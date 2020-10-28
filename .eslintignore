@@ -1,0 +1,10 @@
+node_modules
+dist
+package.json
+package-lock.json
+yarn.lock
+src/public/vendors
+src/database/migrations
+src/database/seeders/index.js
+src/bin
+src/**/*.test.js
