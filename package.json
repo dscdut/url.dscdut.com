@@ -1,0 +1,30 @@
+{
+  "name": "shorten-url",
+  "version": "1.0.0",
+  "description": "- First we need to init our project <code>npm init</code>\r - Then we need to run <code>npm install</code> to install node_modules",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "dev": "nodemon index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://gitlab.com/dangphu2412/shorten-url.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://gitlab.com/dangphu2412/shorten-url/issues"
+  },
+  "homepage": "https://gitlab.com/dangphu2412/shorten-url#readme",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "helmet": "^4.1.1",
+    "mongoose": "^5.10.11",
+    "morgan": "^1.10.0",
+    "shortid": "^2.2.16"
+  }
+}
