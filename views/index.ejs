@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Shorten URL</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body onload="restart()">
+  <div id="app">
+    <img class="logo" src="img/DSC.png" />
+    <div class="input-group-bg">
+      <div style="font-family: system-ui;text-align: center;padding: 12px;">
+        <h2 class="title-shorten">Shorter URL, less pain for your eye</h2>
+        <input placeholder="Insert long URL here..." class="input-link" type="text" id="input-url">
+        <button class="button-submit" id="submit-url"> Shorten URL </button>
+        <br>
+        <div style="display: none;" id="shorten-output" class="row">
+          <div>
+            <input style="margin-top:25px;" class="input-link" id="output-url">
+          </div>
+          <div style="margin-right: -470px;margin-top:-60px">
+            <button onclick="copy()" style="border:#EFEFEF"><img style="height: 50px;width: 50px"
+                src="img/icon.png" /></button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script src="script/script.js"></script>
+</body>
+
+</html>
