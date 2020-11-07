@@ -2,44 +2,43 @@ const shortid = require("shortid");
 const UrlModel = require("../model/url.model");
 
 const saveUrl = async (req, res) => {
-  let { url: rootUrl } = req.body;
-  let foundUrl = await UrlModel.findOne({ url: rootUrl });
+  try {
+    let { url: rootUrl } = req.body;
+    let foundUrl = await UrlModel.findOne({ url: rootUrl });
+
+    if (foundUrl) {
+      return res.json({
+        slug:foundUrl._id
+      });
+    }
+    let newId;
+    do {
+      newId = shortid().slice(0, 5);
+      let isIdExisted = await UrlModel.findOne({ _id: newId });
+      if (!isIdExisted) break;
+    } while (1);
   
-  if (foundUrl) {
+    await UrlModel.create({ _id: newId, url: rootUrl, isActive: true });
     return res.json({
-      success: true,
-      slug: foundUrl._id,
-    });
+      success:true,
+      slug:newId
+    })
+  } catch (error) {
+    console.log('error: '+ error);
   }
-  let id;
-  do{
-    id = shortid().slice(0, 5);
-    let isIdExisted = await UrlModel.findOne({"_id":id});
-    if(!isIdExisted)
-      break;
-  }while(1)
-  
-  await UrlModel.create({ _id:id, url: rootUrl, isActive: true});
-  return res.json({
-    success: true,
-    slug: id,
-  });
 };
 
 const getUrl = async (req, res) => {
   let id = req.params.id;
   let foundUrl = await UrlModel.findOne({ _id: id });
-  if(foundUrl) 
-    return res.redirect(foundUrl.url);        
 
+  if (foundUrl) return res.redirect(foundUrl.url);
+  else res.end();
   // id doesn't exist
-  return res.json({
-    success: false,
-    message: "Wrong id",
-  });
+  // else return error page
 };
 
 module.exports = {
   getUrl,
-  saveUrl
-}
+  saveUrl,
+};
