@@ -1,21 +1,24 @@
 body{
   background-image: url("../img/bg-trim.svg");
   background-repeat: no-repeat;
-  background-size: 100% 720px;
+  background-size: auto;
 }
 
 .logo{
-top: 26px;
-left: 27px;
+margin-top: 26px;
+margin-left: 27px;
 width: 420px;
 height: 70px;
 opacity: 1;
-background: transparent url('./img/DSC.png') 0% 0% no-repeat padding-box;
+background: transparent url('../img/DSC.png') 0% 0% no-repeat padding-box;
+}
+input:focus{
+  outline-width: 0; 
 }
 .input-group-bg{
   text-align: center;
   width: 700px;
-  height: 350px;
+  height: 384px;
   margin: auto;
   background: #FFFFFF 0% 0% no-repeat padding-box;
   box-shadow: 0px 3px 10px #0000000D;
@@ -25,9 +28,8 @@ background: transparent url('./img/DSC.png') 0% 0% no-repeat padding-box;
 }
 .title-shorten{
   font-size: 34px;
-  font: normal normal medium 38px/48px Google Sans;
   letter-spacing: 0px;
-  margin-top: 5px;
+  margin-top: 14px;
   color: #676C72;
   opacity: 1;
   font-weight: 500;
@@ -45,11 +47,16 @@ background: transparent url('./img/DSC.png') 0% 0% no-repeat padding-box;
   color: #8B8F93;
   font-size:20px;
   padding-left: 30px;
+  margin-top: 5px;
+  
+}
+button:focus{
+  outline-width: 0;
 }
 .button-submit{
   width: 200px;
   height: 50px;
-  margin-top: 25px;
+  margin-top: 28px;
   background: #4285F4 0% 0% no-repeat padding-box;
   box-shadow: 0px 3px 6px #00000029;
   border-radius: 15px;
