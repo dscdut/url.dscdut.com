@@ -28,6 +28,7 @@ const saveUrl = async (req, res) => {
 };
 
 const getUrl = async (req, res) => {
+  console.log('getUrl');
   let id = req.params.id;
   let foundUrl = await UrlModel.findOne({ _id: id });
   if (foundUrl) 
