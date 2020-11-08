@@ -8,7 +8,7 @@
   <link rel="stylesheet" href="css/style.css">
 </head>
 
-<body onload="restart()">
+<body onload="returnID()">
   <div id="app">
     <img class="logo" src="img/DSC.png" />
     <div class="input-group-bg">
@@ -19,7 +19,7 @@
         <br>
         <div style="display: none;" id="shorten-output" class="row">
           <div>
-            <input style="margin-top:25px;" class="input-link" id="output-url">
+            <input style="margin-top:25px;" class="input-link" id="output-url" value="Wait For Seconds...">
           </div>
           <div style="margin-right: -470px;margin-top:-60px">
             <button onclick="copy()" style="border:#EFEFEF"><img style="height: 50px;width: 50px"

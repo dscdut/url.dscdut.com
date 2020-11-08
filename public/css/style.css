@@ -1,7 +1,7 @@
 body{
   background-image: url("../img/bg-trim.svg");
   background-repeat: no-repeat;
-  background-size: 100% 720px;
+  background-size: cover;
 }
 
 .logo{
@@ -10,7 +10,7 @@ left: 27px;
 width: 420px;
 height: 70px;
 opacity: 1;
-background: transparent url('./img/DSC.png') 0% 0% no-repeat padding-box;
+background: transparent url('../img/DSC.png') 0% 0% no-repeat padding-box;
 }
 .input-group-bg{
   text-align: center;
