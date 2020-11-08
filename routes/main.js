@@ -5,8 +5,8 @@ const {getUrl, saveUrl} = require('../controller/url');
 router.get('/',(req,res)=>{
   return res.render('index');
 });
-router.post('/url', saveUrl);
+router.get('/:id/', getUrl);  
 
-router.get('/:id', getUrl);  
+router.post('/url', saveUrl);
 
 module.exports = router;

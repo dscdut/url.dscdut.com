@@ -10,6 +10,7 @@ const app = express();
 
 dbConfig; // connect to database
 
+app.use(cors());
 app.use(helmet());
 app.use(morgan("tiny"));
 
