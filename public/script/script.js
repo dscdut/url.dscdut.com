@@ -62,13 +62,14 @@ document
         }
     }
     )
-    
-function copy() {
+
+document.getElementById("copybt").addEventListener("click",function copy() {
     var copyText = document.getElementById("output-url");
     copyText.select();
     copyText.setSelectionRange(0, 99999); /*For mobile devices*/
     document.execCommand("copy");
 }
+)
 
 const axios = {
     post: function (url, body) {
