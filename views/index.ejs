@@ -4,13 +4,15 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="content_security_policy":"script-src 'self' https://apis.google.com; object-src 'self'"  />
+
   <title>Shorten URL</title>
   <link rel="stylesheet" href="css/style.css">
 </head>
 
 <body>
   <div id="app">
-    <img class="logo" src="img/DSC.png" />
+    <img class="logo" src="./img/DSC.png" />
     <div class="input-group-bg">
       <div style="font-family: system-ui;text-align: center;padding: 12px;">
         <h2 class="title-shorten">Shorter URL, less pain for your eyes</h2>
@@ -20,16 +22,16 @@
         </form>
         <br>
         <div id="shorten-output" class="row">
-          <input class="input-link" id="output-url" placeholder="Shorten Link">
+          <input class="input-link" id="output-url" style="cursor: copy;" placeholder="Shorten Link">
           <div style="margin-right: -470px;margin-top:-60px">
-            <button onclick="copy()" style="border:#EFEFEF"><img style="height: 50px;width: 50px;opacity: 0.5;"
-                src="img/icon.png" /></button>
+            <button id="copybt" style="border:#EFEFEF"><img style="height: 50px;width: 50px;opacity: 0.5;"
+                src="./img/icon.png" /></button>
           </div>
         </div>
       </div>
     </div>
   </div>
-  <script src="script/script.js"></script>
+  <script src="./script/script.js"></script>
 </body>
 
 </html>

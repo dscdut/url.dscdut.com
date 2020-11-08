@@ -67,4 +67,5 @@ button:focus{
   color: #FFFFFF;
   font-family: system-ui;
   font-weight: 500;
+  cursor: pointer;
 }
