@@ -4,6 +4,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="content_security_policy":"script-src 'self' https://apis.google.com; object-src 'self'"  />
+
   <title>Shorten URL</title>
   <link rel="stylesheet" href="css/style.css">
 </head>
@@ -22,14 +24,14 @@
         <div id="shorten-output" class="row">
           <input class="input-link" id="output-url" placeholder="Shorten Link">
           <div style="margin-right: -470px;margin-top:-60px">
-            <button onclick="copy()" style="border:#EFEFEF"><img style="height: 50px;width: 50px;opacity: 0.5;"
+            <button id="copybt" style="border:#EFEFEF"><img style="height: 50px;width: 50px;opacity: 0.5;"
                 src="./img/icon.png" /></button>
           </div>
         </div>
       </div>
     </div>
   </div>
-  <script src="script/script.js"></script>
+  <script src="./script/script.js"></script>
 </body>
 
 </html>
