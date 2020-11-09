@@ -13,7 +13,7 @@ checkNull = (inputLink) => {
     })
         .then(res => res.json())
         .then(response => slug = response.slug)
-        .then(response => document.getElementById('output-url').value = "https://dsc-dut.herokuapp.com/" + slug)
+        .then(response => document.getElementById('output-url').value = window.location.href + slug)
         .catch(error => console.error('Error:', error))
 }
 document
