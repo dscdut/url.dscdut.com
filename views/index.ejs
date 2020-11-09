@@ -4,33 +4,38 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-  <title>Shorten URL</title>
+  <title>DSC-DUT Shorten URL tool</title>
   <link rel="stylesheet" href="css/style.css">
+  <link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon">
 </head>
 
 <body>
   <div id="app">
-    <img class="logo" src="./img/DSC.png" />
+    <img class="logo" src="/img/DSC.png" />
     <div class="input-group-bg">
-      <div style="font-family: system-ui;text-align: center;padding: 12px;">
-        <h2 class="title-shorten">Shorter URL, less pain for your eyes</h2>
+      <div style="font-family: system-ui; text-align: center; padding: 12px;">
+        <h2 class="title-shorten">
+          Shorter URL, less pain for your eyes
+        </h2>
         <form id="form-submit">
           <input placeholder="Insert long URL here..." class="input-link" type="text" id="input-url">
-          <button class="button-submit" id="submit-url"> Shorten URL </button>
+          <button class="button-submit" id="submit-url">
+            Shorten URL
+          </button>
         </form>
         <br>
         <div id="shorten-output" class="row">
           <input class="input-link" id="output-url" style="cursor: copy;" placeholder="Shorten Link">
-          <div style="margin-right: -470px;margin-top:-60px">
-            <button id="copybt" style="border:#EFEFEF"><img style="height: 50px;width: 50px;opacity: 0.5;"
-                src="./img/icon.png" /></button>
+          <div style="margin-right: -470px; margin-top:-60px;">
+            <button id="copybt" style="border:#EFEFEF;">
+              <img style="height: 40px; width: 40px; opacity: 0.5; cursor: pointer; margin-top: 0.4rem;" src="/img/icon.png" />
+            </button>
           </div>
         </div>
       </div>
     </div>
   </div>
-  <script src="./script/script.js"></script>
+  <script src="/js/script.js"></script>
 </body>
 
 </html>
