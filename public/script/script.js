@@ -4,7 +4,7 @@ checkFormat = (myURL) => {
 }
 checkNull = (inputLink) => {
     var slug = '';
-    window.fetch("https://dsc-dut.herokuapp.com/url", {
+    window.fetch("/url", {
         method: 'POST',
         body: JSON.stringify({ "url": inputLink }),
         headers: {
