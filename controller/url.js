@@ -16,32 +16,34 @@ const saveUrl = async (req, res) => {
       let isIdExisted = await UrlModel.findOne({ _id: newId });
       if (!isIdExisted) break;
     } while (1);
-
-    await UrlModel.create({ _id: newId, url: rootUrl, isActive: true });
-    return res.json({
-      success: true,
-      slug: newId,
-    });
+    try {
+      await UrlModel.create({ _id: newId, url: rootUrl, isActive: true });
+      return res.json({
+        success: true,
+        slug: newId,
+      });
+    } catch (error) {
+      console.error(error);
+    }
   } catch (error) {
     console.log("error: " + error);
   }
 };
 
 const getUrl = async (req, res) => {
-  console.log('getUrl');
   let id = req.params.id;
-  let foundUrl = await UrlModel.findOne({ _id: id });
-  if (foundUrl) 
-  {
-    console.log('found and : '+foundUrl.url);
-    res.redirect(foundUrl.url);
-    res.end();
+  if (id) {
+    try {
+      let foundUrl = await UrlModel.findOne({ _id: id });
+      if (foundUrl) {
+        return res.redirect(foundUrl.url);
+      } else {
+        return res.status(404).end();
+      }
+    } catch (error) {
+      console.error("ERROR: "+error );
+    }
   }
-  else {
-    console.log('not found');
-    res.render("error");
-    res.end();
-  } 
 };
 
 module.exports = {

@@ -1,8 +1,11 @@
+
 checkFormat = (myURL) => {
     var pattern = /^(http:\/\/www\.|https:\/\/www\.|http:\/\/|https:\/\/)+[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(:[0-9]{1,5})?(\/.*)?$/gm;
     return pattern.test(myURL);
 }
 checkNull = (inputLink) => {
+    localUrl = 'http://localhost:8000/'; // for testing on dev environment
+    let baseUrl = window.location.href.match(/.*com\//i) || localUrl; // get page domain
     var slug = '';
     window.fetch("/url", {
         method: 'POST',
@@ -13,12 +16,12 @@ checkNull = (inputLink) => {
     })
         .then(res => res.json())
         .then(response => slug = response.slug)
-        .then(response => document.getElementById('output-url').value = window.location.href + slug)
+        .then(response => document.getElementById('output-url').value = baseUrl + slug)
         .catch(error => console.error('Error:', error))
 }
 document
     .getElementById('form-submit')
-    .addEventListener('submit', function () {
+    .addEventListener('submit', function (event) {
         event.preventDefault();
         var inputLink = document.getElementById('input-url').value;
         inputLink = inputLink.trim();
@@ -31,8 +34,7 @@ document
                 alert("Please input your link again!");
             }
         }
-    }
-    )
+});
 
 document.getElementById("copybt").addEventListener("click", function copy() {
     var copyText = document.getElementById("output-url");
@@ -43,10 +45,9 @@ document.getElementById("copybt").addEventListener("click", function copy() {
 )
 
 const axios = {
-    post: function (url, body) {
-        var xmlhttp = new XMLHttpRequest();   // new HttpRequest instance 
-        xmlhttp.open("POST", url);
-        xmlhttp.send(JSON.stringify(body));
-    }
-}
-
+  post: function (url, body) {
+    var xmlhttp = new XMLHttpRequest(); // new HttpRequest instance
+    xmlhttp.open("POST", url);
+    xmlhttp.send(JSON.stringify(body));
+  },
+};

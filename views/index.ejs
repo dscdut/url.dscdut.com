@@ -4,16 +4,46 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>DSC-DUT Shorten URL tool</title>
+
+  <title>DSC-DUT | Shorten URL tool</title>
   <link rel="stylesheet" href="css/style.css">
-  <link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon">
+  <link rel="shortcut icon" href="img/favicon.ico">
 </head>
 
 <body>
-  <div id="app">
-    <img class="logo" src="/img/DSC.png" />
-    <div class="input-group-bg">
-      <div style="font-family: system-ui; text-align: center; padding: 12px;">
+  <div id="app" style="position: relative; width: 100vw; height: 100vh;">
+    <div style="display:flex; position: absolute; top: 26px; left: 27px;">
+      <div >
+      <img class="logo" src="img/favicon.ico" style="width:33px;height: auto;" />
+      </div>
+      <div style="color: #676c72; font-size: 18px; font-family: sans-serif; text-shadow:0 0 black; padding: 7px;">
+        <div>
+          Developer Student Clubs
+        </div>
+        <div>
+        DaNang University of Science and Technology
+        </div>
+      </div>
+    </div>
+    <!-- <table style="position: absolute; top: 0; left: 0; font-family: system-ui;">
+      <tr>
+        <td>
+          <img class="logo" src="./img/dscicon.png" style="width:50px;height: auto;" />
+        </td>
+        <td>
+          Developer Student Clubs
+          <br>
+          DaNang University of Science and Technology
+        </td>
+      </tr>
+      <tr>
+        
+      </tr>
+
+    </table> -->
+
+    <div class="input-group-bg" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%);">
+      <div style="font-family: system-ui;padding: 12px;">
         <h2 class="title-shorten">
           Shorter URL, less pain for your eyes
         </h2>
@@ -24,18 +54,25 @@
           </button>
         </form>
         <br>
-        <div id="shorten-output" class="row">
-          <input class="input-link" id="output-url" style="cursor: copy;" placeholder="Shorten Link">
-          <div style="margin-right: -470px; margin-top:-60px;">
-            <button id="copybt" style="border:#EFEFEF;">
-              <img style="height: 40px; width: 40px; opacity: 0.5; cursor: pointer; margin-top: 0.4rem;" src="/img/icon.png" />
-            </button>
-          </div>
+        <div style="display: inline-table; height: 62px; width: 542px; 
+        background: #EFEFEF 0% 0% no-repeat padding-box;
+        box-shadow: 0px 3px 6px #00000029;
+        border-radius: 15px;
+        border: #EFEFEF;
+        margin-top: 4px;">
+          <!-- <div id="shorten-output" class="row"> -->
+          <input class="output-link" id="output-url" style="cursor: copy;" placeholder="Shorten Link">
+          <!-- <div style="margin-right: -470px;margin-top:-60px"> -->
+          <button id="copybt" style="border:#EFEFEF;width: 12%; border-radius: 15px; vertical-align: super;        ">
+            <img style="height: 50px; width: 50px; opacity: 0.5; vertical-align: middle;" src="img/icon.png" />
+          </button>
         </div>
+        <!-- </div> -->
+        <!-- </div> -->
       </div>
     </div>
   </div>
-  <script src="/js/script.js"></script>
+  <script src="js/script.js"></script>
 </body>
 
 </html>
