@@ -7,8 +7,6 @@
 logs
 *.log
 npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
 lerna-debug.log*
 
 # OS
@@ -18,7 +16,7 @@ lerna-debug.log*
 /coverage
 /.nyc_output
 .env
-test.js
+
 
 # IDEs and editors
 /.idea
