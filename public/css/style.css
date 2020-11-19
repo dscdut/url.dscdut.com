@@ -167,6 +167,8 @@ button:focus{
     font-size:12px;
     width: 70%;  
     height: 100%;
+    vertical-align: super;
+    
   }
   .button-submit{
     width: 120px;
@@ -182,6 +184,7 @@ button:focus{
   #copybt{
     width: 15%; 
     border-radius: 7px; 
+    vertical-align: top;
   }
   
 }
