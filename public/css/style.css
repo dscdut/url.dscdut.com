@@ -150,7 +150,7 @@ button:focus{
   }
   .input-link{
     width: 200px;
-    height: 30px;
+    height: 27.6px;
     border-radius: 7px;
     font-size:12px;
     margin-top: 5px;
@@ -165,7 +165,7 @@ button:focus{
     margin: 0px;
     border-radius: 7px;
     font-size:12px;
-    width: 70%;  
+    width: 69%;  
     height: 100%;
     vertical-align: super;
     
