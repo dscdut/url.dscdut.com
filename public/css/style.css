@@ -68,6 +68,11 @@ input:focus{
   padding-left: 30px;
   margin-top: 5px;
 }
+
+.input-link:first-child {
+  margin-bottom: 10px;
+}
+
 .output-group{
   display: inline-table; height: 62px; width: 542px; 
   background: #EFEFEF 0% 0% no-repeat padding-box;
