@@ -1,0 +1,12 @@
+{
+  "type": "service_account",
+  "project_id": "url",
+  "private_key_id": "7ec91293i21i1rjngede2de51eba474fe123",
+  "private_key": "-----BEGIN PRIVATE KEY-----\njwifjeiowijgoibtOfdHMiiijPKPoev6/AqyoLADW/bsDCecR1tlsI1wuAWQRCf0\nJo2+YIqPrT3RP0zRu4OAqthCT8Ogi5i9NefefezC/wTKhZO5A\nWAUSGs3e7xS9zwnefefefe00Q\n5my95BhR6tTSoF3mN1kenbi23nkgqCLZz7ntkZJyZrUZMuorAbdTXdvXRJhWBIM\nTIhcYAlDR5DfvaAWvLXzEa2iv9IDN//7BckboI4Dry1KREN1KsFwiDh/8wJRs3TD\nMVaPmWDBAgMBAAECgf8oelts0etVkM5V3Ra07gEICKD/atIEOF5pKidBNeWxQVMN\n2XjUBQnhTf20L8k3SBlfeCwRliOcOtBK94i1q62DYMbrtWfgG/pcW139v14ylt+g\nPxvCIAA7SDR6v6+wqRXjCXXvURzW/4A3n13mClVtd/oPoSYzlDU7Om7D6DXCEq9k\nOChC/9Cznn31l1kXEKLag2yP2QC0rlRLLkX3ezjVzz3TxIim+rhEDEh67L/2VYoR\nOsF2sggbR3hGevrsNleSUNdBqHUI9JugErY5TvNaFjwQe6Q/ysG3jf69DUC9/yj9\noxf7RYc/oBUS6TGeywhzzZx8cHoI/B+fcIEEwWUCgYEA6fU/8Uo9wfSileR1Tj3K\nsRBe4eWXGslBOEN9moPY5coyT1MMG37EFiD/3ya0sOgGzkw9otKTNbWfBWG3kVfX\nZ7LD0M8K5x2Tc9X+KIm+muaSp/WS9FPqT2f52PGN6eRfaWTgaSFT7fuzF845fQWf\nQvAqrTX0M3MwHse6Zkxirg0CgYEA4cQc9hr+FgjtIWiOTBKsEIz+ad0JeYiJgnRK\nomSbxhOqctOz9BLgg2NxY4QE1I66ZGvvbK/HAPSAccISNHAtNfb2WIaSieudqSKJ\njdxRzbiZxorkveSxxnjffEb893TUZDcA7cJhXbtqEPtOJ9x2qMcV7RNpb21L3dm+\nUt2fxIUCgYBfFGZ6HxveGReCJyhtNbuMHgURdQblweiZfwQqqW6aZIPxrOR8wBXc\nkGisPcStKH6rlFxwMXfWGguYWlAJ51MJN6NQ1vOtXV2xc8QooWIu/YmYbLreRMQy\npSTqv7BW35LO+EojL4I2c1YjVJIUdxZ0U7pkTksCJcvmlnDwZhaseQKBgQDHqS/P\nuwlwpU5JmHUX8/9116t8Jj4l3El4NK54ta9J2sSILo/cUAF8USrLTssSzHMtMoOY\nxE+jmZgqgu6kr3xcWF9+5OydyuEw3ll2Ox2haRueCeHHyoQqOWW0O/emRQ0836QT\noS+IvKFOCWISQJg0JXVPqDY7lBZfSh1WnaeZHQKBgHmtcOQd7RGPzbYrnr9hA9BQ\nH3TMMD3Q7ds1ZapT73yaATsH2bDnL3IRRfLd8oXVU8GzDd2VDwmu1Z7OfBNw5ZX2\nKbdKpIuauRvdeZXlthtGSf2MsJd/zaTGW2mmjpl4fLl4V6W7vY4hc6MK2L/b4ZLI\n4eUmHcHD9IhbR5kH67+V\n-----END PRIVATE KEY-----\n",
+  "client_email": "firebase-adminsdk-wiwii@url.iam.gserviceaccount.com",
+  "client_id": "jqwijgrm",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/firebase-adminsdk-qwef%40url.iam.gserviceaccount.com"
+}
