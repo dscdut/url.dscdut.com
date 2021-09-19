@@ -1,0 +1,141 @@
+:root {
+  --color-blue: #4285F4;
+  --color-blue-darker: #356fcc;
+  --color-green: #34A853;
+  --color-yellow: #FBBC05;
+  --color-red: #EA4335;
+  --color-red-darker: #c23124;
+  --color-gray: #727272;
+  --color-gray-lighter: #a1a1a1;
+  --color-gray-darker: #5e5e5e;
+
+  --shadow-base: 1px 2px 15px 0px rgba(0,0,0,0.20);
+  --shadow-light: 1px 2px 15px 0px rgba(1, 0, 56, 0.15);
+}
+
+* {
+  font-family: Google Sans;
+  color: var(--color-gray);
+}
+
+body {
+  padding: 0;
+  margin: 0;
+  background-image: url("/img/bg-trim.svg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+}
+
+#app {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+}
+
+#app-logo {
+  position: absolute;
+  top: 1rem;
+  left: 1rem;
+}
+
+#app-logo img {
+  height: 70px;
+}
+
+#app-loader {
+  position: fixed;
+  z-index: 9999999;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#app-container {
+  background-color: white;
+  padding: 1.5rem;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border-radius: 1rem;
+  box-shadow: var(--shadow-base);
+}
+
+#app-button-submit {
+  margin-left: 1rem;
+}
+
+.app-input {
+  display: block;
+  height: 50px;
+  width: 100%;
+  border: none;
+  border-radius: 5px;
+  box-shadow: var(--shadow-light);
+  box-sizing: border-box;
+  font-size: 1.5rem;
+  padding: 10px;
+  margin-bottom: 1.5rem;
+  color: var(--color-green);
+}
+
+.app-input.slug {
+  color: var(--color-yellow);
+}
+
+.app-input:focus {
+  outline: none;
+}
+
+.app-input::placeholder {
+  color: var(--color-gray-lighter);
+}
+
+.app-button {
+  display: inline-block;
+  padding: 0.5rem 2rem;
+  border: none;
+  border-radius: 0.5rem;
+  transition-duration: 300ms;
+  background-color: var(--color-blue);
+  box-shadow: var(--shadow-light);
+  font-weight: bold;
+  font-size: 1.2rem;
+  color: white;
+  cursor: pointer;
+  margin: auto;
+}
+
+.app-button:hover {
+  background-color: var(--color-blue-darker);
+}
+
+.app-button.error {
+  background-color: var(--color-red);
+}
+
+.app-button.error:hover {
+  background-color: var(--color-red-darker);
+}
+
+.app-button.cancel {
+  background-color: var(--color-gray-lighter);
+}
+
+.app-button.cancel:hover {
+  background-color: var(--color-gray);
+}
+
+.text-right {
+  text-align: right;
+}
+
+.hidden {
+  display: none !important;
+}
