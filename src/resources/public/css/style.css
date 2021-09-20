@@ -1,15 +1,15 @@
 :root {
-  --color-blue: #4285F4;
+  --color-blue: #4285f4;
   --color-blue-darker: #356fcc;
-  --color-green: #34A853;
-  --color-yellow: #FBBC05;
-  --color-red: #EA4335;
+  --color-green: #34a853;
+  --color-yellow: #fbbc05;
+  --color-red: #ea4335;
   --color-red-darker: #c23124;
   --color-gray: #727272;
   --color-gray-lighter: #a1a1a1;
   --color-gray-darker: #5e5e5e;
 
-  --shadow-base: 1px 2px 15px 0px rgba(0,0,0,0.20);
+  --shadow-base: 1px 2px 15px 0px rgba(0, 0, 0, 0.2);
   --shadow-light: 1px 2px 15px 0px rgba(1, 0, 56, 0.15);
 }
 
@@ -41,6 +41,12 @@ body {
 
 #app-logo img {
   height: 70px;
+}
+
+#app-button-sign-in {
+  position: absolute;
+  top: 1.5rem;
+  right: 1.5rem;
 }
 
 #app-loader {
