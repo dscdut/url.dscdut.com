@@ -7,8 +7,12 @@ router.get('/', (req, res) => {
   return res.render('index');
 });
 
-router.get('/login', (req, res) => {
-  return res.render('login');
+router.get('/signin', (req, res) => {
+  return res.render('signin');
+})
+
+router.get('/signup', (req, res) => {
+  return res.render('signup');
 })
 
 router.get('/:slug', UrlController.findBySlug);

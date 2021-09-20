@@ -9,7 +9,7 @@ var appButtonCancel = document.getElementById('app-button-cancel')
 var appLoader = document.getElementById('app-loader')
 
 function initClipboardAPI() {
-  navigator.permissions.query({name: "clipboard-write"}).then(result => {
+  navigator.permissions.query({ name: "clipboard-write" }).then(result => {
     if (result.state == "granted" || result.state == "prompt") {
       // write to the clipboard now
     } else {
@@ -19,12 +19,12 @@ function initClipboardAPI() {
 }
 
 function updateClipboard(newClip) {
-  navigator.clipboard.writeText(newClip).then(function() {
+  navigator.clipboard.writeText(newClip).then(function () {
     swal({
       title: "Copied your URL into clipboard",
       icon: "success",
     });
-  }, function() {
+  }, function () {
     /* clipboard write failed */
   });
 }
@@ -62,7 +62,6 @@ function hideLoader() {
   }, 1000)
 }
 
-
 function validateURL({ url, slug }) {
   const urlRegex = /https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)/g
 
@@ -73,8 +72,8 @@ function validateURL({ url, slug }) {
     showAlert("error", "Invalid URL!", "Hey hey what is this?", "Oopsie")
     return false
   }
-  if(slug) {
-    if(slug.indexOf(' ') >= 0) {
+  if (slug) {
+    if (slug.indexOf(' ') >= 0) {
       showAlert("error", "Invalid SLUG!", "Slug can not contain whitespace", "Oopsie")
       return false
     }
@@ -85,17 +84,17 @@ function validateURL({ url, slug }) {
 function submitURL(requestData) {
   showLoader()
   window.fetch('/api/url', {
-      method: 'POST',
-      body: JSON.stringify(requestData),
-      headers: {
-        'Content-Type': 'application/json',
-      },
-    })
-    .then(function(response) {
+    method: 'POST',
+    body: JSON.stringify(requestData),
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  })
+    .then(function (response) {
       hideLoader()
       return response.json()
     })
-    .then(function(response) {
+    .then(function (response) {
       if (response.success === false) {
         showAlert("error", "Something is wrong!", response.message, "Try again")
       } else {
@@ -105,7 +104,7 @@ function submitURL(requestData) {
           })
       }
     })
-    .catch(function(error) {
+    .catch(function (error) {
       hideLoader()
     });
 }
@@ -114,7 +113,7 @@ function init() {
   initClipboardAPI()
   hideLoader()
 
-  appButtonCancel.addEventListener('click', function (event) {
+  appButtonCancel && appButtonCancel.addEventListener('click', function (event) {
     appInputUrl.value = ''
     appInputSlug.value = ''
   })
@@ -129,10 +128,10 @@ function init() {
       url
     }
 
-    if(slug) {
+    if (slug) {
       slug = slug.trim();
       urlObject['slug'] = slug;
-    } 
+    }
 
     if (validateURL(urlObject)) {
       submitURL(urlObject)
