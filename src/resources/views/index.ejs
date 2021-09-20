@@ -1,86 +1,67 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <title>DSC-DUT | Shorten URL tool</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Google+Sans&display=swap"
-      rel="stylesheet"
-    />
-    <link rel="stylesheet" href="/css/style.css" />
-    <link rel="stylesheet" href="/css/loader.min.css" />
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
-    />
-    <link rel="shortcut icon" href="/img/favicon.ico" type="image/x-icon" />
-  </head>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-  <body>
-    <div id="app">
-      <div id="app-logo">
-        <img src="/img/logo.png" alt="DSC-DUT Logo" />
-      </div>
-      <div id="app-container">
-        <h1>Shorter URL, less pain for your eyes</h1>
-        <form id="app-form">
-          <input
-            type="text"
-            class="app-input"
-            id="app-input-url"
-            placeholder="Input your url"
-          />
-          <input
-            type="text"
-            class="app-input slug"
-            id="app-input-slug"
-            placeholder="Input your custom slug"
-          />
-          <div class="text-right">
-            <button
-              id="app-button-cancel"
-              class="app-button cancel"
-              type="button"
-            >
-              Clear
-            </button>
-            <button id="app-button-submit" class="app-button" type="submit">
-              Shorten URL
-            </button>
-          </div>
-        </form>
-      </div>
-      <div id="app-loader" class="animate__animated animate__fadeOut">
-        <div class="loader">
-          <div class="dot dot1"></div>
-          <div class="dot dot2"></div>
-          <div class="dot dot3"></div>
-          <div class="dot dot4"></div>
-          <div class="dot dot5"></div>
-          <div class="dot dot6"></div>
-          <div class="dot dot7"></div>
+  <title>DSC-DUT | Shorten URL tool</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Google+Sans&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/css/style.css" />
+  <link rel="stylesheet" href="/css/loader.min.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+  <link rel="shortcut icon" href="/img/favicon.ico" type="image/x-icon" />
+</head>
+
+<body>
+  <div id="app">
+    <div id="app-logo">
+      <img src="/img/logo.png" alt="DSC-DUT Logo" />
+    </div>
+    <div id="app-button-sign-in" class="app-button" type="submit">Sign in</div>
+    <div id="app-container">
+      <h1>Shorter URL, less pain for your eyes</h1>
+      <form id="app-form">
+        <input type="text" class="app-input" id="app-input-url" placeholder="Input your url" />
+        <input type="text" class="app-input slug" id="app-input-slug" placeholder="Input your custom slug" />
+        <div class="text-right">
+          <button id="app-button-cancel" class="app-button cancel" type="button">
+            Clear
+          </button>
+          <button id="app-button-submit" class="app-button" type="submit">
+            Shorten URL
+          </button>
         </div>
+      </form>
+    </div>
+    <div id="app-loader" class="animate__animated animate__fadeOut">
+      <div class="loader">
+        <div class="dot dot1"></div>
+        <div class="dot dot2"></div>
+        <div class="dot dot3"></div>
+        <div class="dot dot4"></div>
+        <div class="dot dot5"></div>
+        <div class="dot dot6"></div>
+        <div class="dot dot7"></div>
       </div>
     </div>
-    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-    <script src="/js/script.js"></script>
-    <!-- Global site tag (gtag.js) - Google Analytics -->
-    <script
-      async
-      src="https://www.googletagmanager.com/gtag/js?id=G-NMY3QQNKFS">
-    </script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag() {
-        dataLayer.push(arguments);
-      }
-      gtag('js', new Date());
+  </div>
+  <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+  <script src="/js/script.js"></script>
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-NMY3QQNKFS">
+  </script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() {
+      dataLayer.push(arguments);
+    }
+    gtag('js', new Date());
 
-      gtag('config', 'G-NMY3QQNKFS');
-    </script>
-  </body>
+    gtag('config', 'G-NMY3QQNKFS');
+  </script>
+</body>
+
 </html>
