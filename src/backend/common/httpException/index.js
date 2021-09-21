@@ -6,7 +6,6 @@ const { NotFoundException } = require('./NotFoundException');
 const { UnAuthorizedException } = require('./UnAuthorizeException');
 const { UniqueConstraintException } = require('./UniqueConstraintException');
 
-
 module.exports = {
     BadRequestException,
     DuplicateException,
@@ -15,4 +14,4 @@ module.exports = {
     NotFoundException,
     UnAuthorizedException,
     UniqueConstraintException
-}
+};

@@ -6,4 +6,4 @@ module.exports.InternalServerException = class InternalServerException extends H
     constructor(msg = 'Internal server error') {
         super(msg, ERROR_CODE.INTERNAL, INTERNAL_SERVER_ERROR);
     }
-}
+};

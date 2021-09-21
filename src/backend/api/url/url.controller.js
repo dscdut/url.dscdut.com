@@ -1,25 +1,20 @@
-const Url = require('../../model/url.model');
-const db = require('../../database');
 const { UrlService } = require('../../modules/url/url.service');
-const { URLS_COLLECTION } = require('../../common/constants/collection.constant');
 const { ValidHttpResponse } = require('../../common/response/validHttp.response');
 const { InValidHttpResponse } = require('../../common/response/invalidHttp.response');
 const { HttpException } = require('../../common/httpException/HttpException');
 
 class Controller {
-
     createOne = async (req, res) => {
-      try {
-        const data = await UrlService.createOne(req.body);
-        return ValidHttpResponse.toCreatedResponse(data).toResponse(res);
-      } catch (error) {
-        if (error instanceof HttpException) {
-          return new InValidHttpResponse(error.status, error.code, error.message)
-              .toResponse(res);
+        try {
+            const data = await UrlService.createOne(req.body);
+            return ValidHttpResponse.toCreatedResponse(data).toResponse(res);
+        } catch (error) {
+            if (error instanceof HttpException) {
+                return new InValidHttpResponse(error.status, error.code, error.message)
+                    .toResponse(res);
+            }
+            return InValidHttpResponse.toInternalResponse(error.message).toResponse(res);
         }
-        console.log(error);
-        return InValidHttpResponse.toInternalResponse(error.message).toResponse(res);
-      }
     }
 
     updateOne() {
@@ -39,18 +34,17 @@ class Controller {
     }
 
     findBySlug = async (req, res) => {
-      try {
-        const redirectUrl = await UrlService.findBySlug(req.params.slug);
-        if(redirectUrl)
-          return res.redirect(redirectUrl);
-        return res.status(404).end();
-      } catch (error) {
-        if (error instanceof HttpException) {
-          return new InValidHttpResponse(error.status, error.code, error.message)
-              .toResponse(res);
+        try {
+            const redirectUrl = await UrlService.findBySlug(req.params.slug);
+            if (redirectUrl) { return res.redirect(redirectUrl); }
+            return res.status(404).end();
+        } catch (error) {
+            if (error instanceof HttpException) {
+                return new InValidHttpResponse(error.status, error.code, error.message)
+                    .toResponse(res);
+            }
+            return InValidHttpResponse.toInternalResponse(error.message).toResponse(res);
         }
-        return InValidHttpResponse.toInternalResponse(error.message).toResponse(res);
-      }
     }
 }
 

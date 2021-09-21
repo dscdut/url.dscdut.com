@@ -27,4 +27,4 @@ module.exports.InValidHttpResponse = class InValidHttpResponse extends HttpRespo
     static toBadRequestResponse(msg, detail) {
         return new InValidHttpResponse(BAD_REQUEST, ERROR_CODE.BAD_REQUEST, msg, detail);
     }
-}
+};
