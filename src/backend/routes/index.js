@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const urlRouters = require('./url.router');
+const userRouters = require('./user.router')
 const { UrlController } = require('../api/url/url.controller');
 
 router.get('/', (req, res) => {
@@ -18,5 +19,6 @@ router.get('/signup', (req, res) => {
 router.get('/:slug', UrlController.findBySlug);
 
 router.use('/api/url', urlRouters)
+router.use('/api/user', userRouters)
 
 module.exports = router;
