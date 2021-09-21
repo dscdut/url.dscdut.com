@@ -11,5 +11,4 @@ module.exports.CreateUserInterceptor = function(req, res, next) {
         return InValidHttpResponse.toInternalResponse(result.error).toResponse(res);
     }
     return next();
-
 }
