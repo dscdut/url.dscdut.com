@@ -6,4 +6,4 @@ module.exports.UnAuthorizedException = class UnAuthorizedException extends HttpE
     constructor(msg = 'Your access token is not valid') {
         super(msg, ERROR_CODE.UNAUTHORIZED, UNAUTHORIZED);
     }
-}
+};

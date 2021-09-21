@@ -8,4 +8,4 @@ module.exports.HttpException = class HttpException extends Error {
         this.code = code;
         this.status = status;
     }
-}
+};

@@ -6,4 +6,4 @@ module.exports.UniqueConstraintException = class UniqueConstraintException exten
     constructor(msg = 'Conflict references id') {
         super(msg, ERROR_CODE.UNIQUE_CONSTAINT, CONFLICT);
     }
-}
+};

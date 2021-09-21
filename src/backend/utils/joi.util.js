@@ -5,7 +5,7 @@ module.exports.JoiUtils = class JoiUtils {
 
     static VALIDATE_PWD_PATTERN_V2 = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
 
-    static VALIDATE_URL_PATTERN = /^(http:\/\/www\.|https:\/\/www\.|http:\/\/|https:\/\/)+[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(:[0-9]{1,5})?(\/.*)?$/m;
+    static VALIDATE_URL_PATTERN = /^(http:\/\/www\.|https:\/\/www\.|http:\/\/|https:\/\/)+[a-z0-9]+([-.]{1}[a-z0-9]+)*\.[a-z]{2,5}(:[0-9]{1,5})?(\/.*)?$/m;
 
     static optionalString() {
         return Joi
@@ -32,10 +32,10 @@ module.exports.JoiUtils = class JoiUtils {
         return custom
             ? Joi.string().regex(JoiUtils.VALIDATE_URL_PATTERN)
             : Joi.string().regex(JoiUtils.VALIDATE_URL_PATTERN)
-                .message('Invalid Url')
+                .message('Invalid Url');
     }
 
     static optionalStrings() {
         return Joi.array().items(JoiUtils.optionalString()).min(1);
     }
-}
+};

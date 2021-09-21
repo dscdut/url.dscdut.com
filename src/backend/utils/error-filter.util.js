@@ -7,5 +7,3 @@ module.exports.responseJoiError = (res, error) => new InValidHttpResponse(
     ERROR_CODE.BAD_REQUEST,
     error.details[0] ? error.details[0].message : '',
 ).toResponse(res);
-
-

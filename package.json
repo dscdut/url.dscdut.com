@@ -5,7 +5,9 @@
   "main": "www.js",
   "scripts": {
     "start": "node src/backend/bin/www.js",
-    "dev": "nodemon src/backend/bin/www.js"
+    "dev": "nodemon src/backend/bin/www.js",
+    "lint": "eslint --fix --ext .js .",
+    "postinstall": "husky install"
   },
   "repository": {
     "type": "git",
@@ -31,6 +33,13 @@
     "method-override": "^3.0.0"
   },
   "devDependencies": {
+    "@commitlint/cli": "^13.1.0",
+    "@commitlint/config-conventional": "^13.1.0",
+    "babel-eslint": "^10.1.0",
+    "eslint": "^7.32.0",
+    "eslint-config-airbnb-base": "^14.2.1",
+    "eslint-plugin-import": "^2.24.2",
+    "husky": "^7.0.2",
     "nodemon": "^2.0.6"
   }
 }

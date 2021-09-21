@@ -13,4 +13,4 @@ module.exports.HttpResponse = class HttpResponse {
     toResponse(res) {
         return res.status(this.status).json(this.data);
     }
-}
+};

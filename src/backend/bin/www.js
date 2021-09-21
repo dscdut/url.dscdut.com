@@ -1,8 +1,10 @@
-const http =require('http');
+/* eslint-disable no-console */
+const http = require('http');
 const debug = require('debug');
 const methodOverride = require('method-override');
-const cors = require('cors'); 
-const express = require('express')
+const cors = require('cors');
+const express = require('express');
+
 const debugHelper = debug('firebase:server');
 const env = require('../env');
 const routes = require('../routes');
@@ -88,7 +90,7 @@ app.use(express.urlencoded({ extended: false }));
 
 /**
  * Config Routers
- *  */ 
+ *  */
 
 app.use('/', routes);
 
