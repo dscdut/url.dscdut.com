@@ -1,6 +1,5 @@
 const { UserRepository } = require('./user.repository');
 const { DuplicateException } = require('../../common/httpException');
-const User = require('../../model/user.model');
 
 class Service {
     constructor() {
@@ -8,11 +7,11 @@ class Service {
     }
 
     async createOne(body) {
-        const isUserExist = await this.userRepository.findById(body.email);
+        const isUserExist = await this.userRepository.findByEmail(body.email);
         if (isUserExist) {
             throw new DuplicateException(`User (${body.email}) is already existed`);
         } else {
-            await this.userRepository.createOne(new User(body.email, body.password).toJSon());
+            await this.userRepository.createOne(body);
         }
     }
 }
