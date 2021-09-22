@@ -6,7 +6,7 @@ module.exports.ValidHttpResponse = class ValidHttpResponse {
         const responseData = {
             data,
             success: true
-        }
+        };
         return new HttpResponse(OK, responseData);
     }
 
@@ -18,7 +18,7 @@ module.exports.ValidHttpResponse = class ValidHttpResponse {
         const responseData = {
             data,
             success: true
-        }
+        };
         return new HttpResponse(CREATED, responseData);
     }
-}
+};

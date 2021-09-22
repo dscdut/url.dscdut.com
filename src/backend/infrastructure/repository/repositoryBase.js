@@ -1,7 +1,6 @@
 const db = require('../../database');
 
 class RepositoryBase {
-
     model;
 
     collectionName
@@ -11,8 +10,8 @@ class RepositoryBase {
      * @param {string} collectionName 
      */
     constructor(collectionName) {
-        this.collectionName = collectionName
-        this.model = db.collection(collectionName)
+        this.collectionName = collectionName;
+        this.model = db.collection(collectionName);
     }
 
     async findById(id) {
@@ -34,10 +33,10 @@ class RepositoryBase {
     /**
      * Use db.batch() to create a transaction
      */
-    async deleteManyByIds(ids) {
-    }
+    // async deleteManyByIds(ids) {
+    // }
 }
 
 module.exports = {
     RepositoryBase
-}
+};
