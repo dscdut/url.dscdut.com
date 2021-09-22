@@ -1,13 +1,17 @@
 const { HttpException } = require('../../common/httpException/HttpException');
 const { InValidHttpResponse } = require('../../common/response/invalidHttp.response');
 const { ValidHttpResponse } = require('../../common/response/validHttp.response');
-const { CreateUserDTO } = require('../../modules/user/dto/createUser');
+const { CreateUserDto } = require('../../modules/user/dto/createUser.dto');
 const { UserService } = require('../../modules/user/user.service');
 
 class Controller {
+    constructor() {
+        this.service = UserService;
+    }
+
     createOne = async (req, res) => {
         try {
-            await UserService.createOne(CreateUserDTO(req.body));
+            await this.service.createOne(CreateUserDto(req.body));
             return ValidHttpResponse.toNoContentResponse().toResponse(res);
         } catch (error) {
             if (error instanceof HttpException) {
