@@ -1,14 +1,10 @@
 const Joi = require('joi');
-const { InValidHttpResponse } = require('../../../common/response/invalidHttp.response');
+const { DefaultValidatorInterceptor } = require('../../../infrastructure/interceptor/default-validator.interceptor');
+const { JoiUtils } = require('../../../utils/joi.util');
 
-module.exports.CreateUserInterceptor = (req, res, next) => {
-    const schema = Joi.object({
-        username: Joi.string().email().required(),
-        password: Joi.string().min(8).required(),
-    });
-    const result = schema.validate(req.body);
-    if (result.error) {
-        return InValidHttpResponse.toInternalResponse(result.error).toResponse(res);
-    }
-    return next();
-};
+module.exports.CreateUserInterceptor = new DefaultValidatorInterceptor(
+    Joi.object({
+        email: JoiUtils.email().required(),
+        password: JoiUtils.password().required(),
+    })
+);

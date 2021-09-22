@@ -3,8 +3,8 @@ const express = require('express');
 const router = express.Router();
 
 const { UserController } = require('../api/users/user.controller');
-const { CreateUserInterceptor } = require('../modules/users/interceptor');
+const { UserInterceptor } = require('../modules/users/interceptor');
 
-router.post('/', CreateUserInterceptor, UserController.createUser);
+router.post('/', UserInterceptor, UserController.createOne);
 
 module.exports = router;

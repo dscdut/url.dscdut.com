@@ -1,12 +1,16 @@
-module.exports = class user {
-    constructor(body) {
-        this.username = body.username;
-        this.password = body.password;
+module.exports = class UserModel {
+    email;
+
+    password;
+
+    constructor(email, password) {
+        this.email = email;
+        this.password = password;
     }
 
     toJSon() {
         return {
-            username: this.username,
+            email: this.email,
             password: this.password,
         };
     }

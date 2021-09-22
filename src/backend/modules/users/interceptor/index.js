@@ -1,5 +1,5 @@
 const { CreateUserInterceptor } = require('./createUser.Interceptor');
 
-module.exports = {
-    CreateUserInterceptor
-};
+module.exports.UserInterceptor = [
+    CreateUserInterceptor.intercept
+];
