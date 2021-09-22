@@ -15,6 +15,6 @@ router.get('/:slug', UrlController.findBySlug);
 
 router.use('/api/url', urlRouters);
 
-router.use('/api/user', userRouters);
+router.use('/api/users', userRouters);
 
 module.exports = router;
