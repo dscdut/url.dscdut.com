@@ -25,7 +25,7 @@ function updateClipboard(newClip) {
       icon: "success",
     });
   }, function () {
-    /* clipboard write failed */
+    // clipboard write failed
   });
 }
 
