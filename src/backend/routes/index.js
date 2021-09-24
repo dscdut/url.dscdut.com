@@ -10,6 +10,8 @@ router.get('/signin', (req, res) => res.render('signin'));
 
 router.get('/signup', (req, res) => res.render('signup'));
 
+router.get('/myurls', (req, res) => res.render('myurls'));
+
 router.get('/:slug', UrlController.findBySlug);
 
 router.use('/api/url', urlRouters);

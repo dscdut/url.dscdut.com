@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<%- include('./partials/head'); %>
+
+  <body>
+    <div id="app">
+      <div id="app-logo">
+        <img src="/img/logo.png" alt="DSC-DUT Logo" />
+      </div>
+      <div class="app-button-right">
+        <a id="app-button-shorten" class="app-button" type="submit" href="./">Shorten URL</a>
+        <a id="app-button-myaccount" class="app-button" type="submit" href="./myaccount">My Account</a>
+      </div>
+      <div id="app-container" class="myurls-container">
+        <div class="myurls-header">
+          <div class="myurls-header-left">
+            <div id="myurls-total-views" class="app-button myurls-total-view">Total views: 10123</div>
+            <input type="checkbox" class="checkbox myurls-checkbox" />
+          </div>
+          <h1 class="myurls-title">My URLs</h1>
+          <div class="app-input-container">
+            <input type="text" id="myurls-input-search" class="app-input search"
+              placeholder="Search URL..." />
+            <i id="icon-search" class="icon-search fas fa-search"></i>
+          </div>
+        </div>
+        <div class="myurls-list">
+          <div class="myurls-item">
+            <div class="myurls-item-left">
+              <input type="checkbox" class="checkbox myurls-checkbox" />
+              <div class="myurls-urls">
+                <div class="myurls-url-slug">https://url.dscdut.com/irZq</div>
+                <div class="myurls-url-long">https://drive.google.com/file/d/1AawFfAji1Mpc4KTukCU9X8npnXIpWddm/view?usp=sharing</div>
+              </div>
+            </div>
+            <div class="myurls-item-right">
+              <div class="myurls-item-view">
+                <i class="fas fa-eye myurls-icon"></i>
+                <span class="myurls-item-view-count">1230</span>
+              </div>
+              <i class="far fa-edit myurls-icon"></i>
+              <i class="far fa-copy myurls-icon"></i>
+              <i class="far fa-trash-alt myurls-icon"></i>
+            </div>
+          </div>
+          <div class="myurls-item">
+            <div class="myurls-item-left">
+              <input type="checkbox" class="checkbox myurls-checkbox" />
+              <div class="myurls-urls">
+                <div class="myurls-url-slug">https://url.dscdut.com/irZq</div>
+                <div class="myurls-url-long">https://drive.google.com/file/d/1AawFfAji1Mpc4KTukCU9X8npnXIpWddm/view?usp=sharing</div>
+              </div>
+            </div>
+            <div class="myurls-item-right">
+              <div class="myurls-item-view">
+                <i class="fas fa-eye myurls-icon"></i>
+                <span class="myurls-item-view-count">1230</span>
+              </div>
+              <i class="far fa-edit myurls-icon"></i>
+              <i class="far fa-copy myurls-icon"></i>
+              <i class="far fa-trash-alt myurls-icon"></i>
+            </div>
+          </div>
+          <div class="myurls-item">
+            <div class="myurls-item-left">
+              <input type="checkbox" class="checkbox myurls-checkbox" />
+              <div class="myurls-urls">
+                <div class="myurls-url-slug">https://url.dscdut.com/irZq</div>
+                <div class="myurls-url-long">https://drive.google.com/file/d/1AawFfAji1Mpc4KTukCU9X8npnXIpWddm/view?usp=sharing</div>
+              </div>
+            </div>
+            <div class="myurls-item-right">
+              <div class="myurls-item-view">
+                <i class="fas fa-eye myurls-icon"></i>
+                <span class="myurls-item-view-count">1230</span>
+              </div>
+              <i class="far fa-edit myurls-icon"></i>
+              <i class="far fa-copy myurls-icon"></i>
+              <i class="far fa-trash-alt myurls-icon"></i>
+            </div>
+          </div>
+          <div class="myurls-item">
+            <div class="myurls-item-left">
+              <input type="checkbox" class="checkbox myurls-checkbox" />
+              <div class="myurls-urls">
+                <div class="myurls-url-slug">https://url.dscdut.com/irZq</div>
+                <div class="myurls-url-long">https://drive.google.com/file/d/1AawFfAji1Mpc4KTukCU9X8npnXIpWddm/view?usp=sharing</div>
+              </div>
+            </div>
+            <div class="myurls-item-right">
+              <div class="myurls-item-view">
+                <i class="fas fa-eye myurls-icon"></i>
+                <span class="myurls-item-view-count">1230</span>
+              </div>
+              <i class="far fa-edit myurls-icon"></i>
+              <i class="far fa-copy myurls-icon"></i>
+              <i class="far fa-trash-alt myurls-icon"></i>
+            </div>
+          </div>
+          <div class="myurls-item">
+            <div class="myurls-item-left">
+              <input type="checkbox" class="checkbox myurls-checkbox" />
+              <div class="myurls-urls">
+                <div class="myurls-url-slug">https://url.dscdut.com/irZq</div>
+                <div class="myurls-url-long">https://drive.google.com/file/d/1AawFfAji1Mpc4KTukCU9X8npnXIpWddm/view?usp=sharing</div>
+              </div>
+            </div>
+            <div class="myurls-item-right">
+              <div class="myurls-item-view">
+                <i class="fas fa-eye myurls-icon"></i>
+                <span class="myurls-item-view-count">1230</span>
+              </div>
+              <i class="far fa-edit myurls-icon"></i>
+              <i class="far fa-copy myurls-icon"></i>
+              <i class="far fa-trash-alt myurls-icon"></i>
+            </div>
+          </div>
+        </div>
+      </div>
+      <%- include('./partials/loader'); %>
+    </div>
+
+    <%- include('./partials/gtag'); %>
+      <%- include('./partials/script'); %>
+  </body>
+
+</html>
