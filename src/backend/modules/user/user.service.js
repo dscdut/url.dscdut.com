@@ -1,17 +1,17 @@
-const bcrypt = require('bcrypt');
 const { UserRepository } = require('./user.repository');
 const { DuplicateException } = require('../../common/httpException');
 const UserModel = require('../../model/user.model');
+const { BcryptService } = require('../auth/service/bcrypt.service');
 
 class Service {
     constructor() {
         this.repository = UserRepository;
+        this.bcrypt = BcryptService;
     }
 
     async createOne(userDto) {
         const isUserExist = await this.repository.findByEmail(userDto.email);
-        const hashStr = bcrypt.genSaltSync(10);
-        userDto.password = bcrypt.hashSync(userDto.password, hashStr);
+        userDto.password = this.bcrypt.hash(userDto.password);
         if (isUserExist) {
             throw new DuplicateException(`User (${userDto.email}) is already existed`);
         }
