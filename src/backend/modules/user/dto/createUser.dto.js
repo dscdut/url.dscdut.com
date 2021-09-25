@@ -1,4 +1,4 @@
 module.exports.CreateUserDto = body => ({
-    email: body.email,
+    email: body.email.toLowerCase(),
     password: body.password,
 });

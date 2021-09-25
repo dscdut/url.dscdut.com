@@ -1,7 +1,7 @@
 const { genSaltSync, hashSync, compareSync } = require('bcrypt');
 const SALT_ROUNDS = require('../../../env');
 
-class BcryptServiceImp {
+class BcryptServiceImpl {
     saltRounds;
 
     /**
@@ -20,7 +20,7 @@ class BcryptServiceImp {
     }
 
     /**
-     * @param {*} str to be hashed
+     * @param {string} str to be hashed
      */
     hash(str) {
         const salt = genSaltSync(this.str);
@@ -28,4 +28,4 @@ class BcryptServiceImp {
     }
 }
 
-module.exports.BcryptService = new BcryptServiceImp();
+module.exports.BcryptService = new BcryptServiceImpl();

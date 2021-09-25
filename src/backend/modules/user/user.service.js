@@ -1,21 +1,22 @@
 const { UserRepository } = require('./user.repository');
 const { DuplicateException } = require('../../common/httpException');
-const UserModel = require('../../model/user.model');
+const User = require('../../model/user.model');
 const { BcryptService } = require('../auth/service/bcrypt.service');
 
 class Service {
     constructor() {
         this.repository = UserRepository;
-        this.bcrypt = BcryptService;
+        this.bcryptService = BcryptService;
     }
 
     async createOne(userDto) {
         const isUserExist = await this.repository.findByEmail(userDto.email);
-        userDto.password = this.bcrypt.hash(userDto.password);
         if (isUserExist) {
             throw new DuplicateException(`User (${userDto.email}) is already existed`);
         }
-        await this.repository.createOne(new UserModel(userDto.email, userDto.password).toJSon());
+        const hashedPassword = this.bcryptService.hash(userDto.password);
+        const newUser = new User(userDto.email, hashedPassword);
+        await this.repository.createOne(newUser.toJSon());
     }
 }
 
