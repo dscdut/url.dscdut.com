@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<%- include('./partials/head'); %>
+
+  <body>
+    <div id="app">
+      <div id="app-logo">
+        <img src="/img/logo.png" alt="DSC-DUT Logo" />
+      </div>
+      <div class="app-button-right">
+        <a id="app-button-shorten" class="app-button" type="submit" href="./">Shorten URL</a>
+      </div>
+      <div id="app-container" class="myurls-container">
+        <div class="myurls-header">
+          <div class="myurls-header-left">
+            <div id="myurls-total-views" class="app-button myurls-total-view">Total views: 10123</div>
+            <input id="checkbox-all" type="checkbox" class="myurls-checkbox" />
+          </div>
+          <h1 class="myurls-title">My URLs</h1>
+          <div class="app-input-container">
+            <input type="text" id="myurls-input-search" class="app-input search" placeholder="Search URL..." />
+            <i id="icon-search" class="icon-search fas fa-search"></i>
+          </div>
+        </div>
+        <div class="myurls-list">
+          <div id="myurls-item" class="myurls-item">
+            <div class="myurls-item-left">
+              <input id="checkbox-item" type="checkbox" class="myurls-checkbox" />
+              <div class="myurls-urls">
+                <div>https://url.dscdut.com/irZq</div>
+                <div>https://drive.google.com/file/d/1AawFfAji1Mpc4KTukCU9X8npnXIpWddm/view?usp=sharing</div>
+              </div>
+            </div>
+            <div class="myurls-item-right">
+              <i class="fas fa-eye myurls-icon"></i>
+              <span class="myurls-item-view">1230</span>
+              <i id="myurls-edit-icon" class="far fa-edit myurls-icon"></i>
+              <i class="far fa-copy myurls-icon"></i>
+              <i class="far fa-trash-alt myurls-icon"></i>
+            </div>
+          </div>
+          <form id="myurls-item-edit" class="myurls-item" style="display: none;">
+            <div class="myurls-item-left">
+              <div class="myurls-urls">
+                <div>
+                  <div>https://url.dscdut.com/</div>
+                  <input type="url" name="input-url-slug" value="irZq"></input>
+                </div>
+                <input type="url" name="input-url-long"
+                  value="https://drive.google.com/file/d/1AawFfAji1Mpc4KTukCU9X8npnXIpWddm/view?usp=sharing"></input>
+              </div>
+            </div>
+            <div class="myurls-item-right">
+              <i id="myurls-save-icon" class="far fa-check-circle myurls-icon"></i>
+              <i id="myurls-cancel-icon" class="far fa-times-circle myurls-icon"></i>
+            </div>
+          </form>
+        </div>
+      </div>
+      <%- include('./partials/loader'); %>
+    </div>
+
+    <%- include('./partials/gtag'); %>
+      <%- include('./partials/script'); %>
+  </body>
+  <%- include('./partials/myurls-script'); %>
+
+</html>
