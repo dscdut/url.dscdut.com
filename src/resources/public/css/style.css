@@ -105,6 +105,7 @@ body {
 
 .app-input-container {
   display: flex;
+  align-items: center;
 }
 
 .icon-show-password,
@@ -125,10 +126,6 @@ body {
 
 .icon-signup-confirm {
   top: 16.9rem;
-}
-
-.icon-search {
-  top: 2.8rem;
 }
 
 .app-button {
@@ -202,8 +199,6 @@ body {
 .checkbox {
   width: 1rem;
   height: 1rem;
-  box-shadow: var(--shadow-light);
-  border: none;
   margin: 0 0.5rem 0 0;
   cursor: pointer;
 }
@@ -273,10 +268,11 @@ body {
 }
 
 .myurls-checkbox {
-  width: 1.5rem;
-  height: 1.5rem;
+  min-width: 1.5rem;
+  min-height: 1.5rem;
+  cursor: pointer;
   margin-top: 0.2rem;
-  margin-left: 0.2rem;
+  margin-left: 0.5rem;
 }
 
 .myurls-title {
@@ -303,19 +299,37 @@ body {
 .myurls-item-left {
   display: flex;
   align-items: flex-start;
+  width: 70%;
 }
 
-.myurls-url-slug {
+.myurls-urls {
+  width: 100%;
+}
+
+.myurls-urls div {
+  display: flex;
+  align-items: center;
+  margin: 0.5rem;
+}
+
+.myurls-urls div:first-child {
   color: var(--color-green);
   font-weight: bold;
 }
 
-.myurls-url-slug {
-  padding: 0.3rem;
+#myurls-item-edit input {
+  height: 1.5rem;
+  width: 100%;
+  font-weight: normal;
+  border: none;
+  border-radius: 0.5rem;
+  box-shadow: var(--shadow-light);
+  padding: 0.5rem;
+  margin: 0.2rem 0;
 }
 
-.myurls-url-long {
-  padding: 0.3rem;
+#myurls-item-edit input:last-child {
+  width: calc(100% - 1.5rem);
 }
 
 .myurls-item-right {
@@ -324,11 +338,6 @@ body {
 }
 
 .myurls-item-view {
-  display: flex;
-  align-items: center;
-}
-
-.myurls-item-view-count {
   color: var(--color-yellow);
   margin-left: 0.5rem;
 }
@@ -339,28 +348,31 @@ body {
   cursor: pointer;
 }
 
-.myurls-icon:first-child {
+#myurls-item-edit .myurls-icon {
+  font-size: 2rem;
+}
+
+.myurls-icon.fa-eye {
   color: var(--color-yellow);
 }
 
 .myurls-icon:last-child {
-  margin-right: 0.2rem;
+  color: var(--color-red);
+  margin-right: 0.5rem;
 }
 
 .fa-edit,
-.fa-copy {
+.fa-copy,
+.fa-check-circle {
   color: var(--color-blue);
 }
 
 .fa-edit:hover,
-.fa-copy:hover {
+.fa-copy:hover,
+.fa-check-circle:hover {
   color: var(--color-blue-darker);
 }
 
-.fa-trash-alt {
-  color: var(--color-red);
-}
-
-.fa-trash-alt:hover {
+.myurls-icon:last-child:hover {
   color: var(--color-red-darker);
 }
