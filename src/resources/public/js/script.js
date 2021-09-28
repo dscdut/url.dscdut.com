@@ -1,12 +1,15 @@
 var appBaseUrl = window.location.href
 
-var appForm = document.getElementById('app-form')
-var appInputUrl = document.getElementById('app-input-url')
-var appInputSlug = document.getElementById('app-input-slug')
+var appSignin = $('#my-signin2')
+var appAvatar = $('#app-avatar')
 
-var appButtonCancel = document.getElementById('app-button-cancel')
+var appForm = $('#app-form')
+var appInputUrl = $('#app-input-url')
+var appInputSlug = $('#app-input-slug')
 
-var appLoader = document.getElementById('app-loader')
+var appButtonCancel = $('#app-button-cancel')
+
+var appLoader = $('#app-loader')
 
 function initClipboardAPI() {
   navigator.permissions.query({ name: "clipboard-write" }).then(result => {
@@ -49,16 +52,16 @@ function showAlert(icon = "success", title, message, buttonText) {
 }
 
 function showLoader() {
-  appLoader.style.zIndex = 9999999;
-  appLoader.classList.remove("animate__fadeOut")
-  appLoader.classList.add('animate__fadeIn');
+  appLoader.css('z-index', 9999999);
+  appLoader.removeClass("animate__fadeOut")
+  appLoader.addClass('animate__fadeIn');
 }
 
 function hideLoader() {
-  appLoader.classList.remove("animate__fadeIn")
-  appLoader.classList.add("animate__fadeOut")
+  appLoader.removeClass("animate__fadeIn")
+  appLoader.addClass("animate__fadeOut")
   setTimeout(function () {
-    appLoader.style.zIndex = -1;
+    appLoader.css('z-index', -1);
   }, 1000)
 }
 
@@ -109,20 +112,60 @@ function submitURL(requestData) {
     });
 }
 
+function onSuccess(googleUser) {
+  let id_token = googleUser.getAuthResponse().id_token;
+
+  $.ajax({
+    method: "POST",
+    url: "/a/api/auth/signin",
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    dataType: 'json',
+    data: { tokenId: id_token },
+    success: function (response) {
+      let accessToken = response.accessToken;
+      document.cookie = "accessToken=" + accessToken;
+      appAvatar.attr('src', googleUser.getBasicProfile().getImageUrl());
+      appAvatar.show();
+      appSignin.hide();
+    },
+    error: function (request) {
+      showAlert("error", "Something is wrong!", request.getResponseHeader('some_header'), "Try again")
+    }
+  });
+}
+
+function onFailure(error) {
+  showAlert("error", "Something is wrong!", error, "Try again")
+}
+
+function renderButton() {
+  gapi.signin2.render('my-signin2', {
+    'scope': 'profile email',
+    'width': 240,
+    'height': 50,
+    'longtitle': true,
+    'theme': 'dark',
+    'onsuccess': onSuccess,
+    'onfailure': onFailure
+  })
+}
+
 function init() {
   initClipboardAPI()
   hideLoader()
 
-  appButtonCancel && appButtonCancel.addEventListener('click', function (event) {
-    appInputUrl.value = ''
-    appInputSlug.value = ''
+  appButtonCancel && appButtonCancel.click(function (event) {
+    appInputUrl.val = ''
+    appInputSlug.val = ''
   })
 
-  appForm.addEventListener('submit', function (event) {
+  appForm.on('submit', function (event) {
     event.preventDefault()
 
-    var url = appInputUrl.value
-    var slug = appInputSlug.value
+    var url = appInputUrl.val
+    var slug = appInputSlug.val
 
     const urlObject = {
       url
