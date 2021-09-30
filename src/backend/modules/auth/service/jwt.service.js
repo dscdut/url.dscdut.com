@@ -2,14 +2,9 @@ const { sign, decode } = require('jsonwebtoken');
 const { JWT_SECRET, EXPIRE_DAYS } = require('../../../env');
 
 class Jwt {
-    secret;
+    secret = JWT_SECRET;
 
-    expiresIn;
-
-    constructor() {
-        this.secret = JWT_SECRET;
-        this.expiresIn = EXPIRE_DAYS;
-    }
+    expiresIn = EXPIRE_DAYS;
 
     sign(payload) {
         return sign(payload, this.secret, { expiresIn: this.expiresIn });

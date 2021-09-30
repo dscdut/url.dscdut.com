@@ -92,7 +92,7 @@ app.use(express.urlencoded({ extended: false }));
  * Config Routers
  *  */
 
-app.use('/', routes);
+app.use('/a/', routes);
 
 app.use(methodOverride('X-HTTP-Method-Override'));
 app.use(

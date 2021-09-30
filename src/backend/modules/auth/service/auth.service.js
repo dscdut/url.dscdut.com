@@ -7,28 +7,25 @@ const { JwtSign } = require('../dto/jwtSign.dto');
 
 class Service {
     constructor() {
-        this.oauth = OAuthService;
+        this.oauthService = OAuthService;
         this.userService = UserService;
-        this.jwt = JwtService;
-    }
-
-    async signup(token) {
-        const userInfo = await this.verifyToken(token);
-        if (userInfo.email_verified) await this.userService.createOne(CreateUserDto(userInfo));
-        else throw new UnAuthorizedException('User not found');
+        this.jwtService = JwtService;
     }
 
     async signin(token) {
-        const userInfo = await this.verifyToken(token);
-        const isUserExist = await this.userService.findOne(CreateUserDto(userInfo).email);
-        if (!isUserExist) await this.signup(token);
-        const jwtToken = await this.jwt.sign(JwtSign(userInfo));
-        return jwtToken;
-    }
-
-    async verifyToken(token) {
-        const userInfo = await this.oauth.verify(token);
-        return userInfo;
+        let userInfo;
+        try {
+            userInfo = await this.oauthService.verify(token);
+        } catch (error) {
+            throw new UnAuthorizedException('Your token is invalid');
+        }
+        const isUserExist = await this.userService.findByEmail(CreateUserDto(userInfo).email);
+        if (!isUserExist) await this.userService.createOne(CreateUserDto(userInfo));
+        const jwtToken = await this.jwtService.sign(JwtSign(userInfo));
+        return {
+            email: userInfo.email,
+            token: jwtToken,
+        };
     }
 }
 

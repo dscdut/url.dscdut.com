@@ -5,13 +5,6 @@ const client = new OAuth2Client(CLIENT_ID);
 
 class OAuthServiceImp {
     /**
-     * @param {String} audience
-     */
-    constructor() {
-        this.audience = CLIENT_ID;
-    }
-
-    /**
      * @param {String} token
      */
     verify = async token => {
