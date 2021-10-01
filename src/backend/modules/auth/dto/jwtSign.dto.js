@@ -1,3 +1,3 @@
-module.exports.JwtSign = data => ({
-    email: data.email,
+module.exports.JwtSign = body => ({
+    email: body.email,
 });

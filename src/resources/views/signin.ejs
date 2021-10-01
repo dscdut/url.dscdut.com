@@ -1,43 +1,55 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <script src="https://apis.google.com/js/platform.js" async defer></script>
-    <meta
-      name="google-signin-client_id"
-      content="738121961360-3mrpcl63gmi6hlouv7lfrvfeqcj66ri8.apps.googleusercontent.com"
-    />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
-  </head>
+<%- include('./partials/head'); %>
+
   <body>
-    <h1>Login</h1>
-    <div class="g-signin2" data-onsuccess="onSignIn"></div>
-    <a href="#" onclick="signOut();">Sign out</a>
-    <script>
-      function signOut() {
-        var auth2 = gapi.auth2.getAuthInstance();
-        auth2.signOut().then(function () {
-          console.log('User signed out.');
-        });
-      }
-    </script>
-    <script>
-      function onSignIn(googleUser) {
-        var id_token = googleUser.getAuthResponse().id_token;
-        var xhr = new XMLHttpRequest();
-        xhr.open('POST', 'http://localhost:3000/a/api/auth/signin');
-        xhr.setRequestHeader('Content-Type', 'application/json');
-        xhr.onload = function () {
-          console.log('Signed in as: ' + xhr.responseText);
-        };
-        xhr.send(
-          JSON.stringify({
-            tokenId: id_token,
+    <div id="app">
+      <div id="app-logo">
+        <img src="/img/logo.png" alt="DSC-DUT Logo" />
+      </div>
+      <div class="app-button-right">
+        <a id="app-button-shorten" class="app-button" type="submit" href="./">Shorten URL</a>
+      </div>
+      <div id="app-container">
+        <h1>Sign in to manage your URLs</h1>
+        <form id="app-form">
+          <input type="email" class="app-input" id="app-input-email" placeholder="Input your email" />
+          <div class="app-input-container">
+            <input type="password" id="app-input-password" class="app-input password"
+              placeholder="Input your password" />
+            <i id="icon-show-password" class="icon-show-password icon-signin far fa-eye fa-eye-slash"></i>
+          </div>
+          <div class="app-remember-forgot">
+            <div class="app-remember-container">
+              <input type="checkbox" class="checkbox" />
+              <span>Remember me</span>
+            </div>
+            <a href="/forgot" class="forgot-password">Forgot your password?</a>
+          </div>
+          <button id="app-button-submit" class="app-button sign" type="submit">
+            Sign in
+          </button>
+          <div class="app-link-sign">
+            <span>Don’t have an account? </span>
+            <a href="/signup" class="link-sign">Sign up</a>
+          </div>
+        </form>
+      </div>
+      <%- include('./partials/loader'); %>
+    </div>
+
+    <%- include('./partials/gtag'); %>
+      <%- include('./partials/script'); %>
+        <script>
+          $(document).ready(function () {
+            $('#icon-show-password').click(function () {
+              var password = $("#app-input-password")
+              var isPasswordShow = password.prop("type") === "text";
+              $(this).toggleClass("fa-eye-slash", isPasswordShow)
+              password.attr("type", isPasswordShow ? "password" : "text")
+            })
           })
-        );
-      }
-    </script>
+        </script>
   </body>
+
 </html>

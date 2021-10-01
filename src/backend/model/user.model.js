@@ -3,7 +3,7 @@ module.exports = class UserModel {
 
     fullName;
 
-    constructor(email = null, fullName = null) {
+    constructor(email, fullName) {
         this.email = email;
         this.fullName = fullName;
     }

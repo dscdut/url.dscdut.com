@@ -1,8 +1,8 @@
 const router = require('express').Router();
 
 const { AuthController } = require('../api/auth/auth.controller');
-const { TokenInterceptor } = require('../modules/auth/interceptor/index');
+const { AuthInterceptor } = require('../modules/auth/interceptor/index');
 
-router.post('/signin', ...TokenInterceptor, AuthController.signin);
+router.post('/signin', ...AuthInterceptor, AuthController.signin);
 
 module.exports = router;

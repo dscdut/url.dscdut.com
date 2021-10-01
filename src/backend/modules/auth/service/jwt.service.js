@@ -1,7 +1,7 @@
 const { sign, decode } = require('jsonwebtoken');
 const { JWT_SECRET, EXPIRE_DAYS } = require('../../../env');
 
-class Jwt {
+class JwtServiceImp {
     secret = JWT_SECRET;
 
     expiresIn = EXPIRE_DAYS;
@@ -15,4 +15,4 @@ class Jwt {
     }
 }
 
-module.exports.JwtService = new Jwt();
+module.exports.JwtService = new JwtServiceImp();

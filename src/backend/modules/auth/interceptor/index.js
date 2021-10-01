@@ -1,5 +1,5 @@
-const { SignInInterceptor } = require('./signIn.interceptor');
+const { SignInInterceptor } = require('./signin.interceptor');
 
-module.exports.TokenInterceptor = [
+module.exports.AuthInterceptor = [
     SignInInterceptor.intercept
 ];
