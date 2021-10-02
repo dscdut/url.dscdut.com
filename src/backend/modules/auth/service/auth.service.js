@@ -6,7 +6,7 @@ const { UnAuthorizedException } = require('../../../common/httpException');
 const { JwtSign } = require('../dto/jwtSign.dto');
 const { UserRepository } = require('../../user/user.repository');
 
-class Service {
+class AuthServiceImp {
     constructor() {
         this.oauthService = OAuthService;
         this.userService = UserService;
@@ -14,21 +14,21 @@ class Service {
         this.userRepository = UserRepository;
     }
 
-    async signin(token) {
+    async signIn(token) {
         let userInfo;
         try {
             userInfo = await this.oauthService.verify(token);
         } catch (error) {
-            throw new UnAuthorizedException('Your token is invalid');
+            throw new UnAuthorizedException('Invalid token');
         }
         const isUserExist = await this.userRepository.findByEmail(userInfo.email);
         if (!isUserExist) await this.userService.createOne(CreateUserDto(userInfo));
-        const jwtToken = await this.jwtService.sign(JwtSign(userInfo));
+        const accessToken = this.jwtService.sign(JwtSign(userInfo));
         return {
             email: userInfo.email,
-            accessToken: jwtToken,
+            accessToken,
         };
     }
 }
 
-module.exports.AuthService = new Service();
+module.exports.AuthService = new AuthServiceImp();

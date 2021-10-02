@@ -1,15 +1,11 @@
 const express = require('express');
 
 const router = express.Router();
-const { ARouter } = require('./a.router');
-const { UrlController } = require('../api/url/url.controller');
+const { ApiRouter } = require('../api/api.router');
+const { viewRouter } = require('./view.route');
 
-router.get('/', (req, res) => res.render('index'));
+router.use('/', viewRouter);
 
-router.get('/signin', (req, res) => res.render('signin'));
-
-router.get('/:slug', UrlController.findBySlug);
-
-router.use('/a/', ARouter);
+router.use('/a/api', ApiRouter);
 
 module.exports = router;

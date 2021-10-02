@@ -1,7 +1,7 @@
 const { UserRepository } = require('./user.repository');
-const User = require('../../model/user.model');
+const User = require('./user.model');
 
-class Service {
+class UserServiceImp {
     constructor() {
         this.repository = UserRepository;
     }
@@ -12,4 +12,4 @@ class Service {
     }
 }
 
-module.exports.UserService = new Service();
+module.exports.UserService = new UserServiceImp();
