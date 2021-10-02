@@ -2,11 +2,7 @@ const { OAuth2Client } = require('google-auth-library');
 const { CLIENT_ID } = require('../../../env');
 
 class OAuthServiceImp {
-    client;
-
-    constructor() {
-        this.client = new OAuth2Client(CLIENT_ID);
-    }
+    client = new OAuth2Client(CLIENT_ID);
 
     /**
      * @param {String} token
