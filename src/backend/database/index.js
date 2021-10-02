@@ -5,4 +5,5 @@ const db = firebase.initializeApp({
     credential: firebase.credential.cert(serviceKey),
 });
 
+db.firestore().settings({ ignoreUndefinedProperties: true });
 module.exports = db.firestore();

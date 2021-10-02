@@ -1,7 +1,7 @@
 const { URLS_COLLECTION } = require('../../common/constants/collection.constant');
 const { RepositoryBase } = require('../../infrastructure/repository/repositoryBase');
 
-class UrlRepositoryImpl extends RepositoryBase {
+class UrlRepositoryImp extends RepositoryBase {
     constructor() {
         super(URLS_COLLECTION);
     }
@@ -24,4 +24,4 @@ class UrlRepositoryImpl extends RepositoryBase {
     }
 }
 
-module.exports.UrlRepository = new UrlRepositoryImpl();
+module.exports.UrlRepository = new UrlRepositoryImp();

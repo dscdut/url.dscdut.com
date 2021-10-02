@@ -2,6 +2,7 @@ var appBaseUrl = window.location.href
 
 var appSignin = $('#my-signin2')
 var appAvatar = $('#app-avatar')
+var appMyURLs = $('#app-button-myurls')
 
 var appForm = $('#app-form')
 var appInputUrl = $('#app-input-url')
@@ -86,7 +87,7 @@ function validateURL({ url, slug }) {
 
 function submitURL(requestData) {
   showLoader()
-  window.fetch('/api/url', {
+  window.fetch('/a/api/url', {
     method: 'POST',
     body: JSON.stringify(requestData),
     headers: {
@@ -122,12 +123,13 @@ function onSuccess(googleUser) {
       'Content-Type': 'application/json',
     },
     dataType: 'json',
-    data: { tokenId: id_token },
+    data: JSON.stringify({ tokenId: id_token }),
     success: function (response) {
-      let accessToken = response.accessToken;
+      let accessToken = response.data.accessToken;
       document.cookie = "accessToken=" + accessToken;
       appAvatar.attr('src', googleUser.getBasicProfile().getImageUrl());
       appAvatar.show();
+      appMyURLs.show();
       appSignin.hide();
     },
     error: function (request) {
@@ -155,6 +157,10 @@ function renderButton() {
 function init() {
   initClipboardAPI()
   hideLoader()
+
+  appAvatar.on('click', function () {
+    gapi.auth2.getAuthInstance().signIn({ prompt: 'select_account' });
+  })
 
   appButtonCancel && appButtonCancel.click(function (event) {
     appInputUrl.val = ''

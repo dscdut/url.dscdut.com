@@ -67,6 +67,10 @@ body {
   box-shadow: var(--shadow-base);
 }
 
+#app-button-myurls {
+  display: none;
+}
+
 .app-button-right {
   position: absolute;
   top: 1.5rem;
@@ -95,6 +99,7 @@ body {
   object-fit: cover;
   border-radius: 50%;
   box-shadow: var(--shadow-base);
+  cursor: pointer;
 }
 
 .app-input {
