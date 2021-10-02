@@ -1,18 +1,18 @@
 const { HttpException } = require('../../common/httpException/HttpException');
 const { InValidHttpResponse } = require('../../common/response/invalidHttp.response');
 const { ValidHttpResponse } = require('../../common/response/validHttp.response');
-const { CreateUserDto } = require('../../modules/user/dto/createUser.dto');
-const { UserService } = require('../../modules/user/user.service');
+const { SignInDto } = require('../../modules/auth/dto/sign-in.dto');
+const { AuthService } = require('../../modules/auth/service/auth.service');
 
 class Controller {
     constructor() {
-        this.service = UserService;
+        this.service = AuthService;
     }
 
-    createOne = async (req, res) => {
+    signIn = async (req, res) => {
         try {
-            await this.service.createOne(CreateUserDto(req.body));
-            return ValidHttpResponse.toNoContentResponse().toResponse(res);
+            const data = await this.service.signIn(SignInDto(req.body).tokenId);
+            return ValidHttpResponse.toCreatedResponse(data).toResponse(res);
         } catch (error) {
             if (error instanceof HttpException) {
                 return new InValidHttpResponse(error.status, error.code, error.message)
@@ -23,4 +23,4 @@ class Controller {
     }
 }
 
-module.exports.UserController = new Controller();
+module.exports.AuthController = new Controller();

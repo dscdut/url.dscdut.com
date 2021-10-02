@@ -1,7 +1,7 @@
 const { USERS_COLLECTION } = require('../../common/constants/collection.constant');
 const { RepositoryBase } = require('../../infrastructure/repository/repositoryBase');
 
-class Repository extends RepositoryBase {
+class UserRepositoryImp extends RepositoryBase {
     constructor() {
         super(USERS_COLLECTION);
     }
@@ -23,4 +23,4 @@ class Repository extends RepositoryBase {
     }
 }
 
-module.exports.UserRepository = new Repository();
+module.exports.UserRepository = new UserRepositoryImp();

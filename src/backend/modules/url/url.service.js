@@ -1,4 +1,4 @@
-const Url = require('../../model/url.model');
+const Url = require('./url.model');
 const db = require('../../database');
 const { generateId } = require('../../utils');
 const { UrlRepository } = require('./url.repository');
@@ -7,7 +7,7 @@ const {
     URLS_COLLECTION,
 } = require('../../common/constants/collection.constant');
 
-class Service {
+class UrlServiceImp {
     constructor() {
         this.repository = UrlRepository;
     }
@@ -51,7 +51,7 @@ class Service {
         do {
             newId = generateId(idLength);
             /**
-             * - This method create new url document and 
+             * - This method create new url document
              *   add custom Id, use slug as Id
              * - Future: Add field slug to model and use default id
              */
@@ -75,4 +75,4 @@ class Service {
     }
 }
 
-module.exports.UrlService = new Service();
+module.exports.UrlService = new UrlServiceImp();
