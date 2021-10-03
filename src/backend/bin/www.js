@@ -4,6 +4,7 @@ const debug = require('debug');
 const methodOverride = require('method-override');
 const cors = require('cors');
 const express = require('express');
+const cookieParser = require('cookie-parser');
 
 const debugHelper = debug('firebase:server');
 const env = require('../env');
@@ -87,6 +88,7 @@ app.use(express.static('src/resources/public'));
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
+app.use(cookieParser());
 
 /**
  * Config Routers

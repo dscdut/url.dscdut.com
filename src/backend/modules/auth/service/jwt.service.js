@@ -1,4 +1,4 @@
-const { sign, decode } = require('jsonwebtoken');
+const { sign, verify } = require('jsonwebtoken');
 const { JWT_SECRET, EXPIRE_DAYS } = require('../../../env');
 
 class JwtServiceImp {
@@ -10,8 +10,8 @@ class JwtServiceImp {
         return sign(payload, this.secret, { expiresIn: this.expiresIn });
     }
 
-    decode(token) {
-        return decode(token);
+    verify(token) {
+        return verify(token, this.secret);
     }
 }
 
