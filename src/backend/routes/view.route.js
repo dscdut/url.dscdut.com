@@ -2,11 +2,13 @@ const express = require('express');
 
 const router = express.Router();
 const { UrlController } = require('../api/url/url.controller');
+const { AuthRequired } = require('../modules/auth/guard/authRequired');
 
-router.get('/', (req, res) => res.render('index'));
-router.get('/myurls', (req, res) => res.render('myurls'));
-router.get('/not-found', (req, res) => res.render('not-found'));
+const renderView = view => (req, res) => res.render(view);
 
+router.get('/', renderView('index'));
 router.get('/:slug', UrlController.findBySlug);
+router.get('/a/admin/myurls', AuthRequired(true), renderView('myurls'));
+router.get('/not-found', renderView('not-found'));
 
 module.exports.viewRouter = router;

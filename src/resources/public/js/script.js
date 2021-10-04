@@ -163,15 +163,15 @@ function init() {
   })
 
   appButtonCancel && appButtonCancel.click(function (event) {
-    appInputUrl.val = ''
-    appInputSlug.val = ''
+    appInputUrl.val('');
+    appInputSlug.val('');
   })
 
   appForm.on('submit', function (event) {
     event.preventDefault()
 
-    var url = appInputUrl.val
-    var slug = appInputSlug.val
+    var url = appInputUrl.val()
+    var slug = appInputSlug.val()
 
     const urlObject = {
       url

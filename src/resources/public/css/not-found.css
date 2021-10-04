@@ -108,7 +108,7 @@ body {
 .four {
   position: absolute;
   width: 40px;
-  height: 10px;
+  height: 40px;
   border-radius: 9999px;
   transform-origin: 20px top;
   animation: dsc-four 4s ease-in-out;
@@ -151,7 +151,7 @@ body {
 .zero-white {
   position: absolute;
   background-color: white;
-  width: 500px;
+  width: 250px;
   height: 100%;
   transform: rotate(0deg);
 }
@@ -245,6 +245,7 @@ body {
     transform: rotate(30deg);
   }
   80% {
+    top: 120px;
     width: 120px;
     transform: rotate(0deg);
   }
@@ -304,6 +305,7 @@ body {
     background-color: var(--color-yellow);
   }
   80% {
+    top: 120px;
     left: 260px;
     width: 120px;
     transform: scale(1);
@@ -428,6 +430,7 @@ body {
     transform-origin: 80px;
   }
   80% {
+    top: 120px;
     left: 260px;
     width: 170px;
     opacity: 1;
@@ -498,6 +501,7 @@ body {
     transform: rotate(-30deg);
   }
   80% {
+    top: 120px;
     width: 180px;
     transform: scale(1);
     transform: rotate(-60deg);
@@ -516,7 +520,7 @@ body {
     transform: scale(0);
   }
   80% {
-    height: 10px;
+    height: 40px;
     opacity: 0;
     transform: scale(0);
   }
