@@ -66,6 +66,12 @@ class UrlServiceImp {
         if (foundUrl) return foundUrl.url;
         return '/not-found';
     }
+
+    async deleteMany(urlIds) {
+        const deletedUrls = await this.repository.deleteManyByIds(urlIds.urlIds);
+        const errorIds = urlIds.urlIds.filter(id => !deletedUrls.includes(id));
+        if (errorIds.length > 0) throw new NotFoundException(`Not found urlIds: ${errorIds}`);
+    }
 }
 
 module.exports.UrlService = new UrlServiceImp();
