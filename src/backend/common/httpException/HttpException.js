@@ -5,7 +5,7 @@ module.exports.HttpException = class HttpException extends Error {
 
     detail;
 
-    constructor(msg, detail, code, status) {
+    constructor(msg, code, status, detail = {}) {
         super(msg);
         this.detail = detail;
         this.code = code;

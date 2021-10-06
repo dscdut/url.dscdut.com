@@ -6,7 +6,6 @@ class RepositoryBase {
     collectionName
 
     /**
-     * 
      * @param {string} collectionName 
      */
     constructor(collectionName) {
@@ -29,25 +28,6 @@ class RepositoryBase {
     async updateById(id, payload) {
         return this.model.doc(id).update(payload);
     }
-
-    async deleteMany(ids) {
-        const batch = db.batch();
-        const deletedUrls = await Promise.all(ids.map(async id => {
-            const urlDef = this.model.doc(id);
-            const doc = await urlDef.get();
-            if (doc.exists) {
-                batch.delete(urlDef);
-                return id;
-            }
-        }));
-        await batch.commit();
-        return deletedUrls;
-    }
-    /**
-     * Use db.batch() to create a transaction
-     */
-    // async deleteManyByIds(ids) {
-    // }
 }
 
 module.exports = {

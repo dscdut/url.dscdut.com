@@ -23,11 +23,11 @@ module.exports.InValidHttpResponse = class InValidHttpResponse extends HttpRespo
         return new InValidHttpResponse(INTERNAL_SERVER_ERROR, ERROR_CODE.INTERNAL, msg);
     }
 
-    static toNotFoundResponse(msg, detail) {
+    static toNotFoundResponse(msg, detail = {}) {
         return new InValidHttpResponse(NOT_FOUND, ERROR_CODE.NOT_FOUND, msg, detail);
     }
 
-    static toBadRequestResponse(msg, detail = []) {
+    static toBadRequestResponse(msg, detail = {}) {
         return new InValidHttpResponse(BAD_REQUEST, ERROR_CODE.BAD_REQUEST, msg, detail);
     }
 };

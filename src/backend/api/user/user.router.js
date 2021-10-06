@@ -5,6 +5,6 @@ const router = express.Router();
 
 const { UserController } = require('./user.controller');
 
-router.get('/detail', AuthRequired(), UserController.getOne);
+router.get('/detail', AuthRequired(), UserController.findOne);
 
 module.exports.userRouter = router;

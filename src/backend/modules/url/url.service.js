@@ -1,7 +1,7 @@
 const Url = require('./url.model');
 const { generateId } = require('../../utils');
 const { UrlRepository } = require('./url.repository');
-const { DuplicateException } = require('../../common/httpException');
+const { DuplicateException, NotFoundException } = require('../../common/httpException');
 const { DEFAULT_ID_LENGTH } = require('../../common/constants/url.constant');
 
 class UrlServiceImp {
@@ -67,10 +67,10 @@ class UrlServiceImp {
         return '/not-found';
     }
 
-    async deleteMany({ ids }) {
-        const deletedUrls = await this.repository.deleteMany(ids);
+    async deleteMany({ ids }, userDetail) {
+        const deletedUrls = await this.repository.deleteMany(ids, userDetail.id);
         const errorIds = ids.filter(id => !deletedUrls.includes(id));
-        if (errorIds.length > 0) throw new NotFoundException('Not found ids:', errorIds);
+        if (errorIds.length > 0) throw new NotFoundException('Ids not found', errorIds);
     }
 }
 

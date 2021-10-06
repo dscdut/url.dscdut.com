@@ -24,7 +24,7 @@ class Controller {
 
     async deleteMany(req, res) {
         try {
-            await UrlService.deleteMany(DeleteUrlsDto(req.body));
+            await UrlService.deleteMany(DeleteUrlsDto(req.body), req.user);
             return ValidHttpResponse.toNoContentResponse().toResponse(res);
         } catch (error) {
             if (error instanceof HttpException) {
