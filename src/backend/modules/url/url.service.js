@@ -1,3 +1,4 @@
+const { lookup } = require('geoip-lite');
 const Url = require('./url.model');
 const { generateId } = require('../../utils');
 const { UrlRepository } = require('./url.repository');
@@ -61,9 +62,17 @@ class UrlServiceImp {
         };
     }
 
-    async findBySlug(slug) {
+    async findBySlug(slug, ip) {
         const foundUrl = await this.repository.findBySlug(slug);
-        if (foundUrl) return foundUrl.url;
+        if (foundUrl) {
+            const visitor = {
+                ip,
+                geolocation: lookup(ip)
+            };
+
+            this.repository.updateById(foundUrl.id, { visitor });
+            return foundUrl.url;
+        }
         return '/not-found';
     }
 

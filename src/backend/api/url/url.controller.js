@@ -45,7 +45,7 @@ class Controller {
 
     findBySlug = async (req, res) => {
         try {
-            const redirectUrl = await UrlService.findBySlug(req.params.slug);
+            const redirectUrl = await UrlService.findBySlug(req.params.slug, req.ip);
             return res.redirect(redirectUrl);
         } catch (error) {
             if (error instanceof HttpException) {

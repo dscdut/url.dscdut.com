@@ -7,12 +7,22 @@ module.exports = class UrlModel {
 
     userId;
 
+    visitors;
+
+    createdAt;
+
+    constructor() {
+        this.createdAt = new Date();
+    }
+
     toJson() {
         return {
             url: this.url,
             isCustom: this.isCustom,
             slug: this.slug,
-            userId: this.userId
+            userId: this.userId,
+            visitors: this.visitors,
+            createdAt: this.createdAt
         };
     }
 };
