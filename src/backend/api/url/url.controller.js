@@ -14,7 +14,7 @@ class Controller {
                 return new InValidHttpResponse(error.status, error.code, error.message)
                     .toResponse(res);
             }
-            return InValidHttpResponse.toInternalResponse(error.message, error.detail).toResponse(res);
+            return InValidHttpResponse.toInternalResponse(error.message).toResponse(res);
         }
     }
 
@@ -24,7 +24,7 @@ class Controller {
 
     async deleteMany(req, res) {
         try {
-            await UrlService.deleteMany(DeleteUrlsDto(req.body).urlIds);
+            await UrlService.deleteMany(DeleteUrlsDto(req.body).ids);
             return ValidHttpResponse.toNoContentResponse().toResponse(res);
         } catch (error) {
             if (error instanceof HttpException) {
