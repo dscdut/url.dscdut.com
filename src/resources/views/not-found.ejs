@@ -44,9 +44,24 @@
     </div>
     <div class="text-not-found">
       <h1>Whoops, the page is gone</h1>
-      <p>You will be redirected to our website in x seconds</p>
+      <p>You will be redirected to our website in <span id="seconds">10</span> seconds</p>
     </div>
   </div>
 </body>
+
+<script>
+  var seconds = 10;
+
+  function updateSecond() {
+    seconds--;
+    document.getElementById("seconds").innerHTML = seconds;
+  }
+  setInterval(updateSecond, 1000);
+
+  function redirectPage() {
+    window.location.href = 'https://dscdut.com/';
+  }
+  setTimeout(redirectPage, 10000)
+</script>
 
 </html>
