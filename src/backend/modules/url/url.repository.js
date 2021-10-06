@@ -1,5 +1,6 @@
 const { URLS_COLLECTION } = require('../../common/constants/collection.constant');
 const { RepositoryBase } = require('../../infrastructure/repository/repositoryBase');
+const { firstDocument } = require('../../utils/getFirstDocument.util');
 
 class UrlRepositoryImp extends RepositoryBase {
     constructor() {
@@ -13,14 +14,15 @@ class UrlRepositoryImp extends RepositoryBase {
             .limit(1)
             .get();
 
-        let foundUrl;
-        response.forEach(doc => {
-            foundUrl = {
-                id: doc.id,
-                ...doc.data(),
-            };
-        });
-        return foundUrl;
+        return firstDocument(response);
+    }
+
+    async findBySlug(slug) {
+        const response = await this.model
+            .where('slug', '==', slug)
+            .limit(1)
+            .get();
+        return firstDocument(response);
     }
 }
 

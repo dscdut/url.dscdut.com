@@ -1,21 +1,18 @@
 module.exports = class UrlModel {
-  url;
+    url;
 
-  slug;
+    slug;
 
-  isCustom;
+    isCustom = false;
 
-  constructor(url, slug, isCustom = false) {
-      this.url = url;
-      this.slug = slug;
-      this.isCustom = isCustom;
-  }
+    userId;
 
-  toJson() {
-      return {
-          url: this.url,
-          isCustom: this.isCustom,
-          slug: this.slug
-      };
-  }
+    toJson() {
+        return {
+            url: this.url,
+            isCustom: this.isCustom,
+            slug: this.slug,
+            userId: this.userId
+        };
+    }
 };

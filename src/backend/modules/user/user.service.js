@@ -1,5 +1,6 @@
 const { UserRepository } = require('./user.repository');
 const User = require('./user.model');
+const { NotFoundException } = require('../../common/httpException');
 
 class UserServiceImp {
     constructor() {
@@ -9,6 +10,15 @@ class UserServiceImp {
     async createOne(userDto) {
         const newUser = new User(userDto.email, userDto.fullName);
         return this.repository.createOne(newUser.toJSon());
+    }
+
+    async getOne({ id }) {
+        const foundUser = await this.repository.findById(id);
+        if (!foundUser) {
+            throw new NotFoundException('User not found');
+        }
+
+        return foundUser;
     }
 }
 

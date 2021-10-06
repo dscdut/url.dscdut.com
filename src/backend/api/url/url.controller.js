@@ -6,7 +6,7 @@ const { HttpException } = require('../../common/httpException/HttpException');
 class Controller {
     createOne = async (req, res) => {
         try {
-            const data = await UrlService.createOne(req.body);
+            const data = await UrlService.createOne(req.body, req.user);
             return ValidHttpResponse.toCreatedResponse(data).toResponse(res);
         } catch (error) {
             if (error instanceof HttpException) {
@@ -36,8 +36,7 @@ class Controller {
     findBySlug = async (req, res) => {
         try {
             const redirectUrl = await UrlService.findBySlug(req.params.slug);
-            if (redirectUrl) { return res.redirect(redirectUrl); }
-            return res.status(404).end();
+            return res.redirect(redirectUrl);
         } catch (error) {
             if (error instanceof HttpException) {
                 return new InValidHttpResponse(error.status, error.code, error.message)
