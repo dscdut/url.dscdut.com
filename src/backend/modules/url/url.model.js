@@ -7,12 +7,15 @@ module.exports = class UrlModel {
 
     userId;
 
+    visitors;
+
     toJson() {
         return {
             url: this.url,
             isCustom: this.isCustom,
             slug: this.slug,
-            userId: this.userId
+            userId: this.userId,
+            visitors: this.visitors
         };
     }
 };
