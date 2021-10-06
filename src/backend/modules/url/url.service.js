@@ -70,7 +70,7 @@ class UrlServiceImp {
                 geolocation: lookup(ip)
             };
 
-            this.repository.updateById(foundUrl.id, { visitor });
+            this.repository.insertVisitor(foundUrl.id, visitor);
             return foundUrl.url;
         }
         return '/not-found';
