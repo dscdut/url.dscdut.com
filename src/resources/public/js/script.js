@@ -4,6 +4,14 @@ var appSignin = $('#my-signin2')
 var appAvatar = $('#app-avatar')
 var appMyURLs = $('#app-button-myurls')
 
+var appAccountMenu = document.getElementById('tippy-1')
+
+var accountMenuAvatar = $('#account-menu-avatar')
+var accountMenuName = $('#account-menu-name')
+var accountMenuEmail = $('#account-menu-email')
+var accountMenuSwitch = $('#account-menu-switch')
+var accountMenuSignout = $('#account-menu-signout')
+
 var appForm = $('#app-form')
 var appInputUrl = $('#app-input-url')
 var appInputSlug = $('#app-input-slug')
@@ -115,6 +123,9 @@ function submitURL(requestData) {
 
 function onSuccess(googleUser) {
   let id_token = googleUser.getAuthResponse().id_token;
+  accountMenuAvatar.attr('src', googleUser.getBasicProfile().getImageUrl())
+  accountMenuName.text(googleUser.getBasicProfile().getName())
+  accountMenuEmail.text(googleUser.getBasicProfile().getEmail())
 
   $.ajax({
     method: "POST",
@@ -158,8 +169,38 @@ function init() {
   initClipboardAPI()
   hideLoader()
 
-  appAvatar.on('click', function () {
-    gapi.auth2.getAuthInstance().signIn({ prompt: 'select_account' });
+  tippy('#app-avatar', {
+    content: appAccountMenu.innerHTML,
+    allowHTML: true,
+    arrow: false,
+    trigger: 'click',
+    interactive: true,
+    placement: 'bottom-end',
+    onMount: function () {
+
+      let tippyMenuAvatar = $('.tippy-box #account-menu-avatar')
+      let tippyMenuName = $('.tippy-box #account-menu-name')
+      let tippyMenuEmail = $('.tippy-box #account-menu-email')
+      let tippyMenuSwitch = $('.tippy-box #account-menu-switch')
+      let tippyMenuSignout = $('.tippy-box #account-menu-signout')
+
+      tippyMenuSwitch.on('click', function () {
+        gapi.auth2.getAuthInstance().signIn({ prompt: 'select_account' });
+      })
+
+      tippyMenuSignout.on('click', function () {
+        gapi.auth2.getAuthInstance().signOut();
+        appAvatar.hide();
+        appMyURLs.hide();
+        appSignin.show();
+        document.cookie = "accessToken=; path=/;";
+        console.log(document.cookie);
+      })
+
+      tippyMenuAvatar.attr('src', accountMenuAvatar.attr('src'))
+      tippyMenuName.text(accountMenuName[0].innerText)
+      tippyMenuEmail.text(accountMenuEmail[0].innerText)
+    },
   })
 
   appButtonCancel && appButtonCancel.click(function (event) {

@@ -84,7 +84,7 @@ body {
 }
 
 .app-button-right > a:last-child,
-.app-button-right > img {
+.app-button-right > .app-avatar {
   margin-left: 0.5rem;
 }
 
@@ -100,6 +100,64 @@ body {
   border-radius: 50%;
   box-shadow: var(--shadow-base);
   cursor: pointer;
+}
+
+.tippy-content {
+  padding: 0;
+}
+
+#tippy-1,
+#tippy-1 > .tippy-box,
+#tippy-1 > .tippy-box > .tippy-content,
+#tippy-1 > .tippy-box > .tippy-content > .app-account-menu {
+  background-color: white;
+  width: 20rem;
+  height: 24rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border-radius: 5px;
+  box-shadow: var(--shadow-base);
+}
+
+.app-account-menu > .account-avatar {
+  width: 6rem;
+  height: 6rem;
+  object-fit: cover;
+  border-radius: 50%;
+  margin-bottom: 1rem;
+}
+
+.app-account-menu > .account-name {
+  font-size: 1.2rem;
+  font-weight: bold;
+  margin-bottom: 0.2rem;
+}
+
+.app-account-menu > .account-email { 
+  font-size: 1rem;
+  margin-bottom: 2rem;
+}
+
+.app-account-menu > button {
+  background-color: white;
+  color: var(--color-blue);
+  width: 80%;
+  font-size: 1rem;
+  border-radius: 5px;
+  border: 1px solid var(--color-blue);
+  cursor: pointer;
+  padding: 0.5rem;
+}
+
+.app-account-menu > button:hover {
+  background-color: var(--color-blue);
+  color: white;
+}
+
+.app-account-menu > button:last-child {
+  margin-top: 10px;
 }
 
 .app-input {
