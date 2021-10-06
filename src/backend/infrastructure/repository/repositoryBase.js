@@ -15,7 +15,11 @@ class RepositoryBase {
     }
 
     async findById(id) {
-        return (await this.model.doc(id).get()).data();
+        const res = await this.model.doc(id).get();
+        return {
+            ...res.data(),
+            id,
+        };
     }
 
     async createOne(payload) {
