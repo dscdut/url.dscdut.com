@@ -11,6 +11,8 @@ module.exports = class UrlModel {
 
     createdAt;
 
+    visitors = []
+
     constructor() {
         this.createdAt = new Date();
     }

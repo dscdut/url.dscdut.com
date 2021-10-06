@@ -1,3 +1,4 @@
+const admin = require('firebase-admin');
 const { URLS_COLLECTION } = require('../../common/constants/collection.constant');
 const { RepositoryBase } = require('../../infrastructure/repository/repositoryBase');
 const { firstDocument } = require('../../utils/getFirstDocument.util');
@@ -38,6 +39,12 @@ class UrlRepositoryImp extends RepositoryBase {
         }));
         await batch.commit();
         return deletedUrls;
+    }
+
+    async insertVisitor(id, visitor) {
+        return this.model.doc(id).update({
+            visitors: admin.firestore.FieldValue.arrayUnion(visitor)
+        });
     }
 }
 
