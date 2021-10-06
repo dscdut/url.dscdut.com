@@ -1,3 +1,3 @@
 module.exports.DeleteUrlsDto = body => ({
-    urlIds: body.urlIds,
+    urlIds: body.ids,
 });

@@ -4,6 +4,6 @@ const { JoiUtils } = require('../../../utils/joi.util');
 
 module.exports.DeleteUrlsInterceptor = new DefaultValidatorInterceptor(
     Joi.object({
-        urlIds: JoiUtils.optionalStrings().required(),
+        ids: JoiUtils.optionalStrings().required(),
     })
 );

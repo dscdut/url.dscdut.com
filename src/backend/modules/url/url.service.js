@@ -68,9 +68,9 @@ class UrlServiceImp {
     }
 
     async deleteMany(urlIds) {
-        const deletedUrls = await this.repository.deleteManyByIds(urlIds.urlIds);
-        const errorIds = urlIds.urlIds.filter(id => !deletedUrls.includes(id));
-        if (errorIds.length > 0) throw new NotFoundException(`Not found urlIds: ${errorIds}`);
+        const deletedUrls = await this.repository.deleteMany(urlIds);
+        const errorIds = urlIds.filter(id => !deletedUrls.includes(id));
+        if (errorIds.length > 0) throw new NotFoundException(`Not found ids: ${errorIds}`, errorIds);
     }
 }
 

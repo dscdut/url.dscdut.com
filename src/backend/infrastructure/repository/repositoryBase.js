@@ -30,17 +30,17 @@ class RepositoryBase {
         return this.model.doc(id).update(payload);
     }
 
-    async deleteManyByIds(ids) {
+    async deleteMany(ids) {
         const batch = db.batch();
         const deletedUrls = await Promise.all(ids.map(async id => {
             const urlDef = this.model.doc(id);
             const doc = await urlDef.get();
             if (doc.exists) {
                 batch.delete(urlDef);
-                await batch.commit();
                 return id;
             }
         }));
+        await batch.commit();
         return deletedUrls;
     }
     /**
