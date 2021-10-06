@@ -5,7 +5,7 @@ const { urlRouter } = require('./url/url.router');
 const { authRouter } = require('./auth/auth.router');
 const { userRouter } = require('./user/user.router');
 
-router.use('/url', urlRouter);
+router.use('/urls', urlRouter);
 
 router.use('/users', userRouter);
 

@@ -9,7 +9,6 @@ const renderView = view => (req, res) => res.render(view);
 router.get('/', renderView('index'));
 router.get('/a/admin/myurls', AuthRequired(true), renderView('myurls'));
 router.get('/not-found', renderView('not-found'));
-router.get('/:slug', UrlController.findBySlug);
 
 router.get('/:slug', UrlController.findBySlug);
 

@@ -95,7 +95,7 @@ function validateURL({ url, slug }) {
 
 function submitURL(requestData) {
   showLoader()
-  window.fetch('/a/api/url', {
+  window.fetch('/a/api/urls', {
     method: 'POST',
     body: JSON.stringify(requestData),
     headers: {

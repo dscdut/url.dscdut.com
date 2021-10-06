@@ -1,6 +1,7 @@
 const { URLS_COLLECTION } = require('../../common/constants/collection.constant');
 const { RepositoryBase } = require('../../infrastructure/repository/repositoryBase');
 const { firstDocument } = require('../../utils/getFirstDocument.util');
+const db = require('../../database');
 
 class UrlRepositoryImp extends RepositoryBase {
     constructor() {
@@ -23,6 +24,20 @@ class UrlRepositoryImp extends RepositoryBase {
             .limit(1)
             .get();
         return firstDocument(response);
+    }
+
+    async deleteMany(ids, userId) {
+        const batch = db.batch();
+        const deletedUrls = await Promise.all(ids.map(async id => {
+            const urlDef = this.model.doc(id);
+            const doc = await urlDef.get();
+            if (doc.exists && doc.data().userId === userId) {
+                batch.delete(urlDef);
+                return id;
+            }
+        }));
+        await batch.commit();
+        return deletedUrls;
     }
 }
 

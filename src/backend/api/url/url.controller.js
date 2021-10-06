@@ -2,6 +2,7 @@ const { UrlService } = require('../../modules/url/url.service');
 const { ValidHttpResponse } = require('../../common/response/validHttp.response');
 const { InValidHttpResponse } = require('../../common/response/invalidHttp.response');
 const { HttpException } = require('../../common/httpException/HttpException');
+const { DeleteUrlsDto } = require('../../modules/url/dto/deleteUrls.dto');
 
 class Controller {
     createOne = async (req, res) => {
@@ -21,8 +22,17 @@ class Controller {
 
     }
 
-    deleteOne() {
-
+    async deleteMany(req, res) {
+        try {
+            await UrlService.deleteMany(DeleteUrlsDto(req.body), req.user);
+            return ValidHttpResponse.toNoContentResponse().toResponse(res);
+        } catch (error) {
+            if (error instanceof HttpException) {
+                return new InValidHttpResponse(error.status, error.code, error.message, error.detail)
+                    .toResponse(res);
+            }
+            return InValidHttpResponse.toInternalResponse(error.message).toResponse(res);
+        }
     }
 
     /**

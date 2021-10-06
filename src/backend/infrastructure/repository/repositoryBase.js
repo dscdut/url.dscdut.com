@@ -6,7 +6,6 @@ class RepositoryBase {
     collectionName
 
     /**
-     * 
      * @param {string} collectionName 
      */
     constructor(collectionName) {
@@ -29,16 +28,6 @@ class RepositoryBase {
     async updateById(id, payload) {
         return this.model.doc(id).update(payload);
     }
-
-    async deleteById(id) {
-        return this.model.doc(id).delete();
-    }
-
-    /**
-     * Use db.batch() to create a transaction
-     */
-    // async deleteManyByIds(ids) {
-    // }
 }
 
 module.exports = {
