@@ -46,6 +46,34 @@ class UrlRepositoryImp extends RepositoryBase {
             visitors: admin.firestore.FieldValue.arrayUnion(visitor)
         });
     }
+
+    async findAll({ id }, page = 1, limit = 10) {
+        const response = await this.model
+            .orderBy('createdAt', 'desc')
+            .offset(page)
+            .limit(limit)
+            .get()
+            .then(doc => (doc.docs.filter(ok => ok.data().userId === id)));
+        const listUrls = [];
+        response.forEach(doc => {
+            listUrls.push({
+                id: doc.id,
+                slug: doc.data().slug,
+                url: doc.data().url,
+                count: doc.data().count,
+            });
+        });
+        return listUrls;
+    }
+
+    async updateClick({ id }) {
+        const batch = db.batch();
+        const updatedClick = (await this.model.doc(id).get()).data().totalClick + 1;
+        await this.model.doc(id).update({
+            totalClick: updatedClick,
+        });
+        await batch.commit();
+    }
 }
 
 module.exports.UrlRepository = new UrlRepositoryImp();

@@ -11,10 +11,13 @@ module.exports = class UrlModel {
 
     createdAt;
 
+    totalClick;
+
     visitors = []
 
     constructor() {
         this.createdAt = new Date();
+        this.totalClick = 1;
     }
 
     toJson() {
@@ -24,7 +27,8 @@ module.exports = class UrlModel {
             slug: this.slug,
             userId: this.userId,
             visitors: this.visitors,
-            createdAt: this.createdAt
+            createdAt: this.createdAt,
+            totalClick: this.totalClick,
         };
     }
 };

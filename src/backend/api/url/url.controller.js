@@ -39,8 +39,17 @@ class Controller {
      * getAll or by search keyword
      */
 
-    findAll() {
-
+    findAll = async (req, res) => {
+        try {
+            const data = await UrlService.findAll(req.user, req.params);
+            return ValidHttpResponse.toCreatedResponse(data).toResponse(res);
+        } catch (error) {
+            if (error instanceof HttpException) {
+                return new InValidHttpResponse(error.status, error.code, error.message)
+                    .toResponse(res);
+            }
+            return InValidHttpResponse.toInternalResponse(error.message).toResponse(res);
+        }
     }
 
     findBySlug = async (req, res) => {

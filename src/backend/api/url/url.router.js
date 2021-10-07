@@ -9,5 +9,6 @@ const { AuthRequired } = require('../../modules/auth/guard/authRequired');
 
 router.post('/', CreateUrlInterceptor.intercept, UrlController.createOne);
 router.delete('/', AuthRequired(), DeleteUrlsInterceptor.intercept, UrlController.deleteMany);
+router.get('/:limit/:page', UrlController.findAll);
 
 module.exports.urlRouter = router;
