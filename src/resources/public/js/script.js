@@ -21,13 +21,15 @@ var appButtonCancel = $('#app-button-cancel')
 var appLoader = $('#app-loader')
 
 function initClipboardAPI() {
-  navigator.permissions.query({ name: "clipboard-write" }).then(result => {
-    if (result.state == "granted" || result.state == "prompt") {
-      // write to the clipboard now
-    } else {
-      showAlert("error", "Cannot access to clipboard", "The website cannot copy your URL automatically", "I understand")
-    }
-  });
+  if (navigator.userAgent.indexOf("Firefox") == -1) {
+    navigator.permissions.query({ name: "clipboard-write" }).then(result => {
+      if (result.state == "granted" || result.state == "prompt") {
+        // write to the clipboard now
+      } else {
+        showAlert("error", "Cannot access to clipboard", "The website cannot copy your URL automatically", "I understand")
+      }
+    });
+  }
 }
 
 function updateClipboard(newClip) {
@@ -178,6 +180,7 @@ function init() {
     placement: 'bottom-end',
     onMount: function () {
 
+      let tippyMenu = $('#tippy-1')
       let tippyMenuAvatar = $('.tippy-box #account-menu-avatar')
       let tippyMenuName = $('.tippy-box #account-menu-name')
       let tippyMenuEmail = $('.tippy-box #account-menu-email')
@@ -185,16 +188,20 @@ function init() {
       let tippyMenuSignout = $('.tippy-box #account-menu-signout')
 
       tippyMenuSwitch.on('click', function () {
-        gapi.auth2.getAuthInstance().signIn({ prompt: 'select_account' });
+        gapi.auth2.getAuthInstance().signIn({
+          prompt: 'select_account',
+        }).then(function () {
+          location.reload()
+        });
       })
 
       tippyMenuSignout.on('click', function () {
         gapi.auth2.getAuthInstance().signOut();
         appAvatar.hide();
         appMyURLs.hide();
+        tippyMenu.hide();
         appSignin.show();
         document.cookie = "accessToken=; path=/;";
-        console.log(document.cookie);
       })
 
       tippyMenuAvatar.attr('src', accountMenuAvatar.attr('src'))
