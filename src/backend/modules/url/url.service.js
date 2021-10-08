@@ -81,6 +81,17 @@ class UrlServiceImp {
         const errorIds = ids.filter(id => !deletedUrls.includes(id));
         if (errorIds.length > 0) throw new NotFoundException('Ids not found', errorIds);
     }
+
+    async updateOne(urlId, slug, userId) {
+        const isUrlExisted = await this.repository.findById(urlId);
+        if (!isUrlExisted) throw new NotFoundException('urlId not found');
+        if (isUrlExisted.userId === userId) {
+            if (slug === isUrlExisted.slug) return;
+            const isSlugExisted = await this.repository.findBySlug(slug);
+            if (isSlugExisted) throw new DuplicateException(`Slug (${slug}) is already existed`);
+            await this.repository.updateOne(urlId, slug);
+        } else throw new NotFoundException('You are not author\'s url');
+    }
 }
 
 module.exports.UrlService = new UrlServiceImp();
