@@ -3,7 +3,7 @@ const { DefaultValidatorInterceptor } = require('../../../infrastructure/interce
 
 module.exports.CheckQueryInterceptor = new DefaultValidatorInterceptor(
     Joi.object({
-        page: Joi.number().min(1).required(),
-        limit: Joi.number().required(),
+        page: Joi.number().min(1),
+        limit: Joi.number(),
     })
 );

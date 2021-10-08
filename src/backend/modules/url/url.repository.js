@@ -47,13 +47,13 @@ class UrlRepositoryImp extends RepositoryBase {
         });
     }
 
-    async findAll(id, offset = 1, limit = 10) {
+    async findAll(userId, offset = 0, limit = 10) {
         const response = await this.model
             .orderBy('createdAt', 'desc')
             .offset(offset)
             .limit(limit)
             .get()
-            .then(doc => (doc.docs.filter(ok => ok.data().userId === id)));
+            .then(doc => (doc.docs.filter(ok => ok.data().userId === userId)));
         const listUrls = [];
         response.forEach(doc => {
             listUrls.push({
