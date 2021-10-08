@@ -47,7 +47,7 @@ class UrlRepositoryImp extends RepositoryBase {
         });
     }
 
-    async findAll(userId, offset = 0, limit = 10) {
+    async findAll(userId, offset, limit) {
         const response = await this.model
             .orderBy('createdAt', 'desc')
             .offset(offset)
