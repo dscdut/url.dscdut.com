@@ -17,7 +17,7 @@ module.exports = class UrlModel {
 
     constructor() {
         this.createdAt = new Date();
-        this.totalClick = 1;
+        this.totalClick = 0;
     }
 
     toJson() {

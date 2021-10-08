@@ -13,7 +13,7 @@ class RepositoryBase {
         this.model = db.collection(collectionName);
     }
 
-    async findById({ id }) {
+    async findById(id) {
         const res = await this.model.doc(id).get();
         return {
             ...res.data(),

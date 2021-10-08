@@ -85,16 +85,11 @@ class UrlServiceImp {
         if (errorIds.length > 0) throw new NotFoundException('Ids not found', errorIds);
     }
 
-    async findAll(user, { limit = 10, page = 1 }) {
+    async findAll({ id }, { limit = 10, page = 1 }) {
         limit = Number.parseInt(limit, 10);
         page = Number.parseInt(page, 10);
-        page = limit * (page - 1);
-
-        const isIdExisted = await this.userRepository.findById(user);
-        if (!isIdExisted) {
-            throw new NotFoundException('User not found');
-        }
-        const urls = await this.repository.findAll(user, page, limit);
+        const offset = limit * (page - 1);
+        const urls = await this.repository.findAll(id, offset, limit);
         return {
             urls
         };

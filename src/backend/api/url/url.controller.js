@@ -41,8 +41,8 @@ class Controller {
 
     findAll = async (req, res) => {
         try {
-            const data = await UrlService.findAll(req.user, req.params);
-            return ValidHttpResponse.toCreatedResponse(data).toResponse(res);
+            const data = await UrlService.findAll(req.user, req.query);
+            return ValidHttpResponse.toOkResponse(data).toResponse(res);
         } catch (error) {
             if (error instanceof HttpException) {
                 return new InValidHttpResponse(error.status, error.code, error.message)
