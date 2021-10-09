@@ -88,8 +88,7 @@ class UrlServiceImp {
     async findAll(userId, query) {
         const { limit, page } = query;
         const offset = limit * (page - 1);
-        const urls = await this.repository.findAll(userId, offset, limit);
-        return urls;
+        return this.repository.findAll(userId, offset, limit);
     }
 }
 
