@@ -36,10 +36,6 @@ class Controller {
         }
     }
 
-    /**
-     * getAll or by search keyword
-     */
-
     findAll = async (req, res) => {
         try {
             const data = await UrlService.findAll(req.user.id, PaginationDto(req.query));

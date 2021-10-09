@@ -66,7 +66,7 @@ class UrlRepositoryImp extends RepositoryBase {
         return listUrls;
     }
 
-    async updateClick({ id }) {
+    async updateClick(id) {
         return this.model.doc(id).update({
             totalClick: admin.firestore.FieldValue.increment(1),
         });

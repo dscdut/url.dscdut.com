@@ -67,7 +67,7 @@ class UrlServiceImp {
     async findBySlug(slug, ip) {
         const foundUrl = await this.repository.findBySlug(slug);
         if (foundUrl) {
-            await this.repository.updateClick(foundUrl);
+            await this.repository.updateClick(foundUrl.id);
             const visitor = {
                 ip,
                 geolocation: lookup(ip)
@@ -89,9 +89,7 @@ class UrlServiceImp {
         const { limit, page } = query;
         const offset = limit * (page - 1);
         const urls = await this.repository.findAll(userId, offset, limit);
-        return {
-            urls
-        };
+        return urls;
     }
 }
 
