@@ -4,10 +4,12 @@ const { generateId } = require('../../utils');
 const { UrlRepository } = require('./url.repository');
 const { DuplicateException, NotFoundException } = require('../../common/httpException');
 const { DEFAULT_ID_LENGTH } = require('../../common/constants/url.constant');
+const { UserRepository } = require('../user/user.repository');
 
 class UrlServiceImp {
     constructor() {
         this.repository = UrlRepository;
+        this.userRepository = UserRepository;
     }
 
     async createOne({ url, slug }, userDetail) {
@@ -65,6 +67,7 @@ class UrlServiceImp {
     async findBySlug(slug, ip) {
         const foundUrl = await this.repository.findBySlug(slug);
         if (foundUrl) {
+            await this.repository.updateClick(foundUrl.id);
             const visitor = {
                 ip,
                 geolocation: lookup(ip)
@@ -80,6 +83,12 @@ class UrlServiceImp {
         const deletedUrls = await this.repository.deleteMany(ids, userDetail.id);
         const errorIds = ids.filter(id => !deletedUrls.includes(id));
         if (errorIds.length > 0) throw new NotFoundException('Ids not found', errorIds);
+    }
+
+    async findAll(userId, query) {
+        const { limit, page } = query;
+        const offset = limit * (page - 1);
+        return this.repository.findAll(userId, offset, limit);
     }
 }
 

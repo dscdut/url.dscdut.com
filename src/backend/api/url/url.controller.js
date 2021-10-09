@@ -3,6 +3,7 @@ const { ValidHttpResponse } = require('../../common/response/validHttp.response'
 const { InValidHttpResponse } = require('../../common/response/invalidHttp.response');
 const { HttpException } = require('../../common/httpException/HttpException');
 const { DeleteUrlsDto } = require('../../modules/url/dto/deleteUrls.dto');
+const { PaginationDto } = require('../../modules/url/dto/pagination.dto');
 
 class Controller {
     createOne = async (req, res) => {
@@ -35,12 +36,17 @@ class Controller {
         }
     }
 
-    /**
-     * getAll or by search keyword
-     */
-
-    findAll() {
-
+    findAll = async (req, res) => {
+        try {
+            const data = await UrlService.findAll(req.user.id, PaginationDto(req.query));
+            return ValidHttpResponse.toOkResponse(data).toResponse(res);
+        } catch (error) {
+            if (error instanceof HttpException) {
+                return new InValidHttpResponse(error.status, error.code, error.message)
+                    .toResponse(res);
+            }
+            return InValidHttpResponse.toInternalResponse(error.message).toResponse(res);
+        }
     }
 
     findBySlug = async (req, res) => {
