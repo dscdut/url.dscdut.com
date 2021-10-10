@@ -27,19 +27,6 @@ class UrlRepositoryImp extends RepositoryBase {
         return firstDocument(response);
     }
 
-    async findBySlugExist(slug, id) {
-        const response = await this.model
-            .where('slug', '==', slug)
-            .limit(1)
-            .get();
-
-        let value = false;
-        response.forEach(doc => {
-            if (doc.id !== id) value = true;
-        });
-        return value;
-    }
-
     async deleteMany(ids, userId) {
         const batch = db.batch();
         const deletedUrls = await Promise.all(ids.map(async id => {
