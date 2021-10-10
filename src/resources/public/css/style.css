@@ -27,6 +27,10 @@ body {
   background-position: center;
 }
 
+.swal-title {
+  margin-bottom: 2rem;
+}
+
 #app {
   position: relative;
   width: 100vw;
@@ -106,6 +110,10 @@ body {
   padding: 0;
 }
 
+#tippy-1 {
+  box-shadow: var(--shadow-base);
+}
+
 #tippy-1,
 #tippy-1 > .tippy-box,
 #tippy-1 > .tippy-box > .tippy-content,
@@ -118,7 +126,6 @@ body {
   align-items: center;
   justify-content: center;
   border-radius: 5px;
-  box-shadow: var(--shadow-base);
 }
 
 .app-account-menu > .account-avatar {
