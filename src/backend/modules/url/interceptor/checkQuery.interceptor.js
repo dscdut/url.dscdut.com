@@ -1,9 +1,9 @@
 const Joi = require('joi');
 const { DefaultValidatorInterceptor } = require('../../../infrastructure/interceptor/default-validator.interceptor');
 
-module.exports.UpdateUrlInterceptor = new DefaultValidatorInterceptor(
+module.exports.CheckQueryInterceptor = new DefaultValidatorInterceptor(
     Joi.object({
-        url: Joi.string().min(1).required(),
-        slug: Joi.string().min(1).required(),
+        page: Joi.number().min(1),
+        limit: Joi.number(),
     })
 );

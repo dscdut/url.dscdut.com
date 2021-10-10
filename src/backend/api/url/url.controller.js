@@ -4,6 +4,7 @@ const { InValidHttpResponse } = require('../../common/response/invalidHttp.respo
 const { HttpException } = require('../../common/httpException/HttpException');
 const { DeleteUrlsDto } = require('../../modules/url/dto/deleteUrls.dto');
 const { UpdateUrlDto } = require('../../modules/url/dto/updateUrl.dto');
+const { PaginationDto } = require('../../modules/url/dto/pagination.dto');
 
 class Controller {
     createOne = async (req, res) => {
@@ -21,7 +22,7 @@ class Controller {
 
     async updateOne(req, res) {
         try {
-            await UrlService.updateOne(req.params.id, UpdateUrlDto(req.body).slug, req.user.id);
+            await UrlService.updateOne(req.params.id, UpdateUrlDto(req.body), req.user.id);
             return ValidHttpResponse.toNoContentResponse().toResponse(res);
         } catch (error) {
             if (error instanceof HttpException) {
@@ -45,12 +46,17 @@ class Controller {
         }
     }
 
-    /**
-     * getAll or by search keyword
-     */
-
-    findAll() {
-
+    findAll = async (req, res) => {
+        try {
+            const data = await UrlService.findAll(req.user.id, PaginationDto(req.query));
+            return ValidHttpResponse.toOkResponse(data).toResponse(res);
+        } catch (error) {
+            if (error instanceof HttpException) {
+                return new InValidHttpResponse(error.status, error.code, error.message)
+                    .toResponse(res);
+            }
+            return InValidHttpResponse.toInternalResponse(error.message).toResponse(res);
+        }
     }
 
     findBySlug = async (req, res) => {

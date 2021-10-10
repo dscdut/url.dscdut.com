@@ -27,6 +27,19 @@ class UrlRepositoryImp extends RepositoryBase {
         return firstDocument(response);
     }
 
+    async findBySlugExist(slug, id) {
+        const response = await this.model
+            .where('slug', '==', slug)
+            .limit(1)
+            .get();
+
+        let value = false;
+        response.forEach(doc => {
+            if (doc.id !== id) value = true;
+        });
+        return value;
+    }
+
     async deleteMany(ids, userId) {
         const batch = db.batch();
         const deletedUrls = await Promise.all(ids.map(async id => {
@@ -41,15 +54,41 @@ class UrlRepositoryImp extends RepositoryBase {
         return deletedUrls;
     }
 
-    async updateOne(id, slug) {
+    async updateOne(id, urlInfo) {
         return this.model.doc(id).update({
-            slug,
+            slug: urlInfo.slug,
+            url: urlInfo.url
         });
     }
 
     async insertVisitor(id, visitor) {
         return this.model.doc(id).update({
             visitors: admin.firestore.FieldValue.arrayUnion(visitor)
+        });
+    }
+
+    async findAll(userId, offset, limit) {
+        const response = await this.model
+            .orderBy('createdAt', 'desc')
+            .offset(offset)
+            .limit(limit)
+            .get()
+            .then(doc => (doc.docs.filter(ok => ok.data().userId === userId)));
+        const listUrls = [];
+        response.forEach(doc => {
+            listUrls.push({
+                id: doc.id,
+                slug: doc.data().slug,
+                url: doc.data().url,
+                totalClick: doc.data().totalClick,
+            });
+        });
+        return listUrls;
+    }
+
+    async updateClick(id) {
+        return this.model.doc(id).update({
+            totalClick: admin.firestore.FieldValue.increment(1),
         });
     }
 }
