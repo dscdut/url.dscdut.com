@@ -35,8 +35,10 @@ function initClipboardAPI() {
 function updateClipboard(newClip) {
   navigator.clipboard.writeText(newClip).then(function () {
     swal({
-      title: "Copied your URL into clipboard",
+      title: "Copied your URL to the clipboard",
       icon: "success",
+      timer: 1500,
+      buttons: false,
     });
   }, function () {
     // clipboard write failed
@@ -167,8 +169,41 @@ function renderButton() {
   })
 }
 
+function checkAccessToken() {
+  let accessToken = document.cookie.replace(/(?:(?:^|.*;\s*)accessToken\s*\=\s*([^;]*).*$)|^.*$/, "$1");
+  if (accessToken) {
+    $.ajax({
+      method: "GET",
+      url: "/a/api/users/detail",
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer ' + accessToken
+      },
+      success: function (response) {
+        appAvatar.attr('src', response.data.avatar);
+        accountMenuAvatar.attr('src', response.data.avatar);
+        accountMenuName.text(response.data.name);
+        accountMenuEmail.text(response.data.email);
+        appAvatar.show();
+        appMyURLs.show();
+        appSignin.hide();
+      },
+      error: function () {
+        appAvatar.hide();
+        appMyURLs.hide();
+        appSignin.show();
+      }
+    });
+  } else {
+    appAvatar.hide();
+    appMyURLs.hide();
+    appSignin.show();
+  }
+}
+
 function init() {
   initClipboardAPI()
+  checkAccessToken()
   hideLoader()
 
   tippy('#app-avatar', {
@@ -180,7 +215,6 @@ function init() {
     placement: 'bottom-end',
     onMount: function () {
 
-      let tippyMenu = $('#tippy-1')
       let tippyMenuAvatar = $('.tippy-box #account-menu-avatar')
       let tippyMenuName = $('.tippy-box #account-menu-name')
       let tippyMenuEmail = $('.tippy-box #account-menu-email')
@@ -196,12 +230,11 @@ function init() {
       })
 
       tippyMenuSignout.on('click', function () {
-        gapi.auth2.getAuthInstance().signOut();
-        appAvatar.hide();
-        appMyURLs.hide();
-        tippyMenu.hide();
-        appSignin.show();
-        document.cookie = "accessToken=; path=/;";
+        gapi.auth2.getAuthInstance().signOut({
+        }).then(function () {
+          location.reload()
+          document.cookie = "accessToken=; path=/;";
+        })
       })
 
       tippyMenuAvatar.attr('src', accountMenuAvatar.attr('src'))
