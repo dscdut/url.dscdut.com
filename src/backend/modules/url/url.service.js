@@ -85,15 +85,15 @@ class UrlServiceImp {
         if (errorIds.length > 0) throw new NotFoundException('Ids not found', errorIds);
     }
 
-    async updateOne(urlId, urlInfo, userId) {
+    async updateOne(urlId, urlDto, userId) {
         const isUrlExisted = await this.repository.findById(urlId);
-        if (isUrlExisted.userId !== userId || !isUrlExisted) throw new NotFoundException('Url Not Found');
+        if (!isUrlExisted || isUrlExisted.userId !== userId) throw new NotFoundException('Url Not Found');
 
-        if (urlInfo.slug !== isUrlExisted.slug) {
-            const isSlugExisted = await this.repository.findBySlug(urlInfo.slug);
-            if (isSlugExisted) throw new DuplicateException(`Slug (${urlInfo.slug}) is already existed`);
+        if (urlDto.slug !== isUrlExisted.slug) {
+            const isSlugExisted = await this.repository.findBySlug(urlDto.slug);
+            if (isSlugExisted) throw new DuplicateException(`Slug (${urlDto.slug}) is already existed`);
         }
-        await this.repository.updateOne(urlId, urlInfo);
+        await this.repository.updateOne(urlId, urlDto);
     }
 
     async findAll(userId, query) {
