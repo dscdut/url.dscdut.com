@@ -41,6 +41,13 @@ class UrlRepositoryImp extends RepositoryBase {
         return deletedUrls;
     }
 
+    async updateOne(id, urlInfo) {
+        return this.model.doc(id).update({
+            slug: urlInfo.slug,
+            url: urlInfo.url
+        });
+    }
+
     async insertVisitor(id, visitor) {
         return this.model.doc(id).update({
             visitors: admin.firestore.FieldValue.arrayUnion(visitor)

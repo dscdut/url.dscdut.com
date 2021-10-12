@@ -85,6 +85,17 @@ class UrlServiceImp {
         if (errorIds.length > 0) throw new NotFoundException('Ids not found', errorIds);
     }
 
+    async updateOne(urlId, urlDto, userId) {
+        const isUrlExisted = await this.repository.findById(urlId);
+        if (!isUrlExisted || isUrlExisted.userId !== userId) throw new NotFoundException('Url Not Found');
+
+        if (urlDto.slug !== isUrlExisted.slug) {
+            const isSlugExisted = await this.repository.findBySlug(urlDto.slug);
+            if (isSlugExisted) throw new DuplicateException(`Slug (${urlDto.slug}) is already existed`);
+        }
+        await this.repository.updateOne(urlId, urlDto);
+    }
+
     async findAll(userId, query) {
         const { limit, page } = query;
         const offset = limit * (page - 1);
