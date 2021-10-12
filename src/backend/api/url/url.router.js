@@ -11,7 +11,7 @@ const { CheckQueryInterceptor } = require('../../modules/url/interceptor/checkQu
 
 router.post('/', CreateUrlInterceptor.intercept, UrlController.createOne);
 router.delete('/', AuthRequired(), DeleteUrlsInterceptor.intercept, UrlController.deleteMany);
-router.put('/:id', UpdateUrlInterceptor.intercept, UrlController.updateOne);
+router.put('/:id', AuthRequired(), UpdateUrlInterceptor.intercept, UrlController.updateOne);
 router.get('/', AuthRequired(), CheckQueryInterceptor.intercept, UrlController.findAll);
 
 module.exports.urlRouter = router;
