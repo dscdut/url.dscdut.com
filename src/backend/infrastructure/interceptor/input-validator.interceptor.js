@@ -1,5 +1,5 @@
 /* eslint-disable no-unused-vars */
-const { responseJoiError } = require('../../utils/error-filter.util');
+const { responseJoiError } = require('@utils/error-filter.util');
 
 class AbstractInputValidatorInterceptor {
     /**

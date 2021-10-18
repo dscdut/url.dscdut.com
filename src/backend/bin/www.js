@@ -5,10 +5,11 @@ const methodOverride = require('method-override');
 const cors = require('cors');
 const express = require('express');
 const cookieParser = require('cookie-parser');
+require('module-alias/register');
 
 const debugHelper = debug('firebase:server');
-const env = require('../env');
-const routes = require('../routes');
+const env = require('@env');
+const routes = require('@routes');
 
 const app = express();
 

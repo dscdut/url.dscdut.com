@@ -1,5 +1,5 @@
 const { OAuth2Client } = require('google-auth-library');
-const { CLIENT_ID } = require('../../../env');
+const { CLIENT_ID } = require('@env');
 
 class OAuthServiceImp {
     client = new OAuth2Client(CLIENT_ID);

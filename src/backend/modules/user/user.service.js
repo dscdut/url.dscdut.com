@@ -1,6 +1,6 @@
+const { NotFoundException } = require('@common/httpException');
 const { UserRepository } = require('./user.repository');
 const User = require('./user.model');
-const { NotFoundException } = require('../../common/httpException');
 
 class UserServiceImp {
     constructor() {

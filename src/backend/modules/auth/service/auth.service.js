@@ -1,9 +1,9 @@
-const { UserService } = require('../../user/user.service');
+const { UnAuthorizedException } = require('@common/httpException');
+const { CreateUserDto } = require('@modules/user/dto/createUser.dto');
+const { UserService } = require('@modules/user/user.service');
+const { UserRepository } = require('@modules/user/user.repository');
 const { OAuthService } = require('./oauth.service');
 const { JwtService } = require('./jwt.service');
-const { CreateUserDto } = require('../../user/dto/createUser.dto');
-const { UnAuthorizedException } = require('../../../common/httpException');
-const { UserRepository } = require('../../user/user.repository');
 
 class AuthServiceImp {
     constructor() {

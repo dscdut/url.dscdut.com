@@ -1,10 +1,10 @@
 const { lookup } = require('geoip-lite');
-const Url = require('./url.model');
-const { generateId } = require('../../utils');
+const { generateId } = require('@utils');
+const { DuplicateException, NotFoundException } = require('@common/httpException');
+const { DEFAULT_ID_LENGTH } = require('@common/constants/url.constant');
+const { UserRepository } = require('@modules/user/user.repository');
 const { UrlRepository } = require('./url.repository');
-const { DuplicateException, NotFoundException } = require('../../common/httpException');
-const { DEFAULT_ID_LENGTH } = require('../../common/constants/url.constant');
-const { UserRepository } = require('../user/user.repository');
+const Url = require('./url.model');
 
 class UrlServiceImp {
     constructor() {

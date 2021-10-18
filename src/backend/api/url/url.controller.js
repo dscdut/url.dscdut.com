@@ -1,15 +1,19 @@
-const { UrlService } = require('../../modules/url/url.service');
-const { ValidHttpResponse } = require('../../common/response/validHttp.response');
-const { InValidHttpResponse } = require('../../common/response/invalidHttp.response');
-const { HttpException } = require('../../common/httpException/HttpException');
-const { DeleteUrlsDto } = require('../../modules/url/dto/deleteUrls.dto');
-const { UpdateUrlDto } = require('../../modules/url/dto/updateUrl.dto');
-const { PaginationDto } = require('../../modules/url/dto/pagination.dto');
+const { ValidHttpResponse } = require('@common/response/validHttp.response');
+const { InValidHttpResponse } = require('@common/response/invalidHttp.response');
+const { HttpException } = require('@common/httpException/HttpException');
+const { DeleteUrlsDto } = require('@modules/url/dto/deleteUrls.dto');
+const { UpdateUrlDto } = require('@modules/url/dto/updateUrl.dto');
+const { PaginationDto } = require('@modules/url/dto/pagination.dto');
+const { UrlService } = require('@modules/url/url.service');
 
 class Controller {
+    constructor() {
+        this.service = UrlService;
+    }
+
     createOne = async (req, res) => {
         try {
-            const data = await UrlService.createOne(req.body, req.user);
+            const data = await this.service.createOne(req.body, req.user);
             return ValidHttpResponse.toCreatedResponse(data).toResponse(res);
         } catch (error) {
             if (error instanceof HttpException) {
@@ -22,7 +26,7 @@ class Controller {
 
     async updateOne(req, res) {
         try {
-            await UrlService.updateOne(req.params.id, UpdateUrlDto(req.body), req.user.id);
+            await this.service.updateOne(req.params.id, UpdateUrlDto(req.body), req.user.id);
             return ValidHttpResponse.toNoContentResponse().toResponse(res);
         } catch (error) {
             if (error instanceof HttpException) {
@@ -35,7 +39,7 @@ class Controller {
 
     async deleteMany(req, res) {
         try {
-            await UrlService.deleteMany(DeleteUrlsDto(req.body), req.user);
+            await this.service.deleteMany(DeleteUrlsDto(req.body), req.user);
             return ValidHttpResponse.toNoContentResponse().toResponse(res);
         } catch (error) {
             if (error instanceof HttpException) {
@@ -48,7 +52,7 @@ class Controller {
 
     findAll = async (req, res) => {
         try {
-            const data = await UrlService.findAll(req.user.id, PaginationDto(req.query));
+            const data = await this.service.findAll(req.user.id, PaginationDto(req.query));
             return ValidHttpResponse.toOkResponse(data).toResponse(res);
         } catch (error) {
             if (error instanceof HttpException) {
@@ -61,7 +65,7 @@ class Controller {
 
     findBySlug = async (req, res) => {
         try {
-            const redirectUrl = await UrlService.findBySlug(req.params.slug, req.ip);
+            const redirectUrl = await this.service.findBySlug(req.params.slug, req.ip);
             return res.redirect(redirectUrl);
         } catch (error) {
             if (error instanceof HttpException) {

@@ -1,6 +1,6 @@
 const { BAD_REQUEST } = require('http-status');
-const { InValidHttpResponse } = require('../common/response/invalidHttp.response');
-const { ERROR_CODE } = require('../common/httpException/error.enum');
+const { InValidHttpResponse } = require('@common/response/invalidHttp.response');
+const { ERROR_CODE } = require('@common/httpException/error.enum');
 
 module.exports.responseJoiError = (res, error) => new InValidHttpResponse(
     BAD_REQUEST,
