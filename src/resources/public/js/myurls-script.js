@@ -73,8 +73,46 @@ function buttonSaveClick(e) {
   var urlItemEdit = e.target.parentElement.parentElement
   var urlItem = urlItemEdit.previousElementSibling
 
-  urlItem.style.display = "flex"
-  urlItemEdit.style.display = "none"
+  var urlId = urlItem.dataset.id
+
+  var slugInput = urlItemEdit.querySelector("input[name='input-url-slug']").value
+  var urlInput = urlItemEdit.querySelector("input[name='input-url-long']").value
+
+  var slugValue = urlItem.querySelector("#my-slug")
+  var urlValue = urlItem.querySelector("#my-url")
+
+  if (slugValue.textContent.trim() != slugInput || urlValue.textContent.trim() != urlInput) {
+    $.ajax({
+      type: "PUT",
+      url: "/a/api/urls/" + urlId,
+      data: {
+        slug: slugInput,
+        url: urlInput
+      },
+      success: function () {
+        showAlert("success", "Copy your URL below", baseUrl + slugInput, "Copy URL")
+          .then(function (result) {
+            updateClipboard(result)
+          })
+        slugValue.textContent = slugInput
+        urlValue.textContent = urlInput
+        urlItem.style.display = "flex"
+        urlItemEdit.style.display = "none"
+      },
+      error: function (response) {
+        showAlert("error", "Something is wrong!", response.responseJSON.message, "Try again")
+      }
+    })
+  } else {
+    swal({
+      title: "No changes",
+      icon: "info",
+      timer: 1500,
+      buttons: false,
+    });
+    urlItem.style.display = "flex"
+    urlItemEdit.style.display = "none"
+  }
 }
 
 function buttonCancelClick(e) {
