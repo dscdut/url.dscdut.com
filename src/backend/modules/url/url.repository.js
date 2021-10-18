@@ -56,11 +56,12 @@ class UrlRepositoryImp extends RepositoryBase {
 
     async findAll(userId, offset, limit) {
         const response = await this.model
+            .where('userId', '==', userId)
             .orderBy('createdAt', 'desc')
             .offset(offset)
             .limit(limit)
-            .get()
-            .then(doc => (doc.docs.filter(ok => ok.data().userId === userId)));
+            .get();
+
         const listUrls = [];
         response.forEach(doc => {
             listUrls.push({

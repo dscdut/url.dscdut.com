@@ -207,7 +207,7 @@ function init() {
   hideLoader()
 
   tippy('#app-avatar', {
-    content: appAccountMenu.innerHTML,
+    content: appAccountMenu?.innerHTML,
     allowHTML: true,
     arrow: false,
     trigger: 'click',

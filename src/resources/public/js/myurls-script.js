@@ -1,4 +1,9 @@
-var currentPage = 1;
+var baseUrl = window.location.host + "/"
+
+const limit = 10
+var hasMore = true
+var currentPage = 1
+var totalViewCount = 0
 var loadMore = $("#load-more")
 
 var urlList = $("#myurls-list")
@@ -22,7 +27,9 @@ function getUrlsApi() {
     success: function (response) {
       urls = response.data
 
-      var totalViewCount = 0
+      if (urls.length < limit) {
+        hasMore = false
+      }
 
       urls.forEach(function (url) {
         let html = ejs.render(template, { url: url })
@@ -84,7 +91,7 @@ $(document).ready(function () {
   urlList.scroll(function () {
     var toBottom = urlList[0].scrollHeight - urlList.innerHeight() - urlList.scrollTop()
 
-    if (toBottom <= 1) {
+    if (toBottom <= 1 && hasMore) {
       loadMore.removeClass("hidden")
       currentPage++
       getUrlsApi()
