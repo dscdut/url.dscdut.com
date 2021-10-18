@@ -1,8 +1,8 @@
 const admin = require('firebase-admin');
-const { URLS_COLLECTION } = require('../../common/constants/collection.constant');
-const { RepositoryBase } = require('../../infrastructure/repository/repositoryBase');
-const { firstDocument } = require('../../utils/getFirstDocument.util');
-const db = require('../../database');
+const { URLS_COLLECTION } = require('@common/constants/collection.constant');
+const { RepositoryBase } = require('@infrastructure/repository/repositoryBase');
+const { firstDocument } = require('@utils/getFirstDocument.util');
+const db = require('@database');
 
 class UrlRepositoryImp extends RepositoryBase {
     constructor() {

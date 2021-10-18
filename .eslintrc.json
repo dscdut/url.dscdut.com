@@ -25,6 +25,7 @@
         "default-case": 0,
         "class-methods-use-this": 0,
         "no-param-reassign":"off",
+        "import/no-unresolved": "off",
         "arrow-parens": [
             "error",
             "as-needed"

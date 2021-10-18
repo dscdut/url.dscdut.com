@@ -1,6 +1,6 @@
+const { UnAuthorizedException } = require('@common/httpException/UnAuthorizeException');
+const { InValidHttpResponse } = require('@common/response/invalidHttp.response');
 const { JwtService } = require('../service/jwt.service');
-const { UnAuthorizedException } = require('../../../common/httpException/UnAuthorizeException');
-const { InValidHttpResponse } = require('../../../common/response/invalidHttp.response');
 
 module.exports.ValidateAndGetDetail = (req, res, next) => {
     const { accessToken } = req.cookies;

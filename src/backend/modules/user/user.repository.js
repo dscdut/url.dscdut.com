@@ -1,5 +1,5 @@
-const { USERS_COLLECTION } = require('../../common/constants/collection.constant');
-const { RepositoryBase } = require('../../infrastructure/repository/repositoryBase');
+const { USERS_COLLECTION } = require('@common/constants/collection.constant');
+const { RepositoryBase } = require('@infrastructure/repository/repositoryBase');
 
 class UserRepositoryImp extends RepositoryBase {
     constructor() {

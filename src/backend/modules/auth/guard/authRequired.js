@@ -1,5 +1,5 @@
-const { UnAuthorizedException } = require('../../../common/httpException/UnAuthorizeException');
-const { InValidHttpResponse } = require('../../../common/response/invalidHttp.response');
+const { UnAuthorizedException } = require('@common/httpException/UnAuthorizeException');
+const { InValidHttpResponse } = require('@common/response/invalidHttp.response');
 
 module.exports.AuthRequired = (isRedirect = false) => (req, res, next) => {
     if (!req['user']) {

@@ -9,6 +9,19 @@
     "lint": "eslint --fix --ext .js .",
     "postinstall": "husky install"
   },
+  "_moduleAliases": {
+    "@root"      : ".src/backend",
+    "@api"      : "./src/backend/api",
+    "@bin"      : "./src/backend/bin",
+    "@common"      : "./src/backend/common",
+    "@config"      : "./src/backend/config",
+    "@database"      : "./src/backend/database",
+    "@env"      : "./src/backend/env",
+    "@infrastructure"      : "./src/backend/infrastructure",
+    "@modules"      : "./src/backend/modules",
+    "@routes"      : "./src/backend/routes",
+    "@utils"      : "./src/backend/utils"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/dscdut/url.dscdut.com"
@@ -33,7 +46,8 @@
     "http-status": "^1.5.0",
     "joi": "^17.4.2",
     "jsonwebtoken": "^8.5.1",
-    "method-override": "^3.0.0"
+    "method-override": "^3.0.0",
+    "module-alias": "^2.2.2"
   },
   "devDependencies": {
     "@commitlint/cli": "^13.1.0",

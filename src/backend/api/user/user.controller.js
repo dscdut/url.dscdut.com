@@ -1,7 +1,7 @@
-const { UserService } = require('../../modules/user/user.service');
-const { ValidHttpResponse } = require('../../common/response/validHttp.response');
-const { InValidHttpResponse } = require('../../common/response/invalidHttp.response');
-const { HttpException } = require('../../common/httpException/HttpException');
+const { UserService } = require('@modules/user/user.service');
+const { ValidHttpResponse } = require('@common/response/validHttp.response');
+const { InValidHttpResponse } = require('@common/response/invalidHttp.response');
+const { HttpException } = require('@common/httpException/HttpException');
 
 class Controller {
     constructor() {

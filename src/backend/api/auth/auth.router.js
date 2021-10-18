@@ -1,7 +1,7 @@
 const router = require('express').Router();
 
+const { AuthInterceptor } = require('@modules/auth/interceptor');
 const { AuthController } = require('./auth.controller');
-const { AuthInterceptor } = require('../../modules/auth/interceptor');
 
 router.post('/signin', ...AuthInterceptor, AuthController.signIn);
 

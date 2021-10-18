@@ -1,4 +1,4 @@
-const { SLUG_GENERATOR_PATTERN } = require('../common/constants/url.constant');
+const { SLUG_GENERATOR_PATTERN } = require('@common/constants/url.constant');
 
 module.exports = length => {
     let result = '';

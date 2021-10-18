@@ -1,5 +1,5 @@
 const express = require('express');
-const { AuthRequired } = require('../../modules/auth/guard/authRequired');
+const { AuthRequired } = require('@modules/auth/guard/authRequired');
 
 const router = express.Router();
 

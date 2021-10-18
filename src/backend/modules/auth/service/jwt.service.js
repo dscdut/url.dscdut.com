@@ -1,5 +1,5 @@
 const { sign, verify } = require('jsonwebtoken');
-const { JWT_SECRET, EXPIRE_DAYS } = require('../../../env');
+const { JWT_SECRET, EXPIRE_DAYS } = require('@env');
 
 class JwtServiceImp {
     secret = JWT_SECRET;
