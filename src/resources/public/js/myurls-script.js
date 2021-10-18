@@ -3,14 +3,19 @@ var baseUrl = window.location.host + "/"
 const limit = 10
 var hasMore = true
 var currentPage = 1
-var totalViewCount = 0
 var loadMore = $("#load-more")
+
+var totalViewCount = 0
+var totalView = $("#myurls-total-views")
 
 var urlList = $("#myurls-list")
 var template = ""
-var urlEditButtons = []
 
-var totalView = $("#myurls-total-views")
+var totalCheckboxes = 0
+var selectedCheckboxes = 0
+var deleteAll = $("#delete-all")
+var checkboxAll = $("#checkbox-all")
+var totalCheckboxCount = $("#delete-count")
 
 $.ajax({
   url: "/js/myurl.ejs",
@@ -42,6 +47,10 @@ function getUrlsApi() {
         urlEditButtons = $(".fa-edit")
         urlSaveButtons = $(".fa-check-circle")
         urlCancelButtons = $(".fa-times-circle")
+        urlDeleteButtons = $(".fa-trash-alt")
+
+        checkboxes = $(".checkbox-item")
+        totalCheckboxes++
       })
 
       totalView.text(totalViewCount)
@@ -56,6 +65,14 @@ function getUrlsApi() {
 
       urlCancelButtons.each((_, element) => {
         element.addEventListener("click", buttonCancelClick)
+      })
+
+      urlDeleteButtons.each((_, element) => {
+        element.addEventListener("click", buttonDeleteClick)
+      })
+
+      checkboxes.each((_, element) => {
+        element.addEventListener("click", checkboxClick)
       })
     }
   })
@@ -109,7 +126,7 @@ function buttonSaveClick(e) {
       icon: "info",
       timer: 1500,
       buttons: false,
-    });
+    })
     urlItem.style.display = "flex"
     urlItemEdit.style.display = "none"
   }
@@ -121,6 +138,153 @@ function buttonCancelClick(e) {
 
   urlItem.style.display = "flex"
   urlItemEdit.style.display = "none"
+}
+
+function checkboxAllClick() {
+  if (checkboxAll.is(':checked')) {
+    selectedCheckboxes = totalCheckboxes
+    totalCheckboxCount.text(totalCheckboxes)
+    deleteAll.css("visibility", "visible")
+    checkboxes.prop('checked', true)
+  } else {
+    selectedCheckboxes = 0
+    deleteAll.css("visibility", "hidden")
+    checkboxes.prop('checked', false)
+  }
+}
+
+function checkboxClick(e) {
+  let selectedCheckbox = e.target
+  if (selectedCheckbox.checked) {
+    selectedCheckboxes++
+    if (selectedCheckboxes == totalCheckboxes) {
+      checkboxAll.prop('checked', true)
+    }
+    deleteAll.css("visibility", "visible")
+  } else {
+    selectedCheckboxes--
+    checkboxAll.prop('checked', false)
+    if (selectedCheckboxes == 0) {
+      deleteAll.css("visibility", "hidden")
+    }
+  }
+  totalCheckboxCount.text(selectedCheckboxes)
+}
+
+function buttonDeleteAllClick() {
+  var checkedUrls = []
+  checkboxes.each((_, element) => {
+    if (element.checked) {
+      checkedUrls.push(element.parentElement.parentElement.dataset.id)
+    }
+  })
+
+  swal({
+    title: "Are you sure?",
+    text: `You will delete all selected URLs!`,
+    icon: "warning",
+    buttons: ["Oh noez!", "Aww yiss!"],
+    dangerMode: true,
+  })
+    .then((willDelete) => {
+      if (willDelete) {
+        fetch("/a/api/urls/", {
+          method: "DELETE",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            ids: checkedUrls,
+          }),
+        })
+          .then((response) => {
+            if (response.ok) {
+              swal("Poof! Your URL has been deleted!", {
+                icon: "success",
+                timer: 1500,
+                buttons: false,
+              }).then(() => {
+                location.reload()
+              })
+            } else {
+              swal("Oops! Something went wrong!", {
+                icon: "error",
+                timer: 1500,
+                buttons: false,
+              })
+            }
+          })
+          .catch(() => {
+            swal("Oops! Something went wrong!", {
+              icon: "error",
+              timer: 1500,
+              buttons: false,
+            })
+          })
+      } else {
+        swal("Your URL is safe!", {
+          timer: 1500,
+          buttons: false,
+        })
+      }
+    })
+}
+
+function buttonDeleteClick(e) {
+  var selectedUrls = []
+  var urlId = e.target.parentElement.parentElement.dataset.id
+  selectedUrls.push(urlId)
+  var urlSlug = e.target.parentElement.previousElementSibling.children[1].children[0].children[1].innerText
+
+  swal({
+    title: "Are you sure?",
+    text: `You will delete ${baseUrl}${urlSlug}!`,
+    icon: "warning",
+    buttons: ["Oh noez!", "Aww yiss!"],
+    dangerMode: true,
+  })
+    .then((willDelete) => {
+      if (willDelete) {
+        fetch("/a/api/urls/", {
+          method: "DELETE",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            ids: selectedUrls,
+          }),
+        })
+          .then((response) => {
+            if (response.ok) {
+              swal("Poof! Your URL has been deleted!", {
+                icon: "success",
+                timer: 1500,
+                buttons: false,
+              }).then(() => {
+                location.reload()
+              })
+            } else {
+              swal("Oops! Something went wrong!", {
+                icon: "error",
+                timer: 1500,
+                buttons: false,
+              })
+            }
+          })
+          .catch(() => {
+            swal("Oops! Something went wrong!", {
+              icon: "error",
+              timer: 1500,
+              buttons: false,
+            })
+          })
+      } else {
+        swal("Your URL is safe!", {
+          timer: 1500,
+          buttons: false,
+        })
+      }
+    })
 }
 
 $(document).ready(function () {
@@ -135,4 +299,7 @@ $(document).ready(function () {
       getUrlsApi()
     }
   })
+
+  checkboxAll.change(checkboxAllClick)
+  deleteAll.click(buttonDeleteAllClick)
 })

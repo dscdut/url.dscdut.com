@@ -37,7 +37,7 @@ class Controller {
         }
     }
 
-    async deleteMany(req, res) {
+    deleteMany = async (req, res) => {
         try {
             await this.service.deleteMany(DeleteUrlsDto(req.body), req.user);
             return ValidHttpResponse.toNoContentResponse().toResponse(res);
