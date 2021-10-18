@@ -24,7 +24,7 @@ class Controller {
         }
     }
 
-    async updateOne(req, res) {
+    updateOne = async (req, res) => {
         try {
             await this.service.updateOne(req.params.id, UpdateUrlDto(req.body), req.user.id);
             return ValidHttpResponse.toNoContentResponse().toResponse(res);
