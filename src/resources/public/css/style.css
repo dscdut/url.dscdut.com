@@ -363,6 +363,10 @@ body {
   display: none;
 }
 
+#input-my-slug {
+  margin-left: 0.5rem;
+}
+
 #input-my-slug,
 #input-my-url {
   height: 1.5rem;

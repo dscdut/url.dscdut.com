@@ -55,25 +55,28 @@ function getUrlsApi() {
 
       totalView.text(totalViewCount)
 
-      urlEditButtons.each((_, element) => {
-        element.addEventListener("click", buttonEditClick)
-      })
+      if (urls.length > 0) {
+        urlEditButtons.each((_, element) => {
+          element.addEventListener("click", buttonEditClick)
+        })
 
-      urlSaveButtons.each((_, element) => {
-        element.addEventListener("click", buttonSaveClick)
-      })
+        urlSaveButtons.each((_, element) => {
+          element.addEventListener("click", buttonSaveClick)
+        })
 
-      urlCancelButtons.each((_, element) => {
-        element.addEventListener("click", buttonCancelClick)
-      })
+        urlCancelButtons.each((_, element) => {
+          element.addEventListener("click", buttonCancelClick)
+        })
 
-      urlDeleteButtons.each((_, element) => {
-        element.addEventListener("click", buttonDeleteClick)
-      })
+        urlDeleteButtons.each((_, element) => {
+          element.addEventListener("click", buttonDeleteClick)
+        })
 
-      checkboxes.each((_, element) => {
-        element.addEventListener("click", checkboxClick)
-      })
+        checkboxes.each((_, element) => {
+          element.addEventListener("click", checkboxClick)
+        })
+
+      }
     }
   })
 }
@@ -208,6 +211,7 @@ function buttonDeleteAllClick() {
               }).then(() => {
                 checkedItems.forEach((element) => {
                   element.remove()
+                  deleteAll.css("visibility", "hidden")
                 })
               })
             } else {
@@ -267,6 +271,14 @@ function buttonDeleteClick(e) {
                 buttons: false,
               }).then(() => {
                 selectedItem.remove()
+                selectedCheckboxes--
+                totalCheckboxCount.text(selectedCheckboxes)
+                checkboxes.each((_, element) => {
+                  if (element.parentElement.parentElement.dataset.id == urlId) {
+                    checkboxes.splice(element.index, 1)
+                    return false
+                  }
+                })
               })
             } else {
               swal("Oops! Something went wrong!", {
