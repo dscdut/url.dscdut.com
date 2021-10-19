@@ -173,9 +173,11 @@ function checkboxClick(e) {
 
 function buttonDeleteAllClick() {
   var checkedUrls = []
+  var checkedItems = []
   checkboxes.each((_, element) => {
     if (element.checked) {
       checkedUrls.push(element.parentElement.parentElement.dataset.id)
+      checkedItems.push(element.parentElement.parentElement)
     }
   })
 
@@ -204,7 +206,9 @@ function buttonDeleteAllClick() {
                 timer: 1500,
                 buttons: false,
               }).then(() => {
-                location.reload()
+                checkedItems.forEach((element) => {
+                  element.remove()
+                })
               })
             } else {
               swal("Oops! Something went wrong!", {
@@ -235,6 +239,7 @@ function buttonDeleteClick(e) {
   var urlId = e.target.parentElement.parentElement.dataset.id
   selectedUrls.push(urlId)
   var urlSlug = e.target.parentElement.previousElementSibling.children[1].children[0].children[1].innerText
+  var selectedItem = e.target.parentElement.parentElement
 
   swal({
     title: "Are you sure?",
@@ -261,7 +266,7 @@ function buttonDeleteClick(e) {
                 timer: 1500,
                 buttons: false,
               }).then(() => {
-                location.reload()
+                selectedItem.remove()
               })
             } else {
               swal("Oops! Something went wrong!", {
