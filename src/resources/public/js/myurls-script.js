@@ -17,6 +17,14 @@ var deleteAll = $("#delete-all")
 var checkboxAll = $("#checkbox-all")
 var totalCheckboxCount = $("#delete-count")
 
+function alertError() {
+  swal("Oops! Something went wrong!", {
+    icon: "error",
+    timer: 1500,
+    buttons: false,
+  })
+}
+
 $.ajax({
   url: "/js/myurl.ejs",
   success: function (response) {
@@ -215,19 +223,11 @@ function buttonDeleteAllClick() {
                 })
               })
             } else {
-              swal("Oops! Something went wrong!", {
-                icon: "error",
-                timer: 1500,
-                buttons: false,
-              })
+              alertError()
             }
           })
           .catch(() => {
-            swal("Oops! Something went wrong!", {
-              icon: "error",
-              timer: 1500,
-              buttons: false,
-            })
+            alertError()
           })
       } else {
         swal("Your URL is safe!", {
@@ -281,19 +281,11 @@ function buttonDeleteClick(e) {
                 })
               })
             } else {
-              swal("Oops! Something went wrong!", {
-                icon: "error",
-                timer: 1500,
-                buttons: false,
-              })
+              alertError()
             }
           })
           .catch(() => {
-            swal("Oops! Something went wrong!", {
-              icon: "error",
-              timer: 1500,
-              buttons: false,
-            })
+            alertError()
           })
       } else {
         swal("Your URL is safe!", {
