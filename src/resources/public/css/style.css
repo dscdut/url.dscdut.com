@@ -363,6 +363,10 @@ body {
   display: none;
 }
 
+#input-my-slug {
+  margin-left: 0.5rem;
+}
+
 #input-my-slug,
 #input-my-url {
   height: 1.5rem;
@@ -412,6 +416,44 @@ body {
 
 .myurls-icon.fa-eye {
   color: var(--color-yellow);
+}
+
+.delete-all {
+  visibility: hidden;
+  position: relative;
+  height: 2.2rem;
+  width: 2.2rem;
+  margin: -0.5rem 0 0 1rem;
+  cursor: pointer;
+}
+
+.myurls-icon.delete-all-icon {
+  color: var(--color-red);
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  font-size: 1.8rem;
+  margin: 0;
+}
+
+.delete-count {
+  background-color: var(--color-red);
+  color: white;
+  position: absolute;
+  top: 0;
+  right: 0;
+  min-width: 1.1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.9rem;
+  border-radius: 9999px;
+  border: 1px solid white;
+  padding: 0.1rem;
+}
+
+.myurls-icon.delete-all-icon:hover {
+  color: var(--color-red-darker);
 }
 
 .myurls-icon:last-child {
