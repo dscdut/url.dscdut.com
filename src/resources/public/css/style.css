@@ -380,6 +380,7 @@ body {
 
 .myurls-url-slug {
   margin: 0;
+  cursor: pointer;
 }
 
 .myurls-url-slug > div {

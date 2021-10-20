@@ -52,9 +52,11 @@ function getUrlsApi() {
 
         totalViewCount += url.totalClick
 
+        urlSlugLink = $("#myurls-item .myurls-url-slug")
         urlEditButtons = $(".fa-edit")
         urlSaveButtons = $(".fa-check-circle")
         urlCancelButtons = $(".fa-times-circle")
+        urlCopyButtons = $(".fa-copy")
         urlDeleteButtons = $(".fa-trash-alt")
 
         checkboxes = $(".checkbox-item")
@@ -64,6 +66,13 @@ function getUrlsApi() {
       totalView.text(totalViewCount)
 
       if (urls.length > 0) {
+        urlSlugLink.each((_, element) => {
+          element.addEventListener('click', function (e) {
+            let urlTextContent = e.target.parentElement.parentElement.querySelector("#my-url").textContent.trim()
+            window.open(urlTextContent, '_blank')
+          })
+        })
+
         urlEditButtons.each((_, element) => {
           element.addEventListener("click", buttonEditClick)
         })
@@ -76,6 +85,10 @@ function getUrlsApi() {
           element.addEventListener("click", buttonCancelClick)
         })
 
+        urlCopyButtons.each((_, element) => {
+          element.addEventListener("click", buttonCopyClick)
+        })
+
         urlDeleteButtons.each((_, element) => {
           element.addEventListener("click", buttonDeleteClick)
         })
@@ -83,7 +96,6 @@ function getUrlsApi() {
         checkboxes.each((_, element) => {
           element.addEventListener("click", checkboxClick)
         })
-
       }
     }
   })
@@ -118,10 +130,12 @@ function buttonSaveClick(e) {
         url: urlInput
       },
       success: function () {
-        showAlert("success", "Copy your URL below", baseUrl + slugInput, "Copy URL")
-          .then(function (result) {
-            updateClipboard(result)
-          })
+        swal({
+          title: "Edit URL successfully!",
+          icon: "success",
+          timer: 1500,
+          buttons: false,
+        })
         slugValue.textContent = slugInput
         urlValue.textContent = urlInput
         urlItem.style.display = "flex"
@@ -180,6 +194,12 @@ function checkboxClick(e) {
     }
   }
   totalCheckboxCount.text(selectedCheckboxes)
+}
+
+function buttonCopyClick(e) {
+  var urlItem = e.target.parentElement.parentElement
+  var urlSlug = urlItem.querySelector("#my-slug").textContent.trim()
+  updateClipboard(baseUrl + urlSlug)
 }
 
 function buttonDeleteAllClick() {
@@ -276,6 +296,9 @@ function buttonDeleteClick(e) {
                 checkboxes.each((_, element) => {
                   if (element.parentElement.parentElement.dataset.id == urlId) {
                     checkboxes.splice(element.index, 1)
+                    let currentView = element.parentElement.nextElementSibling.querySelector("#my-total-click").textContent.trim()
+                    totalViewCount -= currentView
+                    totalView.text(totalViewCount)
                     return false
                   }
                 })

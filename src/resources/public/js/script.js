@@ -116,7 +116,8 @@ function submitURL(requestData) {
       } else {
         showAlert("success", "Copy your URL below", appBaseUrl + response.data.slug, "Copy URL")
           .then(function (result) {
-            updateClipboard(result)
+            if (result)
+              updateClipboard(result)
           })
       }
     })
