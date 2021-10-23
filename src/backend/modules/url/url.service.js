@@ -71,6 +71,7 @@ class UrlServiceImp {
         if (!foundUrl) return NOT_FOUND_ROUTE;
 
         await this.repository.updateClick(foundUrl.id);
+        console.log(ipv6);
         const ipv4 = process(ipv6).toString();
         const visitor = {
             ip: ipv4,

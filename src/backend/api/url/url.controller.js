@@ -68,6 +68,7 @@ class Controller {
             const redirectUrl = await this.service.findBySlug(req.params.slug, req.ip);
             return res.redirect(redirectUrl);
         } catch (error) {
+            console.log(error);
             if (error instanceof HttpException) {
                 return new InValidHttpResponse(error.status, error.code, error.message)
                     .toResponse(res);
