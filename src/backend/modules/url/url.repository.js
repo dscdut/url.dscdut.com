@@ -54,13 +54,22 @@ class UrlRepositoryImp extends RepositoryBase {
         });
     }
 
-    async findAll(userId, offset, limit) {
-        const response = await this.model
-            .where('userId', '==', userId)
-            .orderBy('createdAt', 'desc')
+    async findAll(userId, paginationDTO) {
+        const { limit, page, search } = paginationDTO;
+        const offset = limit * (page - 1);
+
+        let query = this.model
+            .where('userId', '==', userId);
+
+        if (search) {
+            query = query.where('slug', '==', search);
+        }
+
+        query = query.orderBy('createdAt', 'desc')
             .offset(offset)
-            .limit(limit)
-            .get();
+            .limit(limit);
+
+        const response = await query.get();
 
         const listUrls = [];
         response.forEach(doc => {

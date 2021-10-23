@@ -36,7 +36,7 @@ function getUrlsApi() {
   $.ajax({
     type: "GET",
     url: "/a/api/urls/",
-    data: { page: currentPage },
+    data: { page: currentPage, search : ''},
     success: function (response) {
       urls = response.data
 

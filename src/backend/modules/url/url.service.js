@@ -102,10 +102,8 @@ class UrlServiceImp {
         await this.repository.updateOne(urlId, urlDto);
     }
 
-    async findAll(userId, query) {
-        const { limit, page } = query;
-        const offset = limit * (page - 1);
-        return this.repository.findAll(userId, offset, limit);
+    async findAll(userId, paginationDTO) {
+        return this.repository.findAll(userId, paginationDTO);
     }
 }
 
