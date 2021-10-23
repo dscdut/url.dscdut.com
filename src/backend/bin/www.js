@@ -91,9 +91,8 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 
-/**
- * Config Routers
- *  */
+// This enable reverse proxy so as be able to get public ip
+app.enable('trust proxy');
 
 app.use('/', routes);
 
