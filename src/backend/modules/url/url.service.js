@@ -1,8 +1,10 @@
 const { lookup } = require('geoip-lite');
+const { process } = require('ipaddr.js');
 const { generateId } = require('@utils');
 const { DuplicateException, NotFoundException } = require('@common/httpException');
 const { DEFAULT_ID_LENGTH } = require('@common/constants/url.constant');
 const { UserRepository } = require('@modules/user/user.repository');
+const { NOT_FOUND_ROUTE } = require('@common/constants/route.constant');
 const { UrlRepository } = require('./url.repository');
 const Url = require('./url.model');
 
@@ -64,19 +66,19 @@ class UrlServiceImp {
         };
     }
 
-    async findBySlug(slug, ip) {
+    async findBySlug(slug, ipv6) {
         const foundUrl = await this.repository.findBySlug(slug);
-        if (foundUrl) {
-            await this.repository.updateClick(foundUrl.id);
-            const visitor = {
-                ip,
-                geolocation: lookup(ip)
-            };
+        if (!foundUrl) return NOT_FOUND_ROUTE;
 
-            this.repository.insertVisitor(foundUrl.id, visitor);
-            return foundUrl.url;
-        }
-        return '/not-found';
+        await this.repository.updateClick(foundUrl.id);
+        const ipv4 = process(ipv6).toString();
+        const visitor = {
+            ip: ipv4,
+            geolocation: lookup(ipv4)
+        };
+
+        this.repository.insertVisitor(foundUrl.id, visitor);
+        return foundUrl.url;
     }
 
     async deleteMany({ ids }, userDetail) {
