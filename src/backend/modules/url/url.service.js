@@ -1,5 +1,5 @@
 const { lookup } = require('geoip-lite');
-const { process } = require('ipaddr.js');
+const ipaddr = require('ipaddr.js');
 const { generateId } = require('@utils');
 const { DuplicateException, NotFoundException } = require('@common/httpException');
 const { DEFAULT_ID_LENGTH } = require('@common/constants/url.constant');
@@ -72,7 +72,7 @@ class UrlServiceImp {
 
         await this.repository.updateClick(foundUrl.id);
         console.log(ipv6);
-        const ipv4 = process(ipv6).toString();
+        const ipv4 = ipaddr.process(ipv6).toString();
         const visitor = {
             ip: ipv4,
             geolocation: lookup(ipv4)
