@@ -90,7 +90,7 @@ app.use(express.static('src/resources/public'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
-
+app.enable('trust proxy');
 /**
  * Config Routers
  *  */

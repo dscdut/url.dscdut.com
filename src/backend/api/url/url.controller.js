@@ -65,6 +65,9 @@ class Controller {
 
     findBySlug = async (req, res) => {
         try {
+            console.log(req.headers['x-forwarded-for']);
+            console.log(req.connection.remoteAddress);
+            console.log(req.ip);
             const redirectUrl = await this.service.findBySlug(req.params.slug, req.ip);
             return res.redirect(redirectUrl);
         } catch (error) {

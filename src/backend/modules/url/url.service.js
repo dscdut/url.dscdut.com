@@ -71,12 +71,13 @@ class UrlServiceImp {
         if (!foundUrl) return NOT_FOUND_ROUTE;
 
         await this.repository.updateClick(foundUrl.id);
-        console.log(ipv6);
         const ipv4 = ipaddr.process(ipv6).toString();
         const visitor = {
             ip: ipv4,
             geolocation: lookup(ipv4)
         };
+
+        console.log(visitor);
 
         this.repository.insertVisitor(foundUrl.id, visitor);
         return foundUrl.url;
