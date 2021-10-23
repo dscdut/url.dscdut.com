@@ -239,6 +239,9 @@ function buttonDeleteAllClick() {
               }).then(() => {
                 checkedItems.forEach((element) => {
                   element.remove()
+                  let currentView = element.querySelector("#my-total-click").textContent.trim()
+                  totalViewCount -= currentView
+                  totalView.text(totalViewCount)
                   deleteAll.css("visibility", "hidden")
                 })
               })
