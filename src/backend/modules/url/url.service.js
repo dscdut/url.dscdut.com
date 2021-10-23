@@ -71,16 +71,18 @@ class UrlServiceImp {
         if (!foundUrl) return NOT_FOUND_ROUTE;
 
         await this.repository.updateClick(foundUrl.id);
-        const ipv4 = ipaddr.process(ipv6).toString();
-        const visitor = {
-            ip: ipv4,
-            geolocation: lookup(ipv4)
-        };
-
-        console.log(visitor);
+        const visitor = this.getIpInformation(ipv6);
 
         this.repository.insertVisitor(foundUrl.id, visitor);
         return foundUrl.url;
+    }
+
+    getIpInformation(ip) {
+        const ipv4 = ipaddr.process(ip).toString();
+        return {
+            ip: ipv4,
+            geolocation: lookup(ipv4)
+        };
     }
 
     async deleteMany({ ids }, userDetail) {
