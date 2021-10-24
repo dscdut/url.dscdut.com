@@ -62,7 +62,7 @@ class UrlRepositoryImp extends RepositoryBase {
             .where('userId', '==', userId);
 
         if (search) {
-            query = query.where('slug', '==', search);
+            query = query.where('domainKeywords', 'array-contains', search);
         }
 
         query = query.orderBy('createdAt', 'desc')

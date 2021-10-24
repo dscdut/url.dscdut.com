@@ -1,6 +1,6 @@
 const { lookup } = require('geoip-lite');
 const ipaddr = require('ipaddr.js');
-const { generateId } = require('@utils/idGenerator');
+const { generateId } = require('@utils/id-Generator.util');
 const { DuplicateException, NotFoundException } = require('@common/httpException');
 const { DEFAULT_ID_LENGTH } = require('@common/constants/url.constant');
 const { UserRepository } = require('@modules/user/user.repository');

@@ -48,7 +48,8 @@
     "joi": "^17.4.2",
     "jsonwebtoken": "^8.5.1",
     "method-override": "^3.0.0",
-    "module-alias": "^2.2.2"
+    "module-alias": "^2.2.2",
+    "winston": "^3.3.3"
   },
   "devDependencies": {
     "@commitlint/cli": "^13.1.0",
