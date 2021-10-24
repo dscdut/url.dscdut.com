@@ -1,10 +1,11 @@
 const { lookup } = require('geoip-lite');
 const ipaddr = require('ipaddr.js');
-const { generateId } = require('@utils');
+const { generateId } = require('@utils/idGenerator');
 const { DuplicateException, NotFoundException } = require('@common/httpException');
 const { DEFAULT_ID_LENGTH } = require('@common/constants/url.constant');
 const { UserRepository } = require('@modules/user/user.repository');
 const { NOT_FOUND_ROUTE } = require('@common/constants/route.constant');
+const { parseUrl } = require('@utils/url.util');
 const { UrlRepository } = require('./url.repository');
 const Url = require('./url.model');
 
@@ -15,32 +16,29 @@ class UrlServiceImp {
     }
 
     async createOne({ url, slug }, userDetail) {
+        const domainKeywords = parseUrl(url);
+
         if (slug) {
             const isSlugExisted = await this.repository.findBySlug(slug);
             if (isSlugExisted) {
                 throw new DuplicateException(`Slug (${slug}) is already existed`);
             }
 
-            /**
-             * - Future: Validate insert fields like mongoose
-             */
             const newUrl = new Url();
             newUrl.slug = slug;
             newUrl.url = url;
+            newUrl.domainKeywords = domainKeywords;
             newUrl.isCustom = true;
             newUrl.userId = userDetail?.id;
+
             await this.repository.createOne(newUrl.toJson());
-            return {
-                slug,
-            };
+            return slug;
         }
 
-        const foundUrl = await this.repository.findByUrlandIsCustom(url, false);
+        const foundUrl = await this.repository.findRandom(url);
         // return if there is a random slug
-        if (foundUrl) {
-            return {
-                slug: foundUrl.slug,
-            };
+        if (foundUrl && !userDetail && !foundUrl.userId) {
+            return foundUrl.slug;
         }
 
         let idLength = DEFAULT_ID_LENGTH;
@@ -59,11 +57,10 @@ class UrlServiceImp {
         newUrl.slug = newSlug;
         newUrl.url = url;
         newUrl.userId = userDetail?.id;
+        newUrl.domainKeywords = domainKeywords;
         await this.repository.createOne(newUrl.toJson());
 
-        return {
-            slug: newSlug,
-        };
+        return newSlug;
     }
 
     async findBySlug(slug, ipv6) {

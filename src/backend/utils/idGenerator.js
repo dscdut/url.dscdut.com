@@ -1,6 +1,6 @@
 const { SLUG_GENERATOR_PATTERN } = require('@common/constants/url.constant');
 
-module.exports = length => {
+module.exports.generateId = length => {
     let result = '';
     const charactersLength = SLUG_GENERATOR_PATTERN.length;
     for (let i = 0; i < length; i += 1) {

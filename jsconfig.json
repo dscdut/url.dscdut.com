@@ -10,7 +10,7 @@
             "@env/*"      : ["./src/backend/env/*"],
             "@infrastructure/*"      : ["./src/backend/infrastructure/*"],
             "@modules/*"      : ["./src/backend/modules/*"],
-            "@routes/*"      : ["./src/backend/routes/*"],
+            "@routes/*"      : ["src/backend/utils/routes/*"],
             "@utils/*"      : ["./src/backend/utils/*"]
           }
     },
