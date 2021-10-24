@@ -5,7 +5,7 @@ module.exports = class UrlModel {
 
     isCustom = false;
 
-    userId;
+    userId = null;
 
     visitors;
 
@@ -14,6 +14,8 @@ module.exports = class UrlModel {
     totalClick;
 
     visitors = []
+
+    domainKeywords = []
 
     constructor() {
         this.createdAt = new Date();
@@ -29,6 +31,7 @@ module.exports = class UrlModel {
             visitors: this.visitors,
             createdAt: this.createdAt,
             totalClick: this.totalClick,
+            domainKeywords: this.domainKeywords
         };
     }
 };

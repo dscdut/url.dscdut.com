@@ -9,10 +9,10 @@ class UrlRepositoryImp extends RepositoryBase {
         super(URLS_COLLECTION);
     }
 
-    async findByUrlandIsCustom(url, isCustom) {
+    async findRandom(url) {
         const response = await this.model
             .where('url', '==', url)
-            .where('isCustom', '==', isCustom)
+            .where('isCustom', '==', false)
             .limit(1)
             .get();
 

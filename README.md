@@ -19,5 +19,5 @@ npm i
 ### With npm:
 - To run project on development:
 ```bash
-npm dev
+npm run dev
 ```

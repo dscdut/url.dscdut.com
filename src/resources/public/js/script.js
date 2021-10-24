@@ -114,7 +114,7 @@ function submitURL(requestData) {
       if (response.success === false) {
         showAlert("error", "Something is wrong!", response.message, "Try again")
       } else {
-        showAlert("success", "Copy your URL below", appBaseUrl + response.data.slug, "Copy URL")
+        showAlert("success", "Copy your URL below", appBaseUrl + response.data, "Copy URL")
           .then(function (result) {
             if (result)
               updateClipboard(result)
