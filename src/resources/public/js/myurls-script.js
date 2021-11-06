@@ -1,5 +1,8 @@
 var baseUrl = window.location.host + "/"
 
+var searchBox = $("#myurls-input-search")
+var searchButton = $("#icon-search")
+
 const limit = 10
 var hasMore = true
 var currentPage = 1
@@ -32,12 +35,14 @@ $.ajax({
   }
 })
 
-function getUrlsApi() {
+function getUrlsApi(searchValue) {
   $.ajax({
     type: "GET",
     url: "/a/api/urls/",
-    data: { page: currentPage, search : ''},
+    data: { page: currentPage, search: searchValue },
     success: function (response) {
+      urlList.empty()
+
       urls = response.data
 
       if (urls.length < limit) {
@@ -322,8 +327,27 @@ function buttonDeleteClick(e) {
     })
 }
 
+var debounce = function (func, wait, immediate) {
+  var timeout
+  return function () {
+    var context = this, args = arguments
+    var later = function () {
+      timeout = null
+      if (!immediate) func.apply(context, args)
+    };
+    var callNow = immediate && !timeout
+    clearTimeout(timeout)
+    timeout = setTimeout(later, wait)
+    if (callNow) func.apply(context, args)
+  };
+};
+
 $(document).ready(function () {
-  getUrlsApi()
+  getUrlsApi(searchBox.val())
+
+  searchBox.keyup(debounce(function () {
+    getUrlsApi(searchBox.val())
+  }, 500))
 
   urlList.scroll(function () {
     var toBottom = urlList[0].scrollHeight - urlList.innerHeight() - urlList.scrollTop()
