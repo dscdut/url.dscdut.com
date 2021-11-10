@@ -41,7 +41,9 @@ function getUrlsApi(searchValue) {
     url: "/a/api/urls/",
     data: { page: currentPage, search: searchValue },
     success: function (response) {
-      urlList.empty()
+
+      if(searchValue != '' && currentPage == 1)
+        urlList.empty()
 
       urls = response.data
 
@@ -342,6 +344,7 @@ var debounce = function (func, wait, immediate) {
   };
 };
 
+isScrolled = false;
 $(document).ready(function () {
   getUrlsApi(searchBox.val())
 
@@ -352,10 +355,15 @@ $(document).ready(function () {
   urlList.scroll(function () {
     var toBottom = urlList[0].scrollHeight - urlList.innerHeight() - urlList.scrollTop()
 
-    if (toBottom <= 1 && hasMore) {
+    if (toBottom <= 1 && hasMore && !isScrolled) {
+      isScrolled = true
       loadMore.removeClass("hidden")
       currentPage++
-      getUrlsApi()
+      getUrlsApi(searchBox.val())
+
+      setTimeout(() => {
+        isScrolled = false;
+      }, 1000);
     }
   })
 
