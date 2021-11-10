@@ -42,14 +42,14 @@ function getUrlsApi(searchValue) {
     data: { page: currentPage, search: searchValue },
     success: function (response) {
 
-      if(searchValue != '' && currentPage == 1)
+      if(currentPage == 1)
         urlList.empty()
 
       urls = response.data
 
       if (urls.length < limit) {
         hasMore = false
-      }
+      } else hasMore = true
 
       urls.forEach(function (url) {
         let html = ejs.render(template, { url: url })
@@ -349,6 +349,9 @@ $(document).ready(function () {
   getUrlsApi(searchBox.val())
 
   searchBox.keyup(debounce(function () {
+    totalViewCount = 0
+    currentPage = 1
+
     getUrlsApi(searchBox.val())
   }, 500))
 
