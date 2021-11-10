@@ -16,7 +16,7 @@ class UrlServiceImp {
     }
 
     async createOne({ url, slug }, userDetail) {
-        const domainKeywords = parseUrl(url);
+        const keywords = parseUrl(url);
 
         if (slug) {
             const isSlugExisted = await this.repository.findBySlug(slug);
@@ -24,10 +24,12 @@ class UrlServiceImp {
                 throw new DuplicateException(`Slug (${slug}) is already existed`);
             }
 
+            keywords.push(slug);
+
             const newUrl = new Url();
             newUrl.slug = slug;
             newUrl.url = url;
-            newUrl.domainKeywords = domainKeywords;
+            newUrl.keywords = keywords.map(keyword => keyword.toLowerCase());
             newUrl.isCustom = true;
             newUrl.userId = userDetail?.id;
 
@@ -53,11 +55,13 @@ class UrlServiceImp {
             idLength += 1;
         } while (isLoop);
 
+        keywords.push(newSlug);
+
         const newUrl = new Url();
         newUrl.slug = newSlug;
         newUrl.url = url;
         newUrl.userId = userDetail?.id;
-        newUrl.domainKeywords = domainKeywords;
+        newUrl.keywords = keywords.map(keyword => keyword.toLowerCase());
         await this.repository.createOne(newUrl.toJson());
 
         return newSlug;
