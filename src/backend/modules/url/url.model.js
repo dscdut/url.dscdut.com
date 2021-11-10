@@ -15,7 +15,7 @@ module.exports = class UrlModel {
 
     visitors = []
 
-    domainKeywords = []
+    keywords = []
 
     constructor() {
         this.createdAt = new Date();
@@ -31,7 +31,7 @@ module.exports = class UrlModel {
             visitors: this.visitors,
             createdAt: this.createdAt,
             totalClick: this.totalClick,
-            domainKeywords: this.domainKeywords
+            keywords: this.keywords
         };
     }
 };
