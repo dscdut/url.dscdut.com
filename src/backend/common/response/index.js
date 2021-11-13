@@ -1,2 +1,7 @@
-module.exports.InValidHttpResponse = require('./invalidHttp.response');
-module.exports.ValidHttpResponse = require('./validHttp.response');
+const { InValidHttpResponse } = require('./invalidHttp.response');
+const { ValidHttpResponse } = require('./validHttp.response');
+
+module.exports = {
+    InValidHttpResponse,
+    ValidHttpResponse
+};
