@@ -19,13 +19,17 @@ class UrlServiceImp {
         const keywords = parseUrl(url);
 
         if (slug) {
+            if (this.isInvalidSlug(slug)) {
+                throw new DuplicateException('Invalid slug');
+            }
+
             const isSlugExisted = await this.repository.findBySlug(slug);
+
             if (isSlugExisted) {
                 throw new DuplicateException(`Slug (${slug}) is already existed`);
             }
 
             keywords.push(slug);
-
             const newUrl = new Url();
             newUrl.slug = slug;
             newUrl.url = url;
@@ -65,6 +69,10 @@ class UrlServiceImp {
         await this.repository.createOne(newUrl.toJson());
 
         return newSlug;
+    }
+
+    isInvalidSlug(slug) {
+        return slug === 'a' || slug.startsWith('a/');
     }
 
     async findBySlug(slug, ipv6) {
