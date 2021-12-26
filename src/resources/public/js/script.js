@@ -147,6 +147,7 @@ function onSuccess(googleUser) {
       appAvatar.show();
       appMyURLs.show();
       appSignin.hide();
+      googleUser.disconnect();
     },
     error: function (request) {
       showAlert("error", "Something is wrong!", request.getResponseHeader('some_header'), "Try again")
@@ -189,10 +190,13 @@ function checkAccessToken() {
         appMyURLs.show();
         appSignin.hide();
       },
-      error: function () {
-        appAvatar.hide();
-        appMyURLs.hide();
-        appSignin.show();
+      error: function (httpObj) {
+        if (httpObj.status == 401) {
+          document.cookie = "accessToken=;";
+          appAvatar.hide();
+          appMyURLs.hide();
+          appSignin.show();
+        }
       }
     });
   } else {
