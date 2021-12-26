@@ -356,7 +356,10 @@ body {
 }
 
 .myurls-urls div:last-child {
-  overflow-wrap: anywhere;
+  display: block;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 #myurls-item-edit {
