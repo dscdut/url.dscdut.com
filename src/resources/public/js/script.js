@@ -155,10 +155,6 @@ function onSuccess(googleUser) {
   });
 }
 
-function onFailure(error) {
-  showAlert("error", "Something is wrong!", error, "Try again")
-}
-
 function renderButton() {
   gapi.signin2.render('my-signin2', {
     'scope': 'profile email',
@@ -167,7 +163,6 @@ function renderButton() {
     'longtitle': true,
     'theme': 'dark',
     'onsuccess': onSuccess,
-    'onfailure': onFailure
   })
 }
 
