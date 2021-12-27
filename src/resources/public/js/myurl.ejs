@@ -1,45 +1,45 @@
 <div>
-  <div id="myurls-item"
-    data-id = "<%= url.id %>"
-    class="myurls-item">
+  <div id="myurls-item" data-id="<%= url.id %>" class="myurls-item">
     <div class="myurls-item-left">
       <input id="checkbox-item" type="checkbox" class="myurls-checkbox checkbox-item" />
       <div class="myurls-urls">
         <div class="myurls-url-slug">
-          <div><%= baseUrl %></div>
+          <div>
+            <%= baseUrl %>
+          </div>
           <span id="my-slug">
             <%= url.slug %>
-            </span>
+          </span>
         </div>
         <div id="my-url">
           <%= url.url %>
-          </div>
+        </div>
       </div>
     </div>
     <div class="myurls-item-right">
-      <i class="fas fa-eye myurls-icon"></i>
-      <span id="my-total-click" class="myurls-item-view">
-        <%= url.totalClick %>
+      <div class="myurls-view-count">
+        <i class="fas fa-eye myurls-icon"></i>
+        <span id="my-total-click" class="myurls-item-view">
+          <%= url.totalClick %>
         </span>
-      <i id="myurls-edit-icon"
-        class="far fa-edit myurls-icon"></i>
+      </div>
+      <i id="myurls-edit-icon" class="far fa-edit myurls-icon"></i>
       <i class="far fa-copy myurls-icon"></i>
       <i class="far fa-trash-alt myurls-icon"></i>
     </div>
   </div>
-  <form id="myurls-item-edit"
-    data-id = "<%= url.id %>"
-    class="myurls-item">
+  <form id="myurls-item-edit" data-id="<%= url.id %>" class="myurls-item">
     <div class="myurls-item-left">
       <div class="myurls-urls">
         <div class="myurls-url-slug">
-          <div><%= baseUrl %></div>
+          <div>
+            <%= baseUrl %>
+          </div>
           <input type="url" name="input-url-slug" id="input-my-slug" value="
           <%= url.slug %>
           "></input>
         </div>
-        <input type="url" name="input-url-long" id="input-my-url"
-          value="
+        <input type="url" name="input-url-long" id="input-my-url" value="
           <%= url.url %>
           "></input>
       </div>
