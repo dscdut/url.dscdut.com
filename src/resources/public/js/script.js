@@ -147,15 +147,12 @@ function onSuccess(googleUser) {
       appAvatar.show();
       appMyURLs.show();
       appSignin.hide();
+      googleUser.disconnect();
     },
     error: function (request) {
       showAlert("error", "Something is wrong!", request.getResponseHeader('some_header'), "Try again")
     }
   });
-}
-
-function onFailure(error) {
-  showAlert("error", "Something is wrong!", error, "Try again")
 }
 
 function renderButton() {
@@ -166,7 +163,6 @@ function renderButton() {
     'longtitle': true,
     'theme': 'dark',
     'onsuccess': onSuccess,
-    'onfailure': onFailure
   })
 }
 
@@ -189,10 +185,13 @@ function checkAccessToken() {
         appMyURLs.show();
         appSignin.hide();
       },
-      error: function () {
-        appAvatar.hide();
-        appMyURLs.hide();
-        appSignin.show();
+      error: function (httpObj) {
+        if (httpObj.status == 401) {
+          document.cookie = "accessToken=;";
+          appAvatar.hide();
+          appMyURLs.hide();
+          appSignin.show();
+        }
       }
     });
   } else {
