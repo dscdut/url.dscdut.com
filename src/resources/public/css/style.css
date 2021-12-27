@@ -74,6 +74,7 @@ body {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+  text-align: center;
   border-radius: 1rem;
   box-shadow: var(--shadow-base);
 }
@@ -87,16 +88,12 @@ body {
   top: 1.5rem;
   right: 2rem;
   display: flex;
+  gap: 0.5rem;
   align-items: center;
 }
 
 .app-button-right > a {
   text-decoration: none;
-}
-
-.app-button-right > a:last-child,
-.app-button-right > .app-avatar {
-  margin-left: 0.5rem;
 }
 
 .abcRioButtonContents > span {
@@ -302,6 +299,10 @@ body {
   color: white;
 }
 
+.checkbox-delete-all {
+  display: flex;
+}
+
 .myurls-checkbox {
   min-width: 1.5rem;
   min-height: 1.5rem;
@@ -403,6 +404,11 @@ body {
   align-items: center;
 }
 
+.myurls-view-count {
+  display: flex;
+  align-items: center;
+}
+
 .myurls-item-view {
   color: var(--color-yellow);
   margin-left: 0.5rem;
@@ -479,4 +485,195 @@ body {
 
 .myurls-icon:last-child:hover {
   color: var(--color-red-darker);
+}
+
+@media (max-width: 1024px) {
+  #app-container h1 {
+    font-size: 1.6rem;
+  }
+}
+
+@media (max-width: 768px) {
+  #app-container h1 {
+    font-size: 1.3rem;
+  }
+  
+  .app-input {
+    height: 40px;
+    font-size: 1.2rem;
+    margin-bottom: 1.2rem;
+  }
+  
+  .app-button {
+    font-size: 1.2rem;
+    font-weight: normal;
+    padding: 0.3rem 0.5rem;
+  }
+  
+  .myurls-container {
+    width: 95vw;
+  }
+  
+  .myurls-icon {
+    font-size: 1.2rem;
+    margin-left: 0.5rem;
+  }
+
+  #myurls-item-edit .myurls-icon {
+    font-size: 1.2rem;
+  }
+}
+
+@media (max-width: 425px) {
+  #app-logo {
+    top: 0.5rem;
+    left: 0;
+  }
+
+  #app-logo img {
+    height: 50px;
+  }
+
+  #app-container {
+    width: 80%;
+  }
+
+  .app-button-right {
+    top: 1rem;
+    right: 0.5rem;
+    flex-direction: column-reverse;
+    align-items: center;
+  }
+  
+  .abcRioButtonContents {
+    display: none;
+  }
+
+  #tippy-1,
+  #tippy-1 > .tippy-box,
+  #tippy-1 > .tippy-box > .tippy-content,
+  #tippy-1 > .tippy-box > .tippy-content > .app-account-menu {
+    width: 15rem;
+    height: 18rem;
+  }
+
+  .app-account-menu > .account-avatar {
+    width: 4rem;
+    height: 4rem;
+  }
+
+  .app-account-menu > .account-email {
+    margin-bottom: 1rem;
+  }
+
+  .app-account-menu > button {
+    padding: 0.3rem 0.5rem;
+  }
+  
+  .app-input {
+    font-size: 1rem;
+  }
+  
+  .app-input-container {
+    width: 100%;
+  }
+
+  .app-input.search {
+    height: 40px;
+    width: 100%;
+  }
+
+  .icon-search {
+    right: 1.5rem;
+  }
+  
+  .app-button {
+    font-size: 1rem;
+  }
+  
+  .myurls-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+    margin: 1rem;
+  }
+  
+  .myurls-header-left{
+    width: 100%;
+    flex-direction: row-reverse;
+    align-items: space-between;
+    margin-top: 2.5rem;
+  }
+
+  .myurls-total-view {
+    margin-right: 0;
+  }
+
+  .myurls-title {
+    position: absolute;
+    top: 1rem;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+  
+  .myurls-list {
+    height: calc(100% - 14rem)
+  }
+  
+  .myurls-item {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .myurls-item-left {
+    align-items: center;
+    width: 100%;
+  }
+
+  .myurls-checkbox {
+    margin-left: 0;
+  }
+
+  .myurls-urls {
+    width: 90%;
+  }
+
+  #myurls-item-edit .myurls-urls {
+    width: 100%;
+  }
+
+  .myurls-item-right {
+    width: 100%;
+    justify-content: center;
+    gap: 1rem;
+  }
+
+  #myurls-item-edit .myurls-item-right {
+    gap: 0.5rem;
+  }
+
+  .myurls-item-view {
+    margin-left: 0.2rem;
+  }
+  
+  .myurls-icon {
+    margin-left: 0;
+  }
+}
+
+@media (max-width: 375px) {
+  #app-container h1 {
+    font-size: 1.1rem;
+  }
+}
+
+@media (max-width: 320px) {
+  #app-container h1 {
+    font-size: 1rem;
+  }
+  
+  .app-button-right {
+    top: 4rem;
+    flex-direction: row;
+  }
 }
