@@ -20,6 +20,8 @@ var deleteAll = $("#delete-all")
 var checkboxAll = $("#checkbox-all")
 var totalCheckboxCount = $("#delete-count")
 
+var noMore = $("#no-more")
+
 function alertError() {
   swal("Oops! Something went wrong!", {
     icon: "error",
@@ -42,7 +44,7 @@ function getUrlsApi(searchValue) {
     data: { page: currentPage, search: searchValue },
     success: function (response) {
 
-      if(currentPage == 1)
+      if (currentPage == 1)
         urlList.empty()
 
       urls = response.data
@@ -367,6 +369,11 @@ $(document).ready(function () {
       setTimeout(() => {
         isScrolled = false;
       }, 1000);
+    }
+    else if (toBottom <= 1 && !hasMore) {
+      noMore.removeClass("hidden")
+    } else {
+      noMore.addClass("hidden")
     }
   })
 
