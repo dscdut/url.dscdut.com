@@ -6,6 +6,7 @@ const { DEFAULT_ID_LENGTH } = require('@common/constants/url.constant');
 const { UserRepository } = require('@modules/user/user.repository');
 const { NOT_FOUND_ROUTE } = require('@common/constants/route.constant');
 const { parseUrl } = require('@utils/url.util');
+const fetch = require('isomorphic-fetch');
 const { UrlRepository } = require('./url.repository');
 const Url = require('./url.model');
 
@@ -15,59 +16,66 @@ class UrlServiceImp {
         this.userRepository = UserRepository;
     }
 
-    async createOne({ url, slug }, userDetail) {
-        const keywords = parseUrl(url);
-
-        if (slug) {
-            if (this.isInvalidSlug(slug)) {
-                throw new DuplicateException('Invalid slug');
-            }
-
-            const isSlugExisted = await this.repository.findBySlug(slug);
-
-            if (isSlugExisted) {
-                throw new DuplicateException(`Slug (${slug}) is already existed`);
-            }
-
-            keywords.push(slug);
-            const newUrl = new Url();
-            newUrl.slug = slug;
-            newUrl.url = url;
-            newUrl.keywords = keywords.map(keyword => keyword.toLowerCase());
-            newUrl.isCustom = true;
-            newUrl.userId = userDetail?.id;
-
-            await this.repository.createOne(newUrl.toJson());
-            return slug;
-        }
-
-        const foundUrl = await this.repository.findRandom(url);
-        // return if there is a random slug
-        if (foundUrl && !userDetail && !foundUrl.userId) {
-            return foundUrl.slug;
-        }
-
-        let idLength = DEFAULT_ID_LENGTH;
+    async createOne({ url, slug }, userDetail, urlRecaptcha) {
         let newSlug;
+        fetch(urlRecaptcha, {
+            method: 'post',
+        })
+            .then(response => response.json())
+            .then(async googleResponse => {
+                if (googleResponse.success === true) {
+                    const keywords = parseUrl(url);
 
-        const isLoop = true;
-        do {
-            newSlug = generateId(idLength);
-            // eslint-disable-next-line no-await-in-loop
-            const isIdExisted = (await this.repository.findBySlug(newSlug));
-            if (!isIdExisted) break;
-            idLength += 1;
-        } while (isLoop);
+                    if (slug) {
+                        if (this.isInvalidSlug(slug)) {
+                            throw new DuplicateException('Invalid slug');
+                        }
 
-        keywords.push(newSlug);
+                        const isSlugExisted = await this.repository.findBySlug(slug);
 
-        const newUrl = new Url();
-        newUrl.slug = newSlug;
-        newUrl.url = url;
-        newUrl.userId = userDetail?.id;
-        newUrl.keywords = keywords.map(keyword => keyword.toLowerCase());
-        await this.repository.createOne(newUrl.toJson());
+                        if (isSlugExisted) {
+                            throw new DuplicateException(`Slug (${slug}) is already existed`);
+                        }
 
+                        keywords.push(slug);
+                        const newUrl = new Url();
+                        newUrl.slug = slug;
+                        newUrl.url = url;
+                        newUrl.keywords = keywords.map(keyword => keyword.toLowerCase());
+                        newUrl.isCustom = true;
+                        newUrl.userId = userDetail?.id;
+
+                        await this.repository.createOne(newUrl.toJson());
+                        return slug;
+                    }
+
+                    const foundUrl = await this.repository.findRandom(url);
+                    // return if there is a random slug
+                    if (foundUrl && !userDetail && !foundUrl.userId) {
+                        return foundUrl.slug;
+                    }
+
+                    let idLength = DEFAULT_ID_LENGTH;
+
+                    const isLoop = true;
+                    do {
+                        newSlug = generateId(idLength);
+                        // eslint-disable-next-line no-await-in-loop
+                        const isIdExisted = (await this.repository.findBySlug(newSlug));
+                        if (!isIdExisted) break;
+                        idLength += 1;
+                    } while (isLoop);
+
+                    keywords.push(newSlug);
+
+                    const newUrl = new Url();
+                    newUrl.slug = newSlug;
+                    newUrl.url = url;
+                    newUrl.userId = userDetail?.id;
+                    newUrl.keywords = keywords.map(keyword => keyword.toLowerCase());
+                    await this.repository.createOne(newUrl.toJson());
+                } else throw new NotFoundException('Captcha is invalid');
+            });
         return newSlug;
     }
 
