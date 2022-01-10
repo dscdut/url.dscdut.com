@@ -8,4 +8,6 @@ module.exports = {
     CLIENT_ID: process.env.CLIENT_ID,
     JWT_SECRET: process.env.JWT_SECRET || 'hehe',
     EXPIRE_DAYS: process.env.EXPIRE_DAYS || '1d',
+    SITE_KEY: process.env.SITE_KEY,
+    SECRECT_KEY: process.env.SECRECT_KEY
 };

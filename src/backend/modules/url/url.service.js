@@ -1,11 +1,12 @@
 const { lookup } = require('geoip-lite');
 const ipaddr = require('ipaddr.js');
 const { generateId } = require('@utils/id-Generator.util');
-const { DuplicateException, NotFoundException } = require('@common/httpException');
+const { DuplicateException, NotFoundException, BadRequestException } = require('@common/httpException');
 const { DEFAULT_ID_LENGTH } = require('@common/constants/url.constant');
 const { UserRepository } = require('@modules/user/user.repository');
 const { NOT_FOUND_ROUTE } = require('@common/constants/route.constant');
 const { parseUrl } = require('@utils/url.util');
+const axios = require('axios');
 const { UrlRepository } = require('./url.repository');
 const Url = require('./url.model');
 
@@ -15,7 +16,12 @@ class UrlServiceImp {
         this.userRepository = UserRepository;
     }
 
-    async createOne({ url, slug }, userDetail) {
+    async createOne({ url, slug }, userDetail, urlRecaptcha) {
+        const { data } = await axios({
+            method: 'post',
+            url: urlRecaptcha
+        });
+        if (data.success === false) throw new BadRequestException('Invalid captcha');
         const keywords = parseUrl(url);
 
         if (slug) {
@@ -48,9 +54,9 @@ class UrlServiceImp {
         }
 
         let idLength = DEFAULT_ID_LENGTH;
-        let newSlug;
 
         const isLoop = true;
+        let newSlug;
         do {
             newSlug = generateId(idLength);
             // eslint-disable-next-line no-await-in-loop
@@ -67,7 +73,6 @@ class UrlServiceImp {
         newUrl.userId = userDetail?.id;
         newUrl.keywords = keywords.map(keyword => keyword.toLowerCase());
         await this.repository.createOne(newUrl.toJson());
-
         return newSlug;
     }
 

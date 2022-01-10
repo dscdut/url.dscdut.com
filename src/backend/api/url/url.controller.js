@@ -4,6 +4,8 @@ const { UpdateUrlDto } = require('@modules/url/dto/updateUrl.dto');
 const { PaginationDto } = require('@modules/url/dto/pagination.dto');
 const { UrlService } = require('@modules/url/url.service');
 const { errorHandler } = require('@utils/controller-error-handler.util');
+const { SECRECT_KEY } = require('@env/');
+const { URL_RECAPTCHA } = require('@common/constants/url.constant');
 
 class Controller {
     constructor() {
@@ -12,7 +14,8 @@ class Controller {
 
     createOne = async (req, res) => {
         try {
-            const data = await this.service.createOne(req.body, req.user);
+            const urlRecaptcha = `${URL_RECAPTCHA}?secret=${SECRECT_KEY}&response=${req.body['g-recaptcha-response']}&remoteip=${req.connection.remoteAddress}`;
+            const data = await this.service.createOne(req.body, req.user, urlRecaptcha);
             return ValidHttpResponse.toCreatedResponse(data).toResponse(res);
         } catch (error) {
             return errorHandler(error, res);
