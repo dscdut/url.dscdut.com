@@ -17,63 +17,62 @@ class UrlServiceImp {
     }
 
     async createOne({ url, slug }, userDetail, urlRecaptcha) {
-        let newSlug;
         const { data } = await axios({
             method: 'post',
             url: urlRecaptcha
         });
-        if (data.success === true) {
-            const keywords = parseUrl(url);
+        if (data.success === false) throw new BadRequestException('Invalid captcha');
+        const keywords = parseUrl(url);
 
-            if (slug) {
-                if (this.isInvalidSlug(slug)) {
-                    throw new DuplicateException('Invalid slug');
-                }
-
-                const isSlugExisted = await this.repository.findBySlug(slug);
-
-                if (isSlugExisted) {
-                    throw new DuplicateException(`Slug (${slug}) is already existed`);
-                }
-
-                keywords.push(slug);
-                const newUrl = new Url();
-                newUrl.slug = slug;
-                newUrl.url = url;
-                newUrl.keywords = keywords.map(keyword => keyword.toLowerCase());
-                newUrl.isCustom = true;
-                newUrl.userId = userDetail?.id;
-
-                await this.repository.createOne(newUrl.toJson());
-                return slug;
+        if (slug) {
+            if (this.isInvalidSlug(slug)) {
+                throw new DuplicateException('Invalid slug');
             }
 
-            const foundUrl = await this.repository.findRandom(url);
-            // return if there is a random slug
-            if (foundUrl && !userDetail && !foundUrl.userId) {
-                return foundUrl.slug;
+            const isSlugExisted = await this.repository.findBySlug(slug);
+
+            if (isSlugExisted) {
+                throw new DuplicateException(`Slug (${slug}) is already existed`);
             }
 
-            let idLength = DEFAULT_ID_LENGTH;
-
-            const isLoop = true;
-            do {
-                newSlug = generateId(idLength);
-                // eslint-disable-next-line no-await-in-loop
-                const isIdExisted = (await this.repository.findBySlug(newSlug));
-                if (!isIdExisted) break;
-                idLength += 1;
-            } while (isLoop);
-
-            keywords.push(newSlug);
-
+            keywords.push(slug);
             const newUrl = new Url();
-            newUrl.slug = newSlug;
+            newUrl.slug = slug;
             newUrl.url = url;
-            newUrl.userId = userDetail?.id;
             newUrl.keywords = keywords.map(keyword => keyword.toLowerCase());
+            newUrl.isCustom = true;
+            newUrl.userId = userDetail?.id;
+
             await this.repository.createOne(newUrl.toJson());
-        } else throw new BadRequestException('Captcha is invalid');
+            return slug;
+        }
+
+        const foundUrl = await this.repository.findRandom(url);
+        // return if there is a random slug
+        if (foundUrl && !userDetail && !foundUrl.userId) {
+            return foundUrl.slug;
+        }
+
+        let idLength = DEFAULT_ID_LENGTH;
+
+        const isLoop = true;
+        let newSlug;
+        do {
+            newSlug = generateId(idLength);
+            // eslint-disable-next-line no-await-in-loop
+            const isIdExisted = (await this.repository.findBySlug(newSlug));
+            if (!isIdExisted) break;
+            idLength += 1;
+        } while (isLoop);
+
+        keywords.push(newSlug);
+
+        const newUrl = new Url();
+        newUrl.slug = newSlug;
+        newUrl.url = url;
+        newUrl.userId = userDetail?.id;
+        newUrl.keywords = keywords.map(keyword => keyword.toLowerCase());
+        await this.repository.createOne(newUrl.toJson());
         return newSlug;
     }
 
