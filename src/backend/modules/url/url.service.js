@@ -6,7 +6,7 @@ const { DEFAULT_ID_LENGTH } = require('@common/constants/url.constant');
 const { UserRepository } = require('@modules/user/user.repository');
 const { NOT_FOUND_ROUTE } = require('@common/constants/route.constant');
 const { parseUrl } = require('@utils/url.util');
-const fetch = require('isomorphic-fetch');
+const axios = require('axios');
 const { UrlRepository } = require('./url.repository');
 const Url = require('./url.model');
 
@@ -18,10 +18,11 @@ class UrlServiceImp {
 
     async createOne({ url, slug }, userDetail, urlRecaptcha) {
         let newSlug;
-        fetch(urlRecaptcha, {
+        await axios({
             method: 'post',
+            url: urlRecaptcha
         })
-            .then(response => response.json())
+            .then(response => response.data)
             .then(async googleResponse => {
                 if (googleResponse.success === true) {
                     const keywords = parseUrl(url);
