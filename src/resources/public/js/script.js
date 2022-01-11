@@ -83,14 +83,17 @@ function validateURL({ url, slug }) {
 
   if (!url) {
     showAlert("error", "URL is required!", "You cannot shorten nothing", "My bad")
+    grecaptcha.reset()
     return false
   } else if (!urlRegex.test(url)) {
     showAlert("error", "Invalid URL!", "Hey hey what is this?", "Oopsie")
+    grecaptcha.reset()
     return false
   }
   if (slug) {
     if (slug.indexOf(' ') >= 0) {
       showAlert("error", "Invalid SLUG!", "Slug can not contain whitespace", "Oopsie")
+      grecaptcha.reset()
       return false
     }
   }
@@ -119,6 +122,7 @@ function submitURL(requestData) {
     .then(function (response) {
       if (response.success === false) {
         showAlert("error", "Something is wrong!", response.message, "Try again")
+        grecaptcha.reset()
       } else {
         showAlert("success", "Copy your URL below", appBaseUrl + response.data, "Copy URL")
           .then(function (result) {
@@ -130,6 +134,7 @@ function submitURL(requestData) {
     })
     .catch(function (error) {
       hideLoader()
+      grecaptcha.reset()
     });
 }
 
