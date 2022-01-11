@@ -5,6 +5,7 @@ const { JoiUtils } = require('@utils/joi.util');
 module.exports.CreateUrlInterceptor = new DefaultValidatorInterceptor(
     Joi.object({
         url: JoiUtils.url().required(),
-        slug: Joi.string().regex(/^\S+$/).message('Slug can not contain whitespace').optional()
+        slug: Joi.string().regex(/^\S+$/).message('Slug can not contain whitespace').optional(),
+        recaptcha: Joi.string().required()
     })
 );

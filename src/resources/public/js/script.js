@@ -83,19 +83,28 @@ function validateURL({ url, slug }) {
 
   if (!url) {
     showAlert("error", "URL is required!", "You cannot shorten nothing", "My bad")
+    grecaptcha.reset()
     return false
   } else if (!urlRegex.test(url)) {
     showAlert("error", "Invalid URL!", "Hey hey what is this?", "Oopsie")
+    grecaptcha.reset()
     return false
   }
   if (slug) {
     if (slug.indexOf(' ') >= 0) {
       showAlert("error", "Invalid SLUG!", "Slug can not contain whitespace", "Oopsie")
+      grecaptcha.reset()
       return false
     }
   }
   return true
 }
+
+var onloadCallback = function () {
+  grecaptcha.render('my-recaptcha', {
+    'sitekey': '6LdnVAAeAAAAALPkriSdugvZVHrlpXc0Pp-km4DN',
+  });
+};
 
 function submitURL(requestData) {
   showLoader()
@@ -113,16 +122,19 @@ function submitURL(requestData) {
     .then(function (response) {
       if (response.success === false) {
         showAlert("error", "Something is wrong!", response.message, "Try again")
+        grecaptcha.reset()
       } else {
         showAlert("success", "Copy your URL below", appBaseUrl + response.data, "Copy URL")
           .then(function (result) {
             if (result)
               updateClipboard(result)
           })
+        grecaptcha.reset()
       }
     })
     .catch(function (error) {
       hideLoader()
+      grecaptcha.reset()
     });
 }
 
@@ -253,6 +265,7 @@ function init() {
 
     var url = appInputUrl.val()
     var slug = appInputSlug.val()
+    var token = grecaptcha.getResponse()
 
     const urlObject = {
       url
@@ -261,6 +274,13 @@ function init() {
     if (slug) {
       slug = slug.trim();
       urlObject['slug'] = slug;
+    }
+
+    if (token) {
+      urlObject['recaptcha'] = token;
+    } else {
+      showAlert("error", "Recaptcha is required!", "Please verify that you are not a robot!", "Try again")
+      return
     }
 
     if (validateURL(urlObject)) {

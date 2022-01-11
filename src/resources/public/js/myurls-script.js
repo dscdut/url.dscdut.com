@@ -31,7 +31,7 @@ function alertError() {
 }
 
 $.ajax({
-  url: "/js/myurl.ejs",
+  url: "/templates/myurl.ejs",
   success: function (response) {
     template = response
   }
