@@ -97,6 +97,12 @@ function validateURL({ url, slug }) {
   return true
 }
 
+var onloadCallback = function () {
+  grecaptcha.render('my-recaptcha', {
+    'sitekey': '6LdnVAAeAAAAALPkriSdugvZVHrlpXc0Pp-km4DN',
+  });
+};
+
 function submitURL(requestData) {
   showLoader()
   window.fetch('/a/api/urls', {
@@ -119,6 +125,7 @@ function submitURL(requestData) {
             if (result)
               updateClipboard(result)
           })
+        grecaptcha.reset()
       }
     })
     .catch(function (error) {
@@ -253,6 +260,7 @@ function init() {
 
     var url = appInputUrl.val()
     var slug = appInputSlug.val()
+    var token = grecaptcha.getResponse()
 
     const urlObject = {
       url
@@ -261,6 +269,13 @@ function init() {
     if (slug) {
       slug = slug.trim();
       urlObject['slug'] = slug;
+    }
+
+    if (token) {
+      urlObject['recaptcha'] = token;
+    } else {
+      showAlert("error", "Recaptcha is required!", "Please verify that you are not a robot!", "Try again")
+      return
     }
 
     if (validateURL(urlObject)) {

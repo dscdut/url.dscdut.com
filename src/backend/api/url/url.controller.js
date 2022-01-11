@@ -14,7 +14,7 @@ class Controller {
 
     createOne = async (req, res) => {
         try {
-            const urlRecaptcha = `${URL_RECAPTCHA}?secret=${SECRECT_KEY}&response=${req.body['g-recaptcha-response']}&remoteip=${req.connection.remoteAddress}`;
+            const urlRecaptcha = `${URL_RECAPTCHA}?secret=${SECRECT_KEY}&response=${req.body['recaptcha']}&remoteip=${req.connection.remoteAddress}`;
             const data = await this.service.createOne(req.body, req.user, urlRecaptcha);
             return ValidHttpResponse.toCreatedResponse(data).toResponse(res);
         } catch (error) {

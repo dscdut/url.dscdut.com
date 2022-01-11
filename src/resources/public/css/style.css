@@ -488,6 +488,15 @@ body {
   color: var(--color-red-darker);
 }
 
+.my-recaptcha {
+  text-align: center;
+}
+
+.my-recaptcha div {
+  width: 100% !important;
+  margin-bottom: 10px;
+}
+
 @media (max-width: 1024px) {
   #app-container h1 {
     font-size: 1.6rem;
