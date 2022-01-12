@@ -6,6 +6,7 @@ const { UrlService } = require('@modules/url/url.service');
 const { errorHandler } = require('@utils/controller-error-handler.util');
 const { SECRECT_KEY } = require('@env/');
 const { URL_RECAPTCHA } = require('@common/constants/url.constant');
+const { stringify } = require('@utils/stringify.util');
 
 class Controller {
     constructor() {
@@ -14,7 +15,12 @@ class Controller {
 
     createOne = async (req, res) => {
         try {
-            const urlRecaptcha = `${URL_RECAPTCHA}?secret=${SECRECT_KEY}&response=${req.body['recaptcha']}&remoteip=${req.connection.remoteAddress}`;
+            const obj = {
+                secret: SECRECT_KEY,
+                response: req.body['recaptcha'],
+                remoteip: req.connection.remoteAddress,
+            };
+            const urlRecaptcha = `${URL_RECAPTCHA}?${stringify(obj)}`;
             const data = await this.service.createOne(req.body, req.user, urlRecaptcha);
             return ValidHttpResponse.toCreatedResponse(data).toResponse(res);
         } catch (error) {
