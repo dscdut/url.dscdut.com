@@ -1,4 +1,4 @@
-var appBaseUrl = window.location.href;
+var appBaseUrl = window.location.hostname;
 
 var appSignin = $("#my-signin2");
 var appAvatar = $("#app-avatar");
