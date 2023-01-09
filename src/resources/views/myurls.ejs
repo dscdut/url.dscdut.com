@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<%- include('./partials/head'); %>
+
+  <body>
+    <div id="app">
+      <a id="app-logo" href="/">
+        <img src="/img/logo.png" alt="DSC-DUT Logo" />
+      </a>
+      <div class="app-button-right">
+        <a id="app-button-shorten" class="app-button" type="submit" href="/">Shorten URL</a>
+      </div>
+      <div id="app-container" class="myurls-container">
+        <div class="myurls-header">
+          <div class="myurls-header-left">
+            <div class="app-button myurls-total-view">Total views:
+              <span id="myurls-total-views">0</span>
+            </div>
+            <div class="checkbox-delete-all">
+              <input id="checkbox-all" type="checkbox" class="myurls-checkbox" />
+              <div id="delete-all" class="delete-all">
+                <i class="far fa-trash-alt delete-all-icon myurls-icon"></i>
+                <span id="delete-count" class="delete-count">0</span>
+              </div>
+            </div>
+          </div>
+          <h1 class="myurls-title">My URLs</h1>
+          <div class="app-input-container">
+            <input type="text" id="myurls-input-search" class="app-input search" placeholder="Search URL..." />
+            <i id="icon-search" class="icon-search fas fa-search"></i>
+          </div>
+        </div>
+        <div id="myurls-list" class="myurls-list">
+          <%- include('./partials/loadmore'); %>
+        </div>
+        <div id="no-more" class="hidden">No more!</div>
+      </div>
+      <%- include('./partials/loader'); %>
+    </div>
+
+    <%- include('./partials/gtag'); %>
+      <%- include('./partials/script'); %>
+        <script src="/js/myurls-script.js" defer></script>
+
+  </body>
+
+</html>
