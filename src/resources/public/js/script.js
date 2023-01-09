@@ -135,7 +135,7 @@ function validateURL({ url, slug }) {
 
 var onloadCallback = function () {
   grecaptcha.render("my-recaptcha", {
-    sitekey: "6LdnVAAeAAAAALPkriSdugvZVHrlpXc0Pp-km4DN",
+    sitekey: "6LeI8gUeAAAAAA-GTrJb7cyjN12gnOBXqDNhVbzT"
   });
 };
 
