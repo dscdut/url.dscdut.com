@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<%- include('./partials/head'); %>
+
+  <body>
+    <div id="app">
+      <a id="app-logo" href="/">
+        <img src="/img/logo.png" alt="DSC-DUT Logo" />
+      </a>
+      <div class="app-button-right">
+        <div id="my-signin2" data-onsuccess="onSignIn"></div>
+        <a id="app-button-myurls" class="app-button" type="button" href="/a/admin/myurls">My URLs</a>
+        <img id="app-avatar" class="app-avatar" />
+      </div>
+      <div id="tippy-1" style="display: none;">
+        <div class="app-account-menu">
+          <img id="account-menu-avatar" class="account-avatar" />
+          <div id="account-menu-name" class="account-name"></div>
+          <div id="account-menu-email" class="account-email"></div>
+          <button id="account-menu-switch">Switch account</button>
+          <button id="account-menu-signout">Sign out</button>
+        </div>
+      </div>
+      <div id="app-container">
+        <h1>Shorter URL, less pain for your eyes</h1>
+        <a href=<%=redirectUrl%> class="app-button submit" >
+          Continue
+        </a>
+        <a href="/" class="app-button cancel" >
+          Shorten your URL
+        </a>
+        <div class="detail">
+          <div class="num-of-view">
+            <span class="num-of-view-number"><%=view%></span>
+            <span class="num-of-view-text">views</span>
+          </div>
+          <div class="created-at" >
+            <span class="created-at-text">Created at:</span>
+            <span class="created-at-number"><%=createdAt%></span>
+          </div>
+        </div>
+      </div>
+      <%- include('./partials/loader'); %>
+    </div>
+    <%- include('./partials/gtag'); %>
+      <%- include('./partials/script'); %>
+  </body>
+
+</html>

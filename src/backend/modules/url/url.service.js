@@ -88,7 +88,7 @@ class UrlServiceImp {
         const visitor = this.getIpInformation(ipv6);
 
         this.repository.insertVisitor(foundUrl.id, visitor);
-        return foundUrl.url;
+        return foundUrl;
     }
 
     getIpInformation(ip) {

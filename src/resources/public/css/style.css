@@ -79,6 +79,20 @@ body {
   box-shadow: var(--shadow-base);
 }
 
+#app-container a {
+  text-decoration: none;
+  cursor: pointer;
+  display: inline-block;
+  text-align: center;
+  width: 80%;
+  margin-left: 0;
+}
+
+#app-container a {
+  text-decoration: none;
+  margin-top: .5rem;
+}
+
 #app-button-myurls {
   display: none;
 }
@@ -686,4 +700,28 @@ body {
     top: 4rem;
     flex-direction: row;
   }
+}
+
+.detail {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  padding: 1rem;
+}
+
+.detail .num-of-view {
+  margin-right: 1rem;
+}
+
+.detail .num-of-view span {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: var(--color-yellow);
+}
+
+.detail .created-at span {
+  font-size: 1.2rem;
+  color: var(--color-gray);
+
 }

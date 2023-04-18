@@ -4,7 +4,7 @@ const { UpdateUrlDto } = require('@modules/url/dto/updateUrl.dto');
 const { PaginationDto } = require('@modules/url/dto/pagination.dto');
 const { UrlService } = require('@modules/url/url.service');
 const { errorHandler } = require('@utils/controller-error-handler.util');
-const { SECRECT_KEY } = require('@env/');
+const { SECRET_KEY } = require('@env/');
 const { URL_RECAPTCHA } = require('@common/constants/url.constant');
 const { stringify } = require('@utils/stringify.util');
 
@@ -16,7 +16,7 @@ class Controller {
     createOne = async (req, res) => {
         try {
             const obj = {
-                secret: SECRECT_KEY,
+                secret: SECRET_KEY,
                 response: req.body['recaptcha'],
                 remoteip: req.connection.remoteAddress,
             };
@@ -57,8 +57,12 @@ class Controller {
 
     findBySlug = async (req, res) => {
         try {
-            const redirectUrl = await this.service.findBySlug(req.params.slug, req.ip);
-            return res.redirect(redirectUrl);
+            const record = await this.service.findBySlug(req.params.slug, req.ip);
+            return res.render('waiting', {
+                redirectUrl: record.url,
+                view: record.totalClick,
+                createdAt: new Date(record.createdAt._seconds * 1000).toLocaleDateString('vi-VN'),
+            });
         } catch (error) {
             return errorHandler(error, res);
         }
