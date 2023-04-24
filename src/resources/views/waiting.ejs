@@ -1,35 +1,59 @@
 <!DOCTYPE html>
 <html lang="en">
-<%- include('./partials/head'); %>
 
-  <body>
-    <div id="app">
-      <a id="app-logo" href="/">
-        <img src="/img/logo.png" alt="DSC-DUT Logo" />
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="google-signin-client_id"
+    content="1062730623485-rbr44u3n8as27fvf2ud6uh7l2v6jdc2a.apps.googleusercontent.com">
+
+  <title><%=metaData.title%></title>
+
+  <%for (const [name, content] of Object.entries(metaData.metaTags)) {%>
+    <meta name="<%=name%>" property="<%=name%>" content="<%=content%>">
+  <%}%>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Google+Sans&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/css/style.css" />
+  <link rel="stylesheet" href="/css/loader.min.css" />
+  <link rel="stylesheet" href="/css/loadmore.min.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
+    integrity="sha512-1ycn6IcaQQ40/MKBW2W4Rhis/DbILU74C1vSrLJxCq57o941Ym01SwNsOMqvEBFlcgUa6xLiPY/NS5R+E6ztJQ=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link rel="shortcut icon" href="/img/favicon.ico" type="image/x-icon" />
+</head>
+
+<body>
+  <div id="app">
+    <a id="app-logo" href="/">
+      <img src="/img/logo.png" alt="DSC-DUT Logo" />
+    </a>
+    <div class="app-button-right">
+      <div id="my-signin2" data-onsuccess="onSignIn"></div>
+      <a id="app-button-myurls" class="app-button" type="button" href="/a/admin/myurls">My URLs</a>
+      <img id="app-avatar" class="app-avatar" />
+    </div>
+    <div id="tippy-1" style="display: none;">
+      <div class="app-account-menu">
+        <img id="account-menu-avatar" class="account-avatar" />
+        <div id="account-menu-name" class="account-name"></div>
+        <div id="account-menu-email" class="account-email"></div>
+        <button id="account-menu-switch">Switch account</button>
+        <button id="account-menu-signout">Sign out</button>
+      </div>
+    </div>
+    <div id="app-container">
+      <h1>Shorter URL, less pain for your eyes</h1>
+      <a href=<%=redirectUrl%> class="app-button submit" >
+        Continue
       </a>
-      <div class="app-button-right">
-        <div id="my-signin2" data-onsuccess="onSignIn"></div>
-        <a id="app-button-myurls" class="app-button" type="button" href="/a/admin/myurls">My URLs</a>
-        <img id="app-avatar" class="app-avatar" />
-      </div>
-      <div id="tippy-1" style="display: none;">
-        <div class="app-account-menu">
-          <img id="account-menu-avatar" class="account-avatar" />
-          <div id="account-menu-name" class="account-name"></div>
-          <div id="account-menu-email" class="account-email"></div>
-          <button id="account-menu-switch">Switch account</button>
-          <button id="account-menu-signout">Sign out</button>
-        </div>
-      </div>
-      <div id="app-container">
-        <h1>Shorter URL, less pain for your eyes</h1>
-        <a href=<%=redirectUrl%> class="app-button submit" >
-          Continue
-        </a>
-        <a href="/" class="app-button green" >
-          Shorten your URL
-        </a>
-        <!-- <div class="detail">
+      <a href="/" class="app-button shorten">
+        Shorten your URL
+      </a>
+      <!-- <div class="detail">
           <div class="num-of-view">
             <span class="num-of-view-number"><%=view%></span>
             <span class="num-of-view-text">views</span>
@@ -39,11 +63,11 @@
             <span class="created-at-number"><%=createdAt%></span>
           </div>
         </div> -->
-      </div>
-      <%- include('./partials/loader'); %>
     </div>
-    <%- include('./partials/gtag'); %>
-      <%- include('./partials/script'); %>
-  </body>
+    <%- include('./partials/loader'); %>
+  </div>
+  <%- include('./partials/gtag'); %>
+    <%- include('./partials/script'); %>
+</body>
 
 </html>

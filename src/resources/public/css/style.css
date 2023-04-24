@@ -268,16 +268,22 @@ body {
   background-color: var(--color-gray-lighter);
 }
 
-.app-button.green {
-  background-color: var(--color-green);
-}
-
-.app-button.green:hover {
-  background-color: var(--color-green-darker);
-}
 
 .app-button.cancel:hover {
   background-color: var(--color-gray);
+}
+
+.app-button.shorten {
+  transition: box-shadow .3s;
+  background-color: #ffffff;
+  color: var(--color-blue);
+  border: 2px solid var(--color-blue);
+
+}
+
+.app-button.shorten:hover {
+  transition: border 1s;
+  box-shadow: 0 0 5px #4285f4;
 }
 
 .text-right {

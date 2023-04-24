@@ -1,5 +1,6 @@
 const { lookup } = require('geoip-lite');
 const ipaddr = require('ipaddr.js');
+const cheerio = require('cheerio');
 const { generateId } = require('@utils/id-Generator.util');
 const { DuplicateException, NotFoundException, BadRequestException } = require('@common/httpException');
 const { DEFAULT_ID_LENGTH } = require('@common/constants/url.constant');
@@ -118,6 +119,38 @@ class UrlServiceImp {
 
     async findAll(userId, paginationDTO) {
         return this.repository.findAll(userId, paginationDTO);
+    }
+
+    async retrieveMetadata(url) {
+        try {
+            const response = await axios.get(url);
+            const $ = cheerio.load(response.data);
+            const title = $('title').text();
+            const metaTags = {};
+
+            $('meta').each((i, meta) => {
+                const name = $(meta).attr('name');
+                const content = $(meta).attr('content');
+                const property = $(meta).attr('property');
+
+                if (name) {
+                    metaTags[name] = content;
+                }
+
+                if (property) {
+                    metaTags[property] = content;
+                }
+            });
+            return {
+                title,
+                metaTags
+            };
+        } catch (error) {
+            return {
+                title: 'GDSC-DUT | Shorten URL tool',
+                metaTags: {}
+            };
+        }
     }
 }
 
