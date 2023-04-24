@@ -2,6 +2,7 @@
   --color-blue: #4285f4;
   --color-blue-darker: #356fcc;
   --color-green: #34a853;
+  --color-green-darker: #3c8950;
   --color-yellow: #fbbc05;
   --color-red: #ea4335;
   --color-red-darker: #c23124;
@@ -265,6 +266,14 @@ body {
 
 .app-button.cancel {
   background-color: var(--color-gray-lighter);
+}
+
+.app-button.green {
+  background-color: var(--color-green);
+}
+
+.app-button.green:hover {
+  background-color: var(--color-green-darker);
 }
 
 .app-button.cancel:hover {
