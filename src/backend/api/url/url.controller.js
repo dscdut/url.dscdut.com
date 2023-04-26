@@ -66,7 +66,8 @@ class Controller {
                 createdAt: new Date(record.createdAt._seconds * 1000).toLocaleDateString('vi-VN'),
             });
         } catch (error) {
-            return errorHandler(error, res);
+            console.log('error', error);
+            return res.render('not-found');
         }
     }
 }
