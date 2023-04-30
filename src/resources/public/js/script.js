@@ -66,7 +66,7 @@ function updateClipboard(newClip) {
   );
 }
 
-function showAlert(icon = "success", title, message, buttonText, url = '') {
+function showAlert(icon = "success", title, message, buttonText, url = null) {
   var contentElement = document.createElement("div");
   contentElement.innerHTML =
     '<b style="font-size: 1.25rem;">' + message + "</b>";
@@ -83,7 +83,9 @@ function showAlert(icon = "success", title, message, buttonText, url = '') {
 
   var customContent = document.createElement('div');
   customContent.appendChild(contentElement);
-  customContent.appendChild(qrElement);
+  if (url) { 
+    customContent.appendChild(qrElement);
+  }
 
   return swal({
     title,
