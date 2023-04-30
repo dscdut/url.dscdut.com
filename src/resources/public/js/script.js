@@ -182,7 +182,8 @@ function submitURL(requestData) {
           "success",
           "Copy your URL below",
           appBaseUrl + response.data,
-          "Copy URL"
+          "Copy URL",
+          appBaseUrl + response.data
         ).then(function (result) {
           if (result) updateClipboard(result);
         });
