@@ -66,14 +66,29 @@ function updateClipboard(newClip) {
   );
 }
 
-function showAlert(icon = "success", title, message, buttonText) {
+function showAlert(icon = "success", title, message, buttonText, url = '') {
   var contentElement = document.createElement("div");
   contentElement.innerHTML =
     '<b style="font-size: 1.25rem;">' + message + "</b>";
+
+  if (url) {
+    var qrElement = document.createElement("div");
+    qrElement.id = "qrcode";
+    qrElement.style.width = "120px";
+    qrElement.style.height = "120px";
+    qrElement.style.margin = "auto";
+    qrElement.style.marginTop = "1rem";
+    var qrcode = new QRCode(qrElement, url);
+  }
+
+  var customContent = document.createElement('div');
+  customContent.appendChild(contentElement);
+  customContent.appendChild(qrElement);
+
   return swal({
     title,
     icon,
-    content: contentElement,
+    content: customContent,
     buttons: {
       confirm: {
         text: buttonText,
@@ -83,7 +98,7 @@ function showAlert(icon = "success", title, message, buttonText) {
         closeModal: true,
       },
     },
-  });
+  })
 }
 
 function showLoader() {
