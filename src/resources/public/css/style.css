@@ -28,6 +28,10 @@ body {
   background-position: center;
 }
 
+img {
+  max-width: 100%;
+}
+
 .swal-title {
   margin-bottom: 2rem;
 }
