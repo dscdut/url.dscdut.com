@@ -57,17 +57,10 @@ class Controller {
 
     findBySlug = async (req, res) => {
         try {
-            const record = await this.service.findBySlug(req.params.slug, req.ip);
-            const metaData = await this.service.retrieveMetadata(record.url);
-            return res.render('waiting', {
-                metaData,
-                redirectUrl: record.url,
-                view: record.totalClick,
-                createdAt: new Date(record.createdAt._seconds * 1000).toLocaleDateString('vi-VN'),
-            });
+            const redirectUrl = await this.service.findBySlug(req.params.slug, req.ip);
+            return res.redirect(redirectUrl.url);
         } catch (error) {
-            console.log('error', error);
-            return res.render('not-found');
+            return errorHandler(error, res);
         }
     }
 }
