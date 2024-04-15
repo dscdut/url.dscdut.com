@@ -67,6 +67,7 @@ function getUrlsApi(searchValue) {
         urlCancelButtons = $(".fa-times-circle")
         urlCopyButtons = $(".fa-copy")
         urlDeleteButtons = $(".fa-trash-alt")
+        urlGenerateQRButtons = $(".fa-qrcode")
 
         checkboxes = $(".checkbox-item")
         totalCheckboxes++
@@ -100,6 +101,10 @@ function getUrlsApi(searchValue) {
 
         urlDeleteButtons.each((_, element) => {
           element.addEventListener("click", buttonDeleteClick)
+        })
+
+        urlGenerateQRButtons.each((_, element) => {
+          element.addEventListener("click", buttonGenerateQRClick)
         })
 
         checkboxes.each((_, element) => {
@@ -329,6 +334,20 @@ function buttonDeleteClick(e) {
         })
       }
     })
+}
+
+function buttonGenerateQRClick(e) {
+  var urlItem = e.target.parentElement.parentElement
+  var urlSlug = urlItem.querySelector("#my-slug").textContent.trim()
+
+  var appBaseUrl = window.location.protocol + "//" + window.location.host + "/"
+  showAlert(
+    "success",
+    "Scan the QR code below",
+    appBaseUrl + urlSlug,
+    "Close",
+    appBaseUrl + urlSlug
+  )
 }
 
 var debounce = function (func, wait, immediate) {
