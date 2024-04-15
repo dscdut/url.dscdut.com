@@ -67,6 +67,7 @@ function getUrlsApi(searchValue) {
         urlCancelButtons = $(".fa-times-circle")
         urlCopyButtons = $(".fa-copy")
         urlDeleteButtons = $(".fa-trash-alt")
+        urlGenerateQR = $(".fa-qrcode")
 
         checkboxes = $(".checkbox-item")
         totalCheckboxes++
@@ -100,6 +101,10 @@ function getUrlsApi(searchValue) {
 
         urlDeleteButtons.each((_, element) => {
           element.addEventListener("click", buttonDeleteClick)
+        })
+
+        urlGenerateQR.each((_, element) => {
+          element.addEventListener("click", buttonGenerateQRClick)
         })
 
         checkboxes.each((_, element) => {
@@ -203,6 +208,49 @@ function checkboxClick(e) {
     }
   }
   totalCheckboxCount.text(selectedCheckboxes)
+}
+
+function showAlert(icon = "success", title, message, buttonText, url = null) {
+  var contentElement = document.createElement("div");
+  contentElement.innerHTML =
+    '<b style="font-size: 1.25rem;">' + message + "</b>";
+
+  if (url) {
+    var qrElement = document.createElement("div");
+    var qrImg = document.createElement("img");
+    qrElement.id = "qrcode";
+    qrElement.style.width = "200px";
+    qrElement.style.height = "200px";
+    qrElement.style.margin = "auto";
+    qrElement.style.marginTop = "1rem";
+
+    const qrcodeUrl = `https://quickchart.io/qr?text=${url}&centerImageUrl=https://res.cloudinary.com/dddj3wlza/image/upload/v1713155834/gdsc/GDSC_Icon_o1zhsk.png&centerImageSizeRatio=0.5&size=400`
+    qrImg.src = qrcodeUrl;
+    qrImg.style.width = "100%";
+    qrImg.style.height = "100%";
+    qrElement.appendChild(qrImg);
+  }
+
+  var customContent = document.createElement('div');
+  customContent.appendChild(contentElement);
+  if (url) { 
+    customContent.appendChild(qrElement);
+  }
+
+  return swal({
+    title,
+    icon,
+    content: customContent,
+    buttons: {
+      confirm: {
+        text: buttonText,
+        value: message,
+        visible: true,
+        className: ["app-button", icon],
+        closeModal: true,
+      },
+    },
+  })
 }
 
 function buttonCopyClick(e) {
@@ -329,6 +377,15 @@ function buttonDeleteClick(e) {
         })
       }
     })
+}
+
+function buttonGenerateQRClick(e) {
+  var urlItem = e.target.parentElement.parentElement
+  var urlSlug = urlItem.querySelector("#my-slug").textContent.trim()
+
+  var appBaseUrl = window.location.protocol + "//" + window.location.host + "/"
+  var url = appBaseUrl + urlSlug
+  showAlert("success", "Scan QR code to visit your URL", url)
 }
 
 var debounce = function (func, wait, immediate) {

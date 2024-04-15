@@ -73,12 +73,18 @@ function showAlert(icon = "success", title, message, buttonText, url = null) {
 
   if (url) {
     var qrElement = document.createElement("div");
+    var qrImg = document.createElement("img");
     qrElement.id = "qrcode";
-    qrElement.style.width = "120px";
-    qrElement.style.height = "120px";
+    qrElement.style.width = "200px";
+    qrElement.style.height = "200px";
     qrElement.style.margin = "auto";
     qrElement.style.marginTop = "1rem";
-    var qrcode = new QRCode(qrElement, url);
+
+    const qrcodeUrl = `https://quickchart.io/qr?text=${url}&centerImageUrl=https://res.cloudinary.com/dddj3wlza/image/upload/v1713155834/gdsc/GDSC_Icon_o1zhsk.png&centerImageSizeRatio=0.5&size=400`
+    qrImg.src = qrcodeUrl;
+    qrImg.style.width = "100%";
+    qrImg.style.height = "100%";
+    qrElement.appendChild(qrImg);
   }
 
   var customContent = document.createElement('div');
