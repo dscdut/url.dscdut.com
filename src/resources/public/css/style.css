@@ -507,12 +507,14 @@ img {
 
 .fa-edit,
 .fa-copy,
+.fa-qrcode,
 .fa-check-circle {
   color: var(--color-blue);
 }
 
 .fa-edit:hover,
 .fa-copy:hover,
+.fa-qrcode:hover,
 .fa-check-circle:hover {
   color: var(--color-blue-darker);
 }
