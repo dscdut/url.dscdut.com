@@ -262,6 +262,9 @@ function checkAccessToken() {
 		'$1'
 	);
 	if (accessToken) {
+		$('#login-prompt').hide();
+		$('#app-form').show();
+
 		$.ajax({
 			method: 'GET',
 			url: '/a/api/users/detail',
