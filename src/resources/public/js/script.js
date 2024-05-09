@@ -288,7 +288,7 @@ function checkAccessToken() {
 					appMyURLs.hide();
 					appSignin.show();
 
-					appForm.remove();
+					appForm.hide();
 				}
 			},
 		});
@@ -297,7 +297,7 @@ function checkAccessToken() {
 		appMyURLs.hide();
 		appSignin.show();
 
-		appForm.remove();
+		appForm.hide();
 	}
 }
 
