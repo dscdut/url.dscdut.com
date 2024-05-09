@@ -289,7 +289,6 @@ function checkAccessToken() {
 					appSignin.show();
 
 					appForm.remove();
-					loginPrompt.style.display = 'block';
 				}
 			},
 		});
@@ -299,7 +298,6 @@ function checkAccessToken() {
 		appSignin.show();
 
 		appForm.remove();
-		loginPrompt.style.display = 'block';
 	}
 }
 
