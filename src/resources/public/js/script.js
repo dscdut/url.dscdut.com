@@ -233,6 +233,9 @@ function onSuccess(googleUser) {
 			appMyURLs.show();
 			appSignin.hide();
 			googleUser.disconnect();
+
+			appForm.show();
+			loginPrompt.hide();
 		},
 		error: function (request) {
 			showAlert(
@@ -273,8 +276,8 @@ function checkAccessToken() {
 				Authorization: 'Bearer ' + accessToken,
 			},
 			success: function (response) {
-				$('#login-prompt').hide();
-				$('#app-form').show();
+				loginPrompt.hide();
+				appForm.show();
 
 				appAvatar.attr('src', response.data.avatar);
 				accountMenuAvatar.attr('src', response.data.avatar);
@@ -283,8 +286,6 @@ function checkAccessToken() {
 				appAvatar.show();
 				appMyURLs.show();
 				appSignin.hide();
-
-				location.reload();
 			},
 			error: function (httpObj) {
 				if (httpObj.status == 401) {
@@ -293,7 +294,7 @@ function checkAccessToken() {
 					appMyURLs.hide();
 					appSignin.show();
 
-					$('#app-form').hide();
+					appForm.hide();
 				}
 			},
 		});
@@ -302,7 +303,7 @@ function checkAccessToken() {
 		appMyURLs.hide();
 		appSignin.show();
 
-		$('#app-form').hide();
+		appForm.hide();
 	}
 }
 
