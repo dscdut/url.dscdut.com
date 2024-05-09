@@ -279,7 +279,7 @@ function checkAccessToken() {
 				appSignin.hide();
 
 				$('#login-prompt').hide();
-				appForm.style.display = 'block';
+				$('#app-form').show();
 			},
 			error: function (httpObj) {
 				if (httpObj.status == 401) {
@@ -288,7 +288,7 @@ function checkAccessToken() {
 					appMyURLs.hide();
 					appSignin.show();
 
-					appForm.hide();
+					$('#app-form').hide();
 				}
 			},
 		});
@@ -297,8 +297,7 @@ function checkAccessToken() {
 		appMyURLs.hide();
 		appSignin.show();
 
-		appForm.hide();
-		console.log(111111);
+		$('#app-form').hide();
 	}
 }
 
