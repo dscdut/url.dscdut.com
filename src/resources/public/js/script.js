@@ -283,6 +283,8 @@ function checkAccessToken() {
 				appAvatar.show();
 				appMyURLs.show();
 				appSignin.hide();
+
+				location.reload();
 			},
 			error: function (httpObj) {
 				if (httpObj.status == 401) {
