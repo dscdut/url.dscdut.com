@@ -270,6 +270,9 @@ function checkAccessToken() {
 				Authorization: 'Bearer ' + accessToken,
 			},
 			success: function (response) {
+				$('#login-prompt').hide();
+				$('#app-form').show();
+
 				appAvatar.attr('src', response.data.avatar);
 				accountMenuAvatar.attr('src', response.data.avatar);
 				accountMenuName.text(response.data.name);
@@ -277,9 +280,6 @@ function checkAccessToken() {
 				appAvatar.show();
 				appMyURLs.show();
 				appSignin.hide();
-
-				$('#login-prompt').hide();
-				$('#app-form').show();
 			},
 			error: function (httpObj) {
 				if (httpObj.status == 401) {
