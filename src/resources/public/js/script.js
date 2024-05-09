@@ -278,8 +278,8 @@ function checkAccessToken() {
 				appMyURLs.show();
 				appSignin.hide();
 
+				$('#login-prompt').hide();
 				appForm.style.display = 'block';
-				loginPrompt.style.display = 'none';
 			},
 			error: function (httpObj) {
 				if (httpObj.status == 401) {
@@ -298,6 +298,7 @@ function checkAccessToken() {
 		appSignin.show();
 
 		appForm.hide();
+		console.log(111111);
 	}
 }
 
