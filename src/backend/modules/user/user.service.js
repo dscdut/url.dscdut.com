@@ -12,7 +12,7 @@ class UserServiceImp {
         return this.repository.createOne(newUser.toJSon());
     }
 
-    async getOne({ id }) {
+    async getOne({ id, email }) {
         const foundUser = await this.repository.findById(id);
         if (!foundUser) {
             throw new NotFoundException('User not found');

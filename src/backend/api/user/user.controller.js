@@ -9,7 +9,9 @@ class Controller {
 
     findOne = async (req, res) => {
         try {
-            const data = await this.service.getOne(req.user);
+            const { id, email } = req.user;
+            const data = await this.service.getOne({ id, email });
+
             return ValidHttpResponse.toOkResponse(data).toResponse(res);
         } catch (error) {
             return errorHandler(error, res);

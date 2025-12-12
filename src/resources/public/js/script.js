@@ -26,14 +26,25 @@ var appLoader = $('#app-loader');
 const checkButtonClient = document.getElementsByClassName('abcRioButton');
 
 window.onload = function () {
-	if (!checkButtonClient.length) {
-		var s = document.createElement('script');
-		s.type = 'text/javascript';
-		s.src = 'https://apis.google.com/js/platform.js?onload=renderButton';
-		s.async = 1;
-		s.defer = 1;
-		$('head').append(s);
-	}
+	// Load GSI script
+	var gsiScript = document.createElement('script');
+	gsiScript.src = 'https://accounts.google.com/gsi/client';
+	gsiScript.async = true;
+	gsiScript.defer = true;
+	document.head.appendChild(gsiScript);
+
+	// Initialize GSI after script loads
+	gsiScript.onload = function () {
+		google.accounts.id.initialize({
+			client_id: '1010465411576-29377fp3cbm14pc5ajs1558mofvm6pm6.apps.googleusercontent.com',  // Replace with your OAuth client ID from Google Cloud Console
+			callback: handleCredentialResponse,
+		});
+		google.accounts.id.renderButton(
+			document.getElementById('my-signin2'),
+			{ theme: 'outline', size: 'large' }  // Customize as needed
+		);
+		google.accounts.id.prompt();  // Optional: Show One Tap
+	};
 };
 
 function initClipboardAPI() {
@@ -210,6 +221,49 @@ function submitURL(requestData) {
 		});
 }
 
+
+function handleCredentialResponse(response) {
+	const credential = response.credential;
+
+	try {
+		const decoded = jwt_decode(credential);  // Decode the JWT
+	
+		const {name, email, picture} = decoded;
+
+		// Update UI with decoded data
+		accountMenuAvatar.attr('src', picture);
+		accountMenuName.text(name);
+		accountMenuEmail.text(email);
+		appAvatar.attr('src', picture);
+		appAvatar.show();
+		appMyURLs.show();
+		appSignin.hide();
+		appForm.show();
+		loginPrompt.hide();
+	} catch (error) {
+		console.error('JWT decode failed:', error);
+		showAlert('error', 'Something is wrong!', 'Authentication failed', 'Try again');
+		return;
+	}
+
+	$.ajax({
+		method: 'POST',
+		url: '/a/api/auth/signin',
+		headers: {
+			'Content-Type': 'application/json',
+		},
+		dataType: 'json',
+		data: JSON.stringify({ tokenId: credential }),  // Use 'credential' instead of id_token
+		success: function (response) {
+			let accessToken = response.data.accessToken;
+			document.cookie = 'accessToken=' + accessToken;
+		},
+		error: function (request) {
+			showAlert('error', 'Something is wrong!', 'Authentication failed', 'Try again');
+		},
+	});
+}
+
 function onSuccess(googleUser) {
 	console.log('Login as: ' + googleUser.getBasicProfile().getName());
 	let id_token = googleUser.getAuthResponse().id_token;
@@ -249,14 +303,14 @@ function onSuccess(googleUser) {
 }
 
 function renderButton() {
-	gapi.signin2.render('my-signin2', {
-		scope: 'profile email',
-		width: 'auto',
-		height: 50,
-		longtitle: true,
-		theme: 'dark',
-		onsuccess: onSuccess,
-	});
+	// gapi.signin2.render('my-signin2', {
+	// 	scope: 'profile email',
+	// 	width: 'auto',
+	// 	height: 50,
+	// 	longtitle: true,
+	// 	theme: 'dark',
+	// 	onsuccess: onSuccess,
+	// });
 }
 
 function checkAccessToken() {
@@ -327,24 +381,13 @@ function init() {
 			let tippyMenuSignout = $('.tippy-box #account-menu-signout');
 
 			tippyMenuSwitch.on('click', function () {
-				gapi.auth2
-					.getAuthInstance()
-					.signIn({
-						prompt: 'select_account',
-					})
-					.then(function () {
-						location.reload();
-					});
+				google.accounts.id.prompt();
 			});
 
 			tippyMenuSignout.on('click', function () {
-				gapi.auth2
-					.getAuthInstance()
-					.signOut({})
-					.then(function () {
-						location.reload();
-						document.cookie = 'accessToken=; path=/;';
-					});
+				google.accounts.id.disableAutoSelect();
+				document.cookie = 'accessToken=; path=/;';
+				location.reload();
 			});
 
 			tippyMenuAvatar.attr('src', accountMenuAvatar.attr('src'));
